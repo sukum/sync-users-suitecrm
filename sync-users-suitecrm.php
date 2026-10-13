@@ -1,8 +1,8 @@
 <?php
 /**
  * Plugin Name:       Sync users to SuiteCRM
- * Plugin URI:        https://github.com/sukum/sync-suitecrm-users
- * Description:       Synchronize WordPress users one-way to SuiteCRM 7 as Accounts, Contacts, Leads using the REST V8 API.
+ * Plugin URI:        https://github.com/sukum/sync-users-suitecrm
+ * Description:       Synchronize WordPress users one-way to SuiteCRM as Accounts, Contacts, Leads using the REST V8 API.
  * Version:           1.0.0
  * Requires at least: 5.3
  * Requires PHP:      7.4
@@ -10,7 +10,7 @@
  * Author URI:        https://github.com/sukum
  * License:           GPL v2 or later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain:       sync-suitecrm-users
+ * Text Domain:       sync-users-suitecrm
  */
 
 defined('ABSPATH') || exit;
