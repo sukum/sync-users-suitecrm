@@ -66,8 +66,7 @@ defined('ABSPATH') || exit;
                             <td id="syus-stat-started-at">
                                 <code>
                                     <?php echo esc_html(
-                                        $progress['started_at'] && is_numeric($progress['started_at']) ? 
-                                        wp_date( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ), $progress['started_at'] ) : '—'
+                                        ! empty( $progress['started_at'] ) ? wp_date( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ), $progress['started_at'] ) : '—'
                                     );?>
                                 </code>
                             </td>
