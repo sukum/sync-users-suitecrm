@@ -3,7 +3,7 @@
  * Bulk synchronization progress store.
  *
  * Manages serialization, deserialization, and atomic coordinated mutations
- * of the `ssu_bulk_progress` transient using the shared `bulk_progress` lock.
+ * of the `syus_bulk_progress` transient using the shared `bulk_progress` lock.
  *
  * @package SyncSuiteCRMUsers
  */
@@ -28,7 +28,7 @@ class BulkProgressStore {
     /**
      * WordPress transient key.
      */
-    public const TRANSIENT_KEY = 'ssu_bulk_progress';
+    public const TRANSIENT_KEY = 'syus_bulk_progress';
 
     /**
      * Retention duration: 2 hours (7200 seconds) so reviewable on Settings.
@@ -84,7 +84,7 @@ class BulkProgressStore {
         if (!is_array($data)) {
             return new WP_Error(
                 'invalid_bulk_progress',
-                __('Stored bulk progress snapshot is malformed.', 'sync-suitecrm-users')
+                __('Stored bulk progress snapshot is malformed.', 'sync-users-suitecrm')
             );
         }
 
@@ -92,7 +92,7 @@ class BulkProgressStore {
         if ($progress === null) {
             return new WP_Error(
                 'invalid_bulk_progress',
-                __('Stored bulk progress failed schema validation.', 'sync-suitecrm-users')
+                __('Stored bulk progress failed schema validation.', 'sync-users-suitecrm')
             );
         }
 
@@ -220,7 +220,7 @@ class BulkProgressStore {
         if ($lock === null) {
             return new WP_Error(
                 'progress_busy',
-                __('Bulk progress is currently being updated by another operation.', 'sync-suitecrm-users'),
+                __('Bulk progress is currently being updated by another operation.', 'sync-users-suitecrm'),
                 ['http_status' => 409]
             );
         }

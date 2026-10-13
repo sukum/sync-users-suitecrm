@@ -30,7 +30,7 @@ class IneligibleRoleHandler extends AbstractOutcomeHandler implements OutcomeHan
                 $username,
                 $module,
                 SyncOutcome::REASON_ROLE_INELIGIBLE,
-                __('User role is not eligible for synchronization.', 'sync-suitecrm-users')
+                __('User role is not eligible for synchronization.', 'sync-users-suitecrm')
             );
             $this->logOutcome($outcome);
             $handler->onOutcome($outcome);

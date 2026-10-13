@@ -100,7 +100,7 @@ class ChunkProcessor {
      * Process an ordered list of WordPress user IDs through a source-specific handler.
      *
      * - Checks shouldContinue() before each user and module.
-     * - Acquires resource lock _ssu_lock_user_{user_id} before user processing.
+     * - Acquires resource lock _syus_lock_user_{user_id} before user processing.
      * - Releases acquired locks in finally.
      * - Rechecks current user data, role eligibility, and module enablement immediately before push.
      * - Invokes common logging and handler callbacks for all outcomes.

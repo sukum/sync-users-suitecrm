@@ -88,7 +88,7 @@ class BulkRunner {
      * @return void
      */
     public function registerHooks(): void {
-        add_action('ssu_execute_manual_bulk', [$this, 'handleChunk'], 10, 1);
+        add_action('syus_execute_manual_bulk', [$this, 'handleChunk'], 10, 1);
     }
 
     /**

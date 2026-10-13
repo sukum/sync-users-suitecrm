@@ -109,10 +109,10 @@ class Worker {
      * @return void
      */
     public function registerHooks(): void {
-        add_action('ssu_execute_batch_sync', [$this, 'handleBatch'], 10, 1);
-        add_action('ssu_execute_realtime_worker', [$this, 'handleRealtime'], 10, 1);
-        add_action('wp_ajax_ssu_process_queue_worker', [$this, 'handleAjaxRealtimeWorker']);
-        add_action('wp_ajax_nopriv_ssu_process_queue_worker', [$this, 'handleAjaxRealtimeWorker']);
+        add_action('syus_execute_batch_sync', [$this, 'handleBatch'], 10, 1);
+        add_action('syus_execute_realtime_worker', [$this, 'handleRealtime'], 10, 1);
+        add_action('wp_ajax_syus_process_queue_worker', [$this, 'handleAjaxRealtimeWorker']);
+        add_action('wp_ajax_nopriv_syus_process_queue_worker', [$this, 'handleAjaxRealtimeWorker']);
     }
 
     /**

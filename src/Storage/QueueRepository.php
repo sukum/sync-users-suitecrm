@@ -56,7 +56,7 @@ class QueueRepository {
             $wpdb->users
         ));
         if (!empty($wpdb->last_error)) {
-            return new WP_Error('queue_query_failed', __('Could not count queue records.', 'sync-suitecrm-users'));
+            return new WP_Error('queue_query_failed', __('Could not count queue records.', 'sync-users-suitecrm'));
         }
 
         $total = (int) $total;
@@ -77,7 +77,7 @@ class QueueRepository {
             $wpdb->users
         ));
         if (!empty($wpdb->last_error)) {
-            return new WP_Error('queue_query_failed', __('Could not read queue records.', 'sync-suitecrm-users'));
+            return new WP_Error('queue_query_failed', __('Could not read queue records.', 'sync-users-suitecrm'));
         }
 
         return [
@@ -103,7 +103,7 @@ class QueueRepository {
         if ($userId <= 0 || empty($module)) {
             return new WP_Error(
                 'invalid_queue_input',
-                __('Invalid user ID or module provided for queue enqueue.', 'sync-suitecrm-users')
+                __('Invalid user ID or module provided for queue enqueue.', 'sync-users-suitecrm')
             );
         }
 
@@ -121,7 +121,7 @@ class QueueRepository {
                 'queue_enqueue_failed',
                 sprintf(
                     /* translators: %s: Database error */
-                    __('Failed to enqueue item in queue: %s', 'sync-suitecrm-users'),
+                    __('Failed to enqueue item in queue: %s', 'sync-users-suitecrm'),
                     $wpdb->last_error
                 )
             );
@@ -159,7 +159,7 @@ class QueueRepository {
                 'queue_select_failed',
                 sprintf(
                     /* translators: %s: Database error */
-                    __('Database error selecting batch queue chunk: %s', 'sync-suitecrm-users'),
+                    __('Database error selecting batch queue chunk: %s', 'sync-users-suitecrm'),
                     $wpdb->last_error
                 )
             );
@@ -201,7 +201,7 @@ class QueueRepository {
                 'queue_select_failed',
                 sprintf(
                     /* translators: %s: Database error */
-                    __('Database error selecting real-time queue chunk: %s', 'sync-suitecrm-users'),
+                    __('Database error selecting real-time queue chunk: %s', 'sync-users-suitecrm'),
                     $wpdb->last_error
                 )
             );
@@ -235,7 +235,7 @@ class QueueRepository {
                 'queue_max_id_failed',
                 sprintf(
                     /* translators: %s: Database error */
-                    __('Database error querying max queue ID: %s', 'sync-suitecrm-users'),
+                    __('Database error querying max queue ID: %s', 'sync-users-suitecrm'),
                     $wpdb->last_error
                 )
             );
@@ -273,7 +273,7 @@ class QueueRepository {
                 'queue_expired_query_failed',
                 sprintf(
                     /* translators: %s: Database error */
-                    __('Database error querying expired queue items: %s', 'sync-suitecrm-users'),
+                    __('Database error querying expired queue items: %s', 'sync-users-suitecrm'),
                     $wpdb->last_error
                 )
             );
@@ -329,7 +329,7 @@ class QueueRepository {
                 'queue_delete_failed',
                 sprintf(
                     /* translators: %s: Database error */
-                    __('Database error deleting queue rows: %s', 'sync-suitecrm-users'),
+                    __('Database error deleting queue rows: %s', 'sync-users-suitecrm'),
                     $wpdb->last_error
                 )
             );
@@ -354,7 +354,7 @@ class QueueRepository {
                 'queue_count_failed',
                 sprintf(
                     /* translators: %s: Database error */
-                    __('Database error counting queue rows: %s', 'sync-suitecrm-users'),
+                    __('Database error counting queue rows: %s', 'sync-users-suitecrm'),
                     $wpdb->last_error
                 )
             );
@@ -380,7 +380,7 @@ class QueueRepository {
                 'queue_clear_failed',
                 sprintf(
                     /* translators: %s: Database error */
-                    __('Database error clearing queue: %s', 'sync-suitecrm-users'),
+                    __('Database error clearing queue: %s', 'sync-users-suitecrm'),
                     $wpdb->last_error
                 )
             );

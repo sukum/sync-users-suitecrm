@@ -65,16 +65,16 @@ class ActionHandlers {
      * @return void
      */
     public function register(): void {
-        add_action('wp_ajax_ssu_save_settings', [$this, 'handleSaveSettings']);
-        add_action('wp_ajax_ssu_test_api', [$this, 'handleTestApi']);
-        add_action('wp_ajax_ssu_connect', [$this, 'handleConnect']);
-        add_action('wp_ajax_ssu_start_bulk', [$this, 'handleStartBulk']);
-        add_action('wp_ajax_ssu_poll_progress', [$this, 'handlePollProgress']);
-        add_action('wp_ajax_ssu_cancel_bulk', [$this, 'handleCancelBulk']);
-        add_action('wp_ajax_ssu_clear_bulk', [$this, 'handleClearBulk']);
-        add_action('wp_ajax_ssu_sync_user', [$this, 'handleSyncUser']);
-        add_action('wp_ajax_ssu_delete_logs', [$this, 'handleDeleteLogs']);
-        add_action('wp_ajax_ssu_clear_logs', [$this, 'handleClearLogs']);
+        add_action('wp_ajax_syus_save_settings', [$this, 'handleSaveSettings']);
+        add_action('wp_ajax_syus_test_api', [$this, 'handleTestApi']);
+        add_action('wp_ajax_syus_connect', [$this, 'handleConnect']);
+        add_action('wp_ajax_syus_start_bulk', [$this, 'handleStartBulk']);
+        add_action('wp_ajax_syus_poll_progress', [$this, 'handlePollProgress']);
+        add_action('wp_ajax_syus_cancel_bulk', [$this, 'handleCancelBulk']);
+        add_action('wp_ajax_syus_clear_bulk', [$this, 'handleClearBulk']);
+        add_action('wp_ajax_syus_sync_user', [$this, 'handleSyncUser']);
+        add_action('wp_ajax_syus_delete_logs', [$this, 'handleDeleteLogs']);
+        add_action('wp_ajax_syus_clear_logs', [$this, 'handleClearLogs']);
     }
 
     /**
@@ -83,12 +83,12 @@ class ActionHandlers {
      * @return void
      */
     public function handleSaveSettings(): void {
-        check_ajax_referer('ssu_admin_nonce', 'nonce');
+        check_ajax_referer('syus_admin_nonce', 'nonce');
 
         if (!current_user_can('manage_options')) {
             wp_send_json_error([
                 'code'    => 'unauthorized',
-                'message' => __('Unauthorized permission.', 'sync-suitecrm-users'),
+                'message' => __('Unauthorized permission.', 'sync-users-suitecrm'),
             ], 403);
         }
 
@@ -130,7 +130,7 @@ class ActionHandlers {
         $scheduler->syncRealtimeSchedule();
 
         wp_send_json_success([
-            'message'  => __('Settings saved successfully.', 'sync-suitecrm-users'),
+            'message'  => __('Settings saved successfully.', 'sync-users-suitecrm'),
             'settings' => $updated,
         ]);
     }
@@ -141,12 +141,12 @@ class ActionHandlers {
      * @return void
      */
     public function handleTestApi(): void {
-        check_ajax_referer('ssu_admin_nonce', 'nonce');
+        check_ajax_referer('syus_admin_nonce', 'nonce');
 
         if (!current_user_can('manage_options')) {
             wp_send_json_error([
                 'code'    => 'unauthorized',
-                'message' => __('Unauthorized permission.', 'sync-suitecrm-users'),
+                'message' => __('Unauthorized permission.', 'sync-users-suitecrm'),
             ], 403);
         }
 
@@ -159,7 +159,7 @@ class ActionHandlers {
         if (empty($baseUrl) || !filter_var($baseUrl, FILTER_VALIDATE_URL)) {
             wp_send_json_error([
                 'code'    => 'invalid_url',
-                'message' => __('Please enter a valid SuiteCRM base URL.', 'sync-suitecrm-users'),
+                'message' => __('Please enter a valid SuiteCRM base URL.', 'sync-users-suitecrm'),
             ], 400);
         }
 
@@ -179,7 +179,7 @@ class ActionHandlers {
                 'code'    => 'transport_error',
                 'message' => sprintf(
                     /* translators: %s: transport error message */
-                    __('Connection failed: %s', 'sync-suitecrm-users'),
+                    __('Connection failed: %s', 'sync-users-suitecrm'),
                     esc_html($response->get_error_message())
                 ),
             ], 502);
@@ -193,7 +193,7 @@ class ActionHandlers {
                 'reachable'               => true,
                 'authentication_required' => true,
                 'http_status'             => $code,
-                'message'                 => __('SuiteCRM REST V8 API is reachable.', 'sync-suitecrm-users'),
+                'message'                 => __('SuiteCRM REST V8 API is reachable.', 'sync-users-suitecrm'),
             ]);
         }
 
@@ -201,7 +201,7 @@ class ActionHandlers {
             'code'        => 'unexpected_status',
             'message'     => sprintf(
                 /* translators: %d: HTTP status code */
-                __('API reachable but returned unexpected HTTP status %d.', 'sync-suitecrm-users'),
+                __('API reachable but returned unexpected HTTP status %d.', 'sync-users-suitecrm'),
                 $code
             ),
             'http_status' => $code,
@@ -214,12 +214,12 @@ class ActionHandlers {
      * @return void
      */
     public function handleConnect(): void {
-        check_ajax_referer('ssu_admin_nonce', 'nonce');
+        check_ajax_referer('syus_admin_nonce', 'nonce');
 
         if (!current_user_can('manage_options')) {
             wp_send_json_error([
                 'code'    => 'unauthorized',
-                'message' => __('Unauthorized permission.', 'sync-suitecrm-users'),
+                'message' => __('Unauthorized permission.', 'sync-users-suitecrm'),
             ], 403);
         }
 
@@ -249,7 +249,7 @@ class ActionHandlers {
         if (empty($conn['base_url']) || empty($conn['client_id']) || empty($conn['client_secret']) || empty($conn['username']) || empty($conn['password'])) {
             wp_send_json_error([
                 'code'    => 'missing_credentials',
-                'message' => __('All connection fields are required to establish an API connection.', 'sync-suitecrm-users'),
+                'message' => __('All connection fields are required to establish an API connection.', 'sync-users-suitecrm'),
             ], 400);
         }
 
@@ -279,7 +279,7 @@ class ActionHandlers {
                 'code'    => 'transport_error',
                 'message' => sprintf(
                     /* translators: %s: transport error message */
-                    __('Transport error: %s', 'sync-suitecrm-users'),
+                    __('Transport error: %s', 'sync-users-suitecrm'),
                     esc_html($errorMessage)
                 ),
             ], 502);
@@ -302,15 +302,15 @@ class ActionHandlers {
                 'last_connected_at' => $lastConnectedAt,
                 'last_connected_label' => sprintf(
                     /* translators: %s: formatted date of last connection */
-                    __('Last successful handshake: %s', 'sync-suitecrm-users'),
+                    __('Last successful handshake: %s', 'sync-users-suitecrm'),
                     wp_date('Y-m-d H:i:s T', $lastConnectedAt)
                 ),
-                'message'           => __('Connection established and OAuth2 token saved successfully.', 'sync-suitecrm-users'),
+                'message'           => __('Connection established and OAuth2 token saved successfully.', 'sync-users-suitecrm'),
             ]);
         }
 
         // Parse sanitized error message without exposing secrets
-        $errorMessage = __('Authentication failed.', 'sync-suitecrm-users');
+        $errorMessage = __('Authentication failed.', 'sync-users-suitecrm');
         if (is_array($data)) {
             if (!empty($data['message'])) {
                 $errorMessage = (string) $data['message'];
@@ -338,12 +338,12 @@ class ActionHandlers {
      * @return void
      */
     public function handleStartBulk(): void {
-        check_ajax_referer('ssu_admin_nonce', 'nonce');
+        check_ajax_referer('syus_admin_nonce', 'nonce');
 
         if (!current_user_can('manage_options')) {
             wp_send_json_error([
                 'code'    => 'unauthorized',
-                'message' => __('Unauthorized permission.', 'sync-suitecrm-users'),
+                'message' => __('Unauthorized permission.', 'sync-users-suitecrm'),
             ], 403);
         }
 
@@ -359,7 +359,7 @@ class ActionHandlers {
         }
 
         wp_send_json_success(array_merge([
-            'message' => __('Manual bulk synchronization started in background.', 'sync-suitecrm-users'),
+            'message' => __('Manual bulk synchronization started in background.', 'sync-users-suitecrm'),
         ], $result));
     }
 
@@ -369,12 +369,12 @@ class ActionHandlers {
      * @return void
      */
     public function handlePollProgress(): void {
-        check_ajax_referer('ssu_admin_nonce', 'nonce');
+        check_ajax_referer('syus_admin_nonce', 'nonce');
 
         if (!current_user_can('manage_options')) {
             wp_send_json_error([
                 'code'    => 'unauthorized',
-                'message' => __('Unauthorized permission.', 'sync-suitecrm-users'),
+                'message' => __('Unauthorized permission.', 'sync-users-suitecrm'),
             ], 403);
         }
 
@@ -396,12 +396,12 @@ class ActionHandlers {
      * @return void
      */
     public function handleCancelBulk(): void {
-        check_ajax_referer('ssu_admin_nonce', 'nonce');
+        check_ajax_referer('syus_admin_nonce', 'nonce');
 
         if (!current_user_can('manage_options')) {
             wp_send_json_error([
                 'code'    => 'unauthorized',
-                'message' => __('Unauthorized permission.', 'sync-suitecrm-users'),
+                'message' => __('Unauthorized permission.', 'sync-users-suitecrm'),
             ], 403);
         }
 
@@ -420,7 +420,7 @@ class ActionHandlers {
         }
 
         wp_send_json_success(array_merge([
-            'message' => __('Cancellation requested. Worker will halt at the next user boundary.', 'sync-suitecrm-users'),
+            'message' => __('Cancellation requested. Worker will halt at the next user boundary.', 'sync-users-suitecrm'),
         ], $result));
     }
 
@@ -430,12 +430,12 @@ class ActionHandlers {
      * @return void
      */
     public function handleClearBulk(): void {
-        check_ajax_referer('ssu_admin_nonce', 'nonce');
+        check_ajax_referer('syus_admin_nonce', 'nonce');
 
         if (!current_user_can('manage_options')) {
             wp_send_json_error([
                 'code'    => 'unauthorized',
-                'message' => __('Unauthorized permission.', 'sync-suitecrm-users'),
+                'message' => __('Unauthorized permission.', 'sync-users-suitecrm'),
             ], 403);
         }
 
@@ -454,33 +454,33 @@ class ActionHandlers {
         }
 
         wp_send_json_success([
-            'message' => __('Cleared.', 'sync-suitecrm-users'),
+            'message' => __('Cleared.', 'sync-users-suitecrm'),
         ]);
     }
 
     /**
      * AJAX handler: Synchronize an individual user directly to SuiteCRM.
      *
-     * Nonce action: ssu_user_sync_nonce
+     * Nonce action: syus_user_sync_nonce
      * Capability: edit_users (verified for target user ID)
      *
      * @return void
      */
     public function handleSyncUser(): void {
-        check_ajax_referer('ssu_user_sync_nonce', 'nonce');
+        check_ajax_referer('syus_user_sync_nonce', 'nonce');
 
         $userId = isset($_POST['user_id']) ? (int) $_POST['user_id'] : 0;
         if ($userId <= 0) {
             wp_send_json_error([
                 'code'    => 'invalid_user_id',
-                'message' => __('Invalid user ID provided.', 'sync-suitecrm-users'),
+                'message' => __('Invalid user ID provided.', 'sync-users-suitecrm'),
             ], 400);
         }
 
         if (!current_user_can('edit_user', $userId)) {
             wp_send_json_error([
                 'code'    => 'unauthorized',
-                'message' => __('You do not have permission to sync this user.', 'sync-suitecrm-users'),
+                'message' => __('You do not have permission to sync this user.', 'sync-users-suitecrm'),
             ], 403);
         }
 
@@ -501,19 +501,19 @@ class ActionHandlers {
     /**
      * AJAX handler: Delete displayed activity log rows.
      *
-     * Nonce action: ssu_admin_nonce
+     * Nonce action: syus_admin_nonce
      * Capability: manage_options
      * Input: {ids: list<int>} containing exact displayed row IDs.
      *
      * @return void
      */
     public function handleDeleteLogs(): void {
-        check_ajax_referer('ssu_admin_nonce', 'nonce');
+        check_ajax_referer('syus_admin_nonce', 'nonce');
 
         if (!current_user_can('manage_options')) {
             wp_send_json_error([
                 'code'    => 'unauthorized',
-                'message' => __('Unauthorized permission.', 'sync-suitecrm-users'),
+                'message' => __('Unauthorized permission.', 'sync-users-suitecrm'),
             ], 403);
         }
 
@@ -546,7 +546,7 @@ class ActionHandlers {
         if (empty($sanitizedIds)) {
             wp_send_json_error([
                 'code'    => 'invalid_input',
-                'message' => __('No valid record IDs provided for deletion.', 'sync-suitecrm-users'),
+                'message' => __('No valid record IDs provided for deletion.', 'sync-users-suitecrm'),
             ], 400);
         }
 
@@ -563,7 +563,7 @@ class ActionHandlers {
             'deleted_count' => $deletedCount,
             'message'       => sprintf(
                 /* translators: %d: number of deleted rows */
-                _n('%d log entry deleted successfully.', '%d log entries deleted successfully.', $deletedCount, 'sync-suitecrm-users'),
+                _n('%d log entry deleted successfully.', '%d log entries deleted successfully.', $deletedCount, 'sync-users-suitecrm'),
                 $deletedCount
             ),
         ]);
@@ -572,18 +572,18 @@ class ActionHandlers {
     /**
      * AJAX handler: Clear all activity log entries.
      *
-     * Nonce action: ssu_admin_nonce
+     * Nonce action: syus_admin_nonce
      * Capability: manage_options
      *
      * @return void
      */
     public function handleClearLogs(): void {
-        check_ajax_referer('ssu_admin_nonce', 'nonce');
+        check_ajax_referer('syus_admin_nonce', 'nonce');
 
         if (!current_user_can('manage_options')) {
             wp_send_json_error([
                 'code'    => 'unauthorized',
-                'message' => __('Unauthorized permission.', 'sync-suitecrm-users'),
+                'message' => __('Unauthorized permission.', 'sync-users-suitecrm'),
             ], 403);
         }
 
@@ -600,7 +600,7 @@ class ActionHandlers {
             'deleted_count' => $clearedCount,
             'message'       => sprintf(
                 /* translators: %d: number of cleared records */
-                __('Successfully cleared %d activity log records.', 'sync-suitecrm-users'),
+                __('Successfully cleared %d activity log records.', 'sync-users-suitecrm'),
                 $clearedCount
             ),
         ]);

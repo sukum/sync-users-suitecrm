@@ -3,8 +3,8 @@
  * Database schema definitions and migrations.
  *
  * Manages plugin custom database tables:
- * - {prefix}ssu_queue: Automatic synchronization queue.
- * - {prefix}ssu_activity_log: Synchronization audit activity log.
+ * - {prefix}syus_queue: Automatic synchronization queue.
+ * - {prefix}syus_activity_log: Synchronization audit activity log.
  *
  * @package SyncSuiteCRMUsers
  */
@@ -25,8 +25,8 @@ class Schema {
     /**
      * Base table names without prefix.
      */
-    public const QUEUE_TABLE        = 'ssu_queue';
-    public const ACTIVITY_LOG_TABLE = 'ssu_activity_log';
+    public const QUEUE_TABLE        = 'syus_queue';
+    public const ACTIVITY_LOG_TABLE = 'syus_activity_log';
 
     /**
      * Get fully qualified queue table name.

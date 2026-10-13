@@ -16,9 +16,9 @@ defined('ABSPATH') || exit;
 
 class Settings {
 
-    public const OPTION_SETTINGS = 'ssu_settings';
-    public const OPTION_CONNECTION = 'ssu_connection';
-    public const OPTION_DB_VERSION = 'ssu_db_version';
+    public const OPTION_SETTINGS = 'syus_settings';
+    public const OPTION_CONNECTION = 'syus_connection';
+    public const OPTION_DB_VERSION = 'syus_db_version';
 
     public const SECRET_MASK = '••••••••';
 
@@ -260,7 +260,7 @@ class Settings {
         if (!$lock->acquire()) {
             return new \WP_Error(
                 'connection_busy',
-                __('The connection could not be locked for updating.', 'sync-suitecrm-users'),
+                __('The connection could not be locked for updating.', 'sync-users-suitecrm'),
                 ['http_status' => 409]
             );
         }
@@ -482,14 +482,14 @@ class Settings {
         global $wpdb;
 
         // Purge queue table
-        $queueTable = $wpdb->prefix . 'ssu_queue';
+        $queueTable = $wpdb->prefix . 'syus_queue';
         $wpdb->query($wpdb->prepare("TRUNCATE TABLE `%1\$s`", $queueTable));
 
         // Clear CRM mappings
         $wpdb->query(
             $wpdb->prepare(
                 "DELETE FROM {$wpdb->usermeta} WHERE meta_key LIKE %s",
-                $wpdb->esc_like('_ssu_crm_id_') . '%'
+                $wpdb->esc_like('_syus_crm_id_') . '%'
             )
         );
     }

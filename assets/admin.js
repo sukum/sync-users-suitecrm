@@ -12,8 +12,8 @@
 (function($) {
     'use strict';
 
-    // Global configuration object (localized via ssuAdminData)
-    const config = window.ssuAdminData || {
+    // Global configuration object (localized via syusAdminData)
+    const config = window.syusAdminData || {
         ajax_url: window.ajaxurl || '/wp-admin/admin-ajax.php',
         nonce: '',
         poll_interval: 3000,
@@ -29,11 +29,11 @@
      */
     function showNotice(msg, type, containerSelector) {
         type = type || 'success';
-        const selector = containerSelector || '#ssu-notice-container';
+        const selector = containerSelector || '#syus-notice-container';
         let $container = $(selector);
 
         if (!$container.length) {
-            $container = $('<div id="ssu-notice-container" style="margin-top:10px;"></div>');
+            $container = $('<div id="syus-notice-container" style="margin-top:10px;"></div>');
             $('.wrap h1').first().after($container);
         }
 
@@ -64,12 +64,12 @@
        ========================================================================== */
 
     function initSettingsPage() {
-        if (!$('#ssu-settings-page').length) {
+        if (!$('#syus-settings-page').length) {
             return;
         }
 
-        window.SSUSettings.init({
-            el: '#ssu-settings-page',
+        window.SYUSSettings.init({
+            el: '#syus-settings-page',
             config,
             notice: showNotice
         });
@@ -80,12 +80,12 @@
        ========================================================================== */
 
     function initActivityLogPage() {
-        if (!$('.ssu-activity-log-wrap').length) {
+        if (!$('.syus-activity-log-wrap').length) {
             return;
         }
 
         // --- 2.1 Delete records shown on this page ---
-        $('#ssu-delete-shown-logs-btn').on('click', function(e) {
+        $('#syus-delete-shown-logs-btn').on('click', function(e) {
             e.preventDefault();
             const $btn = $(this);
             const rawIds = $btn.attr('data-ids');
@@ -108,12 +108,12 @@
                 return;
             }
 
-            const $spinner = $('#ssu-log-action-spinner');
+            const $spinner = $('#syus-log-action-spinner');
             $btn.prop('disabled', true);
             $spinner.addClass('is-active');
 
             $.post(config.ajax_url, {
-                action: 'ssu_delete_logs',
+                action: 'syus_delete_logs',
                 ids,
                 nonce: config.nonce
             }, res => {
@@ -122,7 +122,7 @@
                     showNotice(res.data.message || 'Records deleted successfully.', 'success');
                     // Remove rows smoothly and update UI
                     ids.forEach(id => {
-                        $(`#ssu-log-row-${id}`).fadeOut(300, function() {
+                        $(`#syus-log-row-${id}`).fadeOut(300, function() {
                             $(this).remove();
                         });
                     });
@@ -142,7 +142,7 @@
         });
 
         // --- 2.2 Clear all logs ---
-        $('#ssu-clear-all-logs-btn').on('click', function(e) {
+        $('#syus-clear-all-logs-btn').on('click', function(e) {
             e.preventDefault();
             const confirmMsg = config.strings.confirm_clear_all ||
                 'Are you sure you want to permanently clear ALL activity log records? This cannot be undone.';
@@ -152,12 +152,12 @@
             }
 
             const $btn = $(this);
-            const $spinner = $('#ssu-log-action-spinner');
+            const $spinner = $('#syus-log-action-spinner');
             $btn.prop('disabled', true);
             $spinner.addClass('is-active');
 
             $.post(config.ajax_url, {
-                action: 'ssu_clear_logs',
+                action: 'syus_clear_logs',
                 nonce: config.nonce
             }, res => {
                 $spinner.removeClass('is-active');
@@ -180,13 +180,13 @@
     }
 
     function initQueuePage() {
-        const $page = $('.ssu-queue-wrap');
+        const $page = $('.syus-queue-wrap');
         if (!$page.length) {
             return;
         }
-        $page.on('click', '.ssu-queue-delete, #ssu-clear-queue', function(e) {
+        $page.on('click', '.syus-queue-delete, #syus-clear-queue', function(e) {
             e.preventDefault();
-            const clear = this.id === 'ssu-clear-queue';
+            const clear = this.id === 'syus-clear-queue';
             let ids = [];
             if (!clear) {
                 try {
@@ -204,9 +204,9 @@
             const $buttons = $page.find('button');
             const enabledButtons = $buttons.filter(':enabled');
             $buttons.prop('disabled', true);
-            $('#ssu-queue-spinner').addClass('is-active');
+            $('#syus-queue-spinner').addClass('is-active');
             $.post(config.ajax_url, {
-                action: clear ? 'ssu_clear_queue' : 'ssu_delete_queue',
+                action: clear ? 'syus_clear_queue' : 'syus_delete_queue',
                 ids,
                 nonce: config.nonce
             }).done(res => {
@@ -219,7 +219,7 @@
                 showNotice(xhr.responseJSON?.data?.message || config.strings.queue_error, 'error');
             }).always(() => {
                 enabledButtons.prop('disabled', false);
-                $('#ssu-queue-spinner').removeClass('is-active');
+                $('#syus-queue-spinner').removeClass('is-active');
             });
         });
     }

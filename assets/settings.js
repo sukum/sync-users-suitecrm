@@ -4,7 +4,7 @@
  * @package SyncSuiteCRMUsers
  */
 
-window.ssu_app = (function($, Backbone) {
+window.syus_app = (function($, Backbone) {
     'use strict';
 
     function message(strings, key, fallback) {
@@ -126,7 +126,7 @@ window.ssu_app = (function($, Backbone) {
         test(baseUrl) {
             if (this.isBusy() || this.disposed) return;
             this.set({ testing: true, test_message: '', test_success: null });
-            this.request = this.api.request('ssu_test_api', { base_url: baseUrl });
+            this.request = this.api.request('syus_test_api', { base_url: baseUrl });
             this.request.done(data => testApiSuccess.call(this, data))
                 .fail(error => testApiFail.call(this, error))
                 .always(() => testApiAlways.call(this));
@@ -137,7 +137,7 @@ window.ssu_app = (function($, Backbone) {
             this.set({ connecting: true, connect_message: '', connect_success: null });
             // Credentials belong to this request; they are never stored in model attributes.
             const baseUrl = credentials.base_url;
-            this.request = this.api.request('ssu_connect', credentials);
+            this.request = this.api.request('syus_connect', credentials);
             this.request.done(data => connectSuccess.call(this, data, baseUrl))
                 .fail(error => connectFail.call(this, error))
                 .always(() => connectAlways.call(this));
@@ -152,8 +152,8 @@ window.ssu_app = (function($, Backbone) {
 
     const ConnectionView = Backbone.View.extend({
         events: {
-            'click #ssu-test-api-btn': 'test',
-            'click #ssu-connect-btn': 'connect',
+            'click #syus-test-api-btn': 'test',
+            'click #syus-connect-btn': 'connect',
         },
 
         initialize(options) {
@@ -164,14 +164,14 @@ window.ssu_app = (function($, Backbone) {
 
         test(event) {
             event.preventDefault();
-            this.model.test(this.$('#ssu_base_url').val());
+            this.model.test(this.$('#syus_base_url').val());
         },
 
         connect(event) {
             event.preventDefault();
             if (this.model.isBusy()) return;
-            const baseUrl = this.$('#ssu_base_url').val();
-            const sameCrm = this.$('#ssu_same_crm').is(':checked');
+            const baseUrl = this.$('#syus_base_url').val();
+            const sameCrm = this.$('#syus_same_crm').is(':checked');
             const originalUrl = this.model.get('original_base_url');
 
             if (originalUrl && baseUrl !== originalUrl && !sameCrm && !window.confirm(message(
@@ -184,10 +184,10 @@ window.ssu_app = (function($, Backbone) {
 
             this.model.connect({
                 base_url: baseUrl,
-                client_id: this.$('#ssu_client_id').val(),
-                client_secret: this.$('#ssu_client_secret').val(),
-                username: this.$('#ssu_username').val(),
-                password: this.$('#ssu_password').val(),
+                client_id: this.$('#syus_client_id').val(),
+                client_secret: this.$('#syus_client_secret').val(),
+                username: this.$('#syus_username').val(),
+                password: this.$('#syus_password').val(),
                 same_crm: sameCrm ? 1 : 0
             });
         },
@@ -202,16 +202,16 @@ window.ssu_app = (function($, Backbone) {
             };
             const colors = { connected: '#00a32a', reconnect_required: '#dba617', not_configured: '#787c82' };
 
-            this.$('#ssu-test-api-btn, #ssu-connect-btn').prop('disabled', model.isBusy());
-            this.$('#ssu-test-api-spinner').toggleClass('is-active', model.get('testing'));
-            this.$('#ssu-connect-spinner').toggleClass('is-active', model.get('connecting'));
-            this.$('#ssu-test-api-result').text(model.get('test_message')).css('color',
+            this.$('#syus-test-api-btn, #syus-connect-btn').prop('disabled', model.isBusy());
+            this.$('#syus-test-api-spinner').toggleClass('is-active', model.get('testing'));
+            this.$('#syus-connect-spinner').toggleClass('is-active', model.get('connecting'));
+            this.$('#syus-test-api-result').text(model.get('test_message')).css('color',
                 model.get('test_success') === null ? '' : (model.get('test_success') ? '#00a32a' : '#d63638'));
-            this.$('#ssu-connect-result').text(model.get('connect_message')).css('color',
+            this.$('#syus-connect-result').text(model.get('connect_message')).css('color',
                 model.get('connect_success') === null ? '' : (model.get('connect_success') ? '#00a32a' : '#d63638'));
-            this.$('#ssu-connection-badge').text(labels[status] || status).css('background-color', colors[status] || '#787c82');
-            this.$('#ssu-last-connected').text(model.get('last_connected_label')).toggle(!!model.get('last_connected_label'));
-            this.$('#ssu-last-connection-error').toggle(!!model.get('last_error')).find('code').text(model.get('last_error'));
+            this.$('#syus-connection-badge').text(labels[status] || status).css('background-color', colors[status] || '#787c82');
+            this.$('#syus-last-connected').text(model.get('last_connected_label')).toggle(!!model.get('last_connected_label'));
+            this.$('#syus-last-connection-error').toggle(!!model.get('last_error')).find('code').text(model.get('last_error'));
             return this;
         },
     });
@@ -262,7 +262,7 @@ window.ssu_app = (function($, Backbone) {
                 generation: this.pollGeneration,
                 succeeded: false
             };
-            this.pollRequest = this.api.request('ssu_poll_progress', {}, 'GET');
+            this.pollRequest = this.api.request('syus_poll_progress', {}, 'GET');
             this.pollRequest
                 .done(data => bulkProgressSuccess.call(this, data, poll_status))
                 .fail(error => bulkProgressFail.call(this, error, poll_status))
@@ -295,7 +295,7 @@ window.ssu_app = (function($, Backbone) {
 
         start() {
             if (this.isRunning() && !this.isStale()) return;
-            this.perform('ssu_start_bulk', 'starting', {},
+            this.perform('syus_start_bulk', 'starting', {},
                 message(this.strings, 'bulk_started', 'Bulk synchronization initiated in background.'),
                 message(this.strings, 'bulk_start_failed', 'Failed to start bulk synchronization.'),
                 function(data) {
@@ -307,7 +307,7 @@ window.ssu_app = (function($, Backbone) {
         cancel() {
             const progress = this.get('progress');
             if (!this.isRunning() || this.isStale() || progress.cancel_requested) return;
-            this.perform('ssu_cancel_bulk', 'cancelling', { run_id: progress.run_id },
+            this.perform('syus_cancel_bulk', 'cancelling', { run_id: progress.run_id },
                 message(this.strings, 'bulk_cancel_requested', 'Cancellation requested. Processing will halt at the next user boundary.'),
                 message(this.strings, 'bulk_cancel_failed', 'Failed to request cancellation.'),
                 function(data) {
@@ -318,7 +318,7 @@ window.ssu_app = (function($, Backbone) {
 
         clearRun() {
             if (!this.isStale()) return;
-            this.perform('ssu_clear_bulk', 'clearing', { run_id: this.get('progress').run_id },
+            this.perform('syus_clear_bulk', 'clearing', { run_id: this.get('progress').run_id },
                 message(this.strings, 'bulk_cleared', 'Bulk synchronization progress cleared.'),
                 message(this.strings, 'bulk_clear_failed', 'Failed to clear bulk synchronization progress.'),
                 function() { this.set({ progress: null, stale: false }); });
@@ -334,9 +334,9 @@ window.ssu_app = (function($, Backbone) {
 
     const BulkProgressView = Backbone.View.extend({
         events: {
-            'click #ssu-start-bulk-btn': 'start',
-            'click #ssu-cancel-bulk-btn': 'cancel',
-            'click #ssu-clear-bulk-btn': 'clearRun'
+            'click #syus-start-bulk-btn': 'start',
+            'click #syus-cancel-bulk-btn': 'cancel',
+            'click #syus-clear-bulk-btn': 'clearRun'
         },
 
         initialize(options) {
@@ -384,29 +384,29 @@ window.ssu_app = (function($, Backbone) {
             const processed = Math.max(0, parseInt(snapshot.processed_users, 10) || 0);
             const percent = total > 0 ? Math.min(100, Math.round(processed / total * 100)) : 0;
 
-            this.$('#ssu-start-bulk-btn').prop('disabled', busy || (running && !stale)).text(operation === 'starting'
+            this.$('#syus-start-bulk-btn').prop('disabled', busy || (running && !stale)).text(operation === 'starting'
                 ? message(this.strings, 'starting_bulk', 'Starting bulk sync...')
                 : message(this.strings, 'start_bulk', 'Sync all existing users'));
-            this.$('#ssu-cancel-bulk-btn').toggle(running && !stale).prop('disabled', busy || !!snapshot.cancel_requested)
+            this.$('#syus-cancel-bulk-btn').toggle(running && !stale).prop('disabled', busy || !!snapshot.cancel_requested)
                 .text(operation === 'cancelling' || snapshot.cancel_requested
                     ? message(this.strings, 'cancelling_bulk', 'Requesting cancellation...')
                     : message(this.strings, 'cancel_bulk', 'Cancel sync'));
-            this.$('#ssu-clear-bulk-btn').toggle(stale).prop('disabled', busy).text(operation === 'clearing'
+            this.$('#syus-clear-bulk-btn').toggle(stale).prop('disabled', busy).text(operation === 'clearing'
                 ? message(this.strings, 'clearing', 'Clearing...')
                 : message(this.strings, 'clear_bulk', 'Clear sync'));
-            this.$('#ssu-bulk-spinner').toggleClass('is-active', busy);
-            this.$('#ssu-bulk-panel').toggle(!!progress);
-            this.$('#ssu-bulk-stale-notice').toggle(stale);
-            this.$('#ssu-bulk-status-badge').text(stale
+            this.$('#syus-bulk-spinner').toggleClass('is-active', busy);
+            this.$('#syus-bulk-panel').toggle(!!progress);
+            this.$('#syus-bulk-stale-notice').toggle(stale);
+            this.$('#syus-bulk-status-badge').text(stale
                 ? message(this.strings, 'bulk_stalled', 'STALLED / INTERRUPTED')
                 : (labels[status] || status.toUpperCase())).css('background-color', stale ? '#dba617' : (colors[status] || '#2271b1'));
-            this.$('#ssu-bulk-progress-bar').css('width', `${percent}%`);
-            this.$('#ssu-stat-run-id code').text(snapshot.run_id || '—');
-            this.$('#ssu-stat-total-users').text(total);
-            this.$('#ssu-stat-processed-users').text(processed);
-            this.$('#ssu-stat-successes').text(snapshot.success_count || 0);
-            this.$('#ssu-stat-failures').text(snapshot.failure_count || 0);
-            this.$('#ssu-stat-skips').text(snapshot.skipped_count || 0);
+            this.$('#syus-bulk-progress-bar').css('width', `${percent}%`);
+            this.$('#syus-stat-run-id code').text(snapshot.run_id || '—');
+            this.$('#syus-stat-total-users').text(total);
+            this.$('#syus-stat-processed-users').text(processed);
+            this.$('#syus-stat-successes').text(snapshot.success_count || 0);
+            this.$('#syus-stat-failures').text(snapshot.failure_count || 0);
+            this.$('#syus-stat-skips').text(snapshot.skipped_count || 0);
             return this;
         }
     });
@@ -416,11 +416,11 @@ window.ssu_app = (function($, Backbone) {
             'click .nav-tab-wrapper a.nav-tab': 'selectTab',
             'change #auto_sync_enabled': 'syncAutoModeState',
             'change input[name="auto_sync_mode"]': 'syncAutoModeState',
-            'submit #ssu-settings-form': 'save'
+            'submit #syus-settings-form': 'save'
         },
 
         initialize(options) {
-            this.$form = this.$('#ssu-settings-form');
+            this.$form = this.$('#syus-settings-form');
             const config = options.config || {};
             this.config = $.extend({}, config, {
                 nonce: this.$form.find('input[name="nonce"]').val() || config.nonce
@@ -431,9 +431,9 @@ window.ssu_app = (function($, Backbone) {
             this.disposed = false;
 
             const api = new SettingsApi(this.config);
-            const $connection = this.$form.find('#ssu-tab-authentication');
-            const $bulk = this.$form.find('#ssu-tab-bulk');
-            const $modules = this.$form.find('#ssu-tab-modules');
+            const $connection = this.$form.find('#syus-tab-authentication');
+            const $bulk = this.$form.find('#syus-tab-bulk');
+            const $modules = this.$form.find('#syus-tab-modules');
             this.connectionModel = new ConnectionModel(initialState($connection), { api, strings: this.strings });
             this.modulesModel = new ModulesModel(initialState($modules));
             this.bulkModel = new BulkProgressModel(initialState($bulk), {
@@ -465,8 +465,8 @@ window.ssu_app = (function($, Backbone) {
         switchTab(tabId) {
             const $tabs = this.$('.nav-tab-wrapper a.nav-tab');
             const $tab = $tabs.filter((index, tab) => tab.getAttribute('data-tab') === tabId);
-            const $contents = this.$('.ssu-tab-content');
-            const $content = $contents.filter((index, content) => content.id === `ssu-tab-${tabId}`);
+            const $contents = this.$('.syus-tab-content');
+            const $content = $contents.filter((index, content) => content.id === `syus-tab-${tabId}`);
             if (!$tab.length || !$content.length) return;
 
             $tabs.removeClass('nav-tab-active');
@@ -480,28 +480,28 @@ window.ssu_app = (function($, Backbone) {
 
         syncAutoModeState() {
             const isEnabled = this.$('#auto_sync_enabled').is(':checked');
-            this.$('#ssu-auto-mode-fieldset input[type="radio"]').prop('disabled', !isEnabled);
+            this.$('#syus-auto-mode-fieldset input[type="radio"]').prop('disabled', !isEnabled);
 
             const isBatch = this.$('input[name="auto_sync_mode"]:checked').val() === 'batch';
             this.$('#batch_time_hour, #batch_time_minute').prop('disabled', !isEnabled || !isBatch);
             if (isBatch && isEnabled) {
-                this.$('#ssu-batch-time-row').show();
-                this.$('#ssu-batch-time-row').css('opacity', 1);
+                this.$('#syus-batch-time-row').show();
+                this.$('#syus-batch-time-row').css('opacity', 1);
             } else {
-                this.$('#ssu-batch-time-row').css('opacity', isEnabled ? '0.5' : '0.3');
+                this.$('#syus-batch-time-row').css('opacity', isEnabled ? '0.5' : '0.3');
             }
         },
 
         setSaving(saving) {
-            this.$('#ssu-save-btn').prop('disabled', saving);
-            this.$('#ssu-save-spinner').toggleClass('is-active', saving);
+            this.$('#syus-save-btn').prop('disabled', saving);
+            this.$('#syus-save-spinner').toggleClass('is-active', saving);
         },
 
         save(event) {
             event.preventDefault();
             if (this.disposed || this.saveRequest) return;
 
-            const formData = `${this.$form.serialize()}&action=ssu_save_settings`;
+            const formData = `${this.$form.serialize()}&action=syus_save_settings`;
             this.setSaving(true);
             this.saveRequest = $.post(this.config.ajax_url, formData);
             this.saveRequest.always(() => {
@@ -536,26 +536,26 @@ window.ssu_app = (function($, Backbone) {
             });
             this.stopListening();
             this.undelegateEvents();
-            if (this.$el.data('ssuSettingsPageView') === this) {
-                this.$el.removeData('ssuSettingsPageView');
+            if (this.$el.data('syusSettingsPageView') === this) {
+                this.$el.removeData('syusSettingsPageView');
             }
             // Detach behavior while preserving the server-rendered WordPress markup.
             return this;
         }
     });
 
-    window.SSUSettings = {
+    window.SYUSSettings = {
         init(options) {
             const $element = $(options.el);
             // Accept the original form selector as well as the page wrapper.
-            const $page = $element.is('#ssu-settings-form')
-                ? $element.closest('#ssu-settings-page, .ssu-wrap') : $element;
-            if (!$page.length || !$page.find('#ssu-settings-form').length) return null;
+            const $page = $element.is('#syus-settings-form')
+                ? $element.closest('#syus-settings-page, .syus-wrap') : $element;
+            if (!$page.length || !$page.find('#syus-settings-form').length) return null;
 
-            const existing = $page.data('ssuSettingsPageView');
+            const existing = $page.data('syusSettingsPageView');
             if (existing) return existing;
             const view = new SettingsPageView({ el: $page, config: options.config, notice: options.notice });
-            $page.data('ssuSettingsPageView', view);
+            $page.data('syusSettingsPageView', view);
             return view;
         }
     };

@@ -16,23 +16,23 @@
 defined('ABSPATH') || exit;
 
 // Plugin version and constants
-define('SSU_VERSION', '1.0.0');
-define('SSU_DB_VERSION', '1.0.0');
-define('SSU_PLUGIN_FILE', __FILE__);
-define('SSU_PLUGIN_DIR', plugin_dir_path(__FILE__));
-define('SSU_PLUGIN_URL', plugin_dir_url(__FILE__));
-define('SSU_PLUGIN_BASENAME', plugin_basename(__FILE__));
+define('SYUS_VERSION', '1.0.0');
+define('SYUS_DB_VERSION', '1.0.0');
+define('SYUS_PLUGIN_FILE', __FILE__);
+define('SYUS_PLUGIN_DIR', plugin_dir_path(__FILE__));
+define('SYUS_PLUGIN_URL', plugin_dir_url(__FILE__));
+define('SYUS_PLUGIN_BASENAME', plugin_basename(__FILE__));
 
 // Functions must be loaded explicitly with either class autoloader.
-require_once SSU_PLUGIN_DIR . 'src/functions.php';
+require_once SYUS_PLUGIN_DIR . 'src/functions.php';
 
 // Autoloader: Composer autoload if present, otherwise fallback PSR-4 autoloader
-if (file_exists(SSU_PLUGIN_DIR . 'vendor/autoload.php')) {
-    require_once SSU_PLUGIN_DIR . 'vendor/autoload.php';
+if (file_exists(SYUS_PLUGIN_DIR . 'vendor/autoload.php')) {
+    require_once SYUS_PLUGIN_DIR . 'vendor/autoload.php';
 } else {
     spl_autoload_register(function ($class) {
         $prefix = 'SyncSuiteCRMUsers\\';
-        $baseDir = SSU_PLUGIN_DIR . 'src/';
+        $baseDir = SYUS_PLUGIN_DIR . 'src/';
 
         $len = strlen($prefix);
         if (strncmp($prefix, $class, $len) !== 0) {

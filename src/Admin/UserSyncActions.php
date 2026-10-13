@@ -93,41 +93,41 @@ class UserSyncActions {
 
         wp_enqueue_style('dashicons');
 
-        $assetFile    = SSU_PLUGIN_DIR . 'assets/user-sync.js';
-        $scriptHandle = 'ssu-user-sync';
+        $assetFile    = SYUS_PLUGIN_DIR . 'assets/user-sync.js';
+        $scriptHandle = 'syus-user-sync';
 
         if (file_exists($assetFile)) {
             wp_enqueue_script(
                 $scriptHandle,
-                SSU_PLUGIN_URL . 'assets/user-sync.js',
+                SYUS_PLUGIN_URL . 'assets/user-sync.js',
                 ['jquery', 'backbone'],
                 (string) filemtime($assetFile),
                 true
             );
         } else {
-            wp_register_script($scriptHandle, false, ['jquery', 'backbone'], SSU_VERSION, true);
+            wp_register_script($scriptHandle, false, ['jquery', 'backbone'], SYUS_VERSION, true);
             wp_enqueue_script($scriptHandle);
         }
 
-        wp_localize_script($scriptHandle, 'ssuUserSyncData', [
+        wp_localize_script($scriptHandle, 'syusUserSyncData', [
             'ajax_url' => admin_url('admin-ajax.php'),
-            'nonce'    => wp_create_nonce('ssu_user_sync_nonce'),
+            'nonce'    => wp_create_nonce('syus_user_sync_nonce'),
             'strings'  => [
-                'syncing'          => __('Synchronizing user with SuiteCRM...', 'sync-suitecrm-users'),
-                'sync_complete'    => __('Synchronization complete.', 'sync-suitecrm-users'),
-                'sync_failed'      => __('Synchronization failed.', 'sync-suitecrm-users'),
-                'confirm_sync'     => __('Synchronize this user to SuiteCRM now?', 'sync-suitecrm-users'),
-                'sync_outcomes'    => __('Synchronization Outcomes:', 'sync-suitecrm-users'),
-                'row_syncing'      => __('Syncing...', 'sync-suitecrm-users'),
-                'row_synced'       => __('Synced', 'sync-suitecrm-users'),
-                'row_failed'       => __('Failed', 'sync-suitecrm-users'),
-                'connection_error' => __('Error communicating with synchronization engine.', 'sync-suitecrm-users'),
-                'column_module'    => __('Module', 'sync-suitecrm-users'),
-                'column_action'    => __('Action', 'sync-suitecrm-users'),
-                'column_status'    => __('Status', 'sync-suitecrm-users'),
-                'column_details'   => __('Details', 'sync-suitecrm-users'),
-                'crm_id'           => __('CRM ID:', 'sync-suitecrm-users'),
-                'mapped'           => __('Mapped', 'sync-suitecrm-users'),
+                'syncing'          => __('Synchronizing user with SuiteCRM...', 'sync-users-suitecrm'),
+                'sync_complete'    => __('Synchronization complete.', 'sync-users-suitecrm'),
+                'sync_failed'      => __('Synchronization failed.', 'sync-users-suitecrm'),
+                'confirm_sync'     => __('Synchronize this user to SuiteCRM now?', 'sync-users-suitecrm'),
+                'sync_outcomes'    => __('Synchronization Outcomes:', 'sync-users-suitecrm'),
+                'row_syncing'      => __('Syncing...', 'sync-users-suitecrm'),
+                'row_synced'       => __('Synced', 'sync-users-suitecrm'),
+                'row_failed'       => __('Failed', 'sync-users-suitecrm'),
+                'connection_error' => __('Error communicating with synchronization engine.', 'sync-users-suitecrm'),
+                'column_module'    => __('Module', 'sync-users-suitecrm'),
+                'column_action'    => __('Action', 'sync-users-suitecrm'),
+                'column_status'    => __('Status', 'sync-users-suitecrm'),
+                'column_details'   => __('Details', 'sync-users-suitecrm'),
+                'crm_id'           => __('CRM ID:', 'sync-users-suitecrm'),
+                'mapped'           => __('Mapped', 'sync-users-suitecrm'),
             ],
         ]);
     }
@@ -155,9 +155,9 @@ class UserSyncActions {
         $isEligible     = $this->eligibility->isUserEligible($user);
         $eligibleRoles  = $this->eligibility->getEligibleRoles();
         $userRoles      = (array) $user->roles;
-        $nonce          = wp_create_nonce('ssu_user_sync_nonce');
+        $nonce          = wp_create_nonce('syus_user_sync_nonce');
 
-        $templatePath = SSU_PLUGIN_DIR . 'templates/user-sync.php';
+        $templatePath = SYUS_PLUGIN_DIR . 'templates/user-sync.php';
         if (file_exists($templatePath)) {
             include $templatePath;
         }
@@ -175,13 +175,13 @@ class UserSyncActions {
             return $actions;
         }
 
-        $nonce = wp_create_nonce('ssu_user_sync_nonce');
-        $actions['ssu_sync'] = sprintf(
-            '<a href="#" class="ssu-sync-user-row-btn" data-user-id="%d" data-nonce="%s" title="%s">%s</a>',
+        $nonce = wp_create_nonce('syus_user_sync_nonce');
+        $actions['syus_sync'] = sprintf(
+            '<a href="#" class="syus-sync-user-row-btn" data-user-id="%d" data-nonce="%s" title="%s">%s</a>',
             (int) $user->ID,
             esc_attr($nonce),
-            esc_attr__('Push this user directly to SuiteCRM', 'sync-suitecrm-users'),
-            esc_html__('Sync to SuiteCRM', 'sync-suitecrm-users')
+            esc_attr__('Push this user directly to SuiteCRM', 'sync-users-suitecrm'),
+            esc_html__('Sync to SuiteCRM', 'sync-users-suitecrm')
         );
 
         return $actions;

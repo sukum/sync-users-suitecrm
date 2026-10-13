@@ -49,7 +49,7 @@ class QueueExpiryProcessor {
                 $item->getModule(),
                 sprintf(
                     /* translators: %d: Number of days */
-                    __('Queue item exceeded %d days stale expiration threshold.', 'sync-suitecrm-users'),
+                    __('Queue item exceeded %d days stale expiration threshold.', 'sync-users-suitecrm'),
                         esc_html(self::STALE_DAYS)
                 )
             );

@@ -37,7 +37,7 @@
                 url: this.config.ajax_url,
                 method: 'POST',
                 dataType: 'json',
-                data: { action: 'ssu_sync_user', user_id: this.id, nonce }
+                data: { action: 'syus_sync_user', user_id: this.id, nonce }
             });
 
             this.request.done(response => {
@@ -73,7 +73,7 @@
     });
 
     const UserListSyncView = Backbone.View.extend({
-        events: { 'click .ssu-sync-user-row-btn': 'synchronize' },
+        events: { 'click .syus-sync-user-row-btn': 'synchronize' },
 
         initialize({ config, getModel }) {
             this.config = config;
@@ -154,13 +154,13 @@
     });
 
     const UserProfileSyncView = Backbone.View.extend({
-        events: { 'click #ssu-sync-user-btn': 'synchronize' },
+        events: { 'click #syus-sync-user-btn': 'synchronize' },
 
         initialize({ config }) {
             this.config = config;
-            this.$button = this.$('#ssu-sync-user-btn');
-            this.$spinner = this.$('#ssu-sync-user-spinner');
-            this.$result = this.$('#ssu-user-sync-result').attr('aria-live', 'polite');
+            this.$button = this.$('#syus-sync-user-btn');
+            this.$spinner = this.$('#syus-sync-user-spinner');
+            this.$result = this.$('#syus-user-sync-result').attr('aria-live', 'polite');
             this.initialDisabled = this.$button.prop('disabled');
             this.listenTo(this.model, 'change', this.render);
         },
@@ -224,12 +224,12 @@
         updateMapping(outcome) {
             const hasMapping = outcome.status === 'success' || ['create', 'update'].includes(outcome.action);
             if (!outcome.crm_record_id || !hasMapping) return;
-            const rowId = `ssu-mapping-row-${outcome.module.toLowerCase()}`;
-            const $row = this.$('#ssu-user-mappings-tbody tr').filter((index, row) => row.id === rowId);
+            const rowId = `syus-mapping-row-${outcome.module.toLowerCase()}`;
+            const $row = this.$('#syus-user-mappings-tbody tr').filter((index, row) => row.id === rowId);
             $row.find('td:nth-child(2)').empty().append(
                 $('<span>').text(this.config.strings.mapped || 'Mapped').css({ color: STATUS_COLORS.success, fontWeight: 600 })
             );
-            $row.find('.ssu-mapping-id-cell').empty().append($('<code>').text(outcome.crm_record_id));
+            $row.find('.syus-mapping-id-cell').empty().append($('<code>').text(outcome.crm_record_id));
         },
 
         dispose() {
@@ -243,7 +243,7 @@
 
     let instance = null;
 
-    const init = (config = window.ssuUserSyncData || {}) => {
+    const init = (config = window.syusUserSyncData || {}) => {
         if (instance) instance.dispose();
         const options = {
             ajax_url: config.ajax_url || window.ajaxurl || '/wp-admin/admin-ajax.php',
@@ -258,8 +258,8 @@
         };
         const $list = $('#the-list');
         if ($list.length) views.push(new UserListSyncView({ el: $list, config: options, getModel }));
-        $('.ssu-user-sync-section').each((index, section) => {
-            const $button = $(section).find('#ssu-sync-user-btn');
+        $('.syus-user-sync-section').each((index, section) => {
+            const $button = $(section).find('#syus-sync-user-btn');
             if ($button.length) {
                 views.push(new UserProfileSyncView({
                     el: section, config: options, model: getModel(Number($button.data('user-id')))
@@ -283,6 +283,6 @@
         return handle;
     };
 
-    window.SSUUserSync = { init, dispose: () => { if (instance) instance.dispose(); } };
+    window.SYUSUserSync = { init, dispose: () => { if (instance) instance.dispose(); } };
     $(() => init());
 })(jQuery, Backbone);

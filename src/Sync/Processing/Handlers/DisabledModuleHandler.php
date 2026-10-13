@@ -30,7 +30,7 @@ class DisabledModuleHandler extends AbstractOutcomeHandler implements OutcomeHan
                 $username,
                 $module,
                 SyncOutcome::REASON_MODULE_DISABLED,
-                __('Module is disabled in configuration settings.', 'sync-suitecrm-users')
+                __('Module is disabled in configuration settings.', 'sync-users-suitecrm')
             );
             $this->logOutcome($outcome);
             $handler->onOutcome($outcome);

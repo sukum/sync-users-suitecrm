@@ -71,7 +71,7 @@ class RecordMatcher {
                 'invalid_module',
                 sprintf(
                     /* translators: %s: Module name */
-                    __('Unsupported SuiteCRM module: %s.', 'sync-suitecrm-users'),
+                    __('Unsupported SuiteCRM module: %s.', 'sync-users-suitecrm'),
                     $module
                 ),
                 ['http_status' => 400]
@@ -111,7 +111,7 @@ class RecordMatcher {
                     'invalid_response',
                     sprintf(
                         /* translators: 1: Saved CRM ID, 2: Module name */
-                        __('Multiple records returned for saved ID %1$s in module %2$s.', 'sync-suitecrm-users'),
+                        __('Multiple records returned for saved ID %1$s in module %2$s.', 'sync-users-suitecrm'),
                         $savedId,
                         $module
                     ),
@@ -127,7 +127,7 @@ class RecordMatcher {
         if (!is_email($email)) {
             return new WP_Error(
                 'invalid_user_data',
-                __('WordPress user has no valid email address', 'sync-suitecrm-users'),
+                __('WordPress user has no valid email address', 'sync-users-suitecrm'),
                 ['user_id' => $userId]
             );
         }

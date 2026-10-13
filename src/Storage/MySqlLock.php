@@ -17,7 +17,7 @@ class MySqlLock {
         global $wpdb;
 
         // MySQL lock names are server-wide and limited to 64 characters.
-        $this->name = 'ssu:' . sha1(DB_NAME . ':' . $wpdb->prefix . ':' . $resource);
+        $this->name = 'syus:' . sha1(DB_NAME . ':' . $wpdb->prefix . ':' . $resource);
     }
 
     public function acquire(): bool {

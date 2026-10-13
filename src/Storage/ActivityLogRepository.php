@@ -96,7 +96,7 @@ class ActivityLogRepository {
                 'activity_log_insert_failed',
                 sprintf(
                     /* translators: %s: Database error */
-                    __('Database error inserting activity log entry: %s', 'sync-suitecrm-users'),
+                    __('Database error inserting activity log entry: %s', 'sync-users-suitecrm'),
                     $wpdb->last_error
                 )
             );
@@ -174,7 +174,7 @@ class ActivityLogRepository {
                 'activity_log_query_failed',
                 sprintf(
                     /* translators: %s: Database error */
-                    __('Database error counting activity log records: %s', 'sync-suitecrm-users'),
+                    __('Database error counting activity log records: %s', 'sync-users-suitecrm'),
                     $wpdb->last_error
                 )
             );
@@ -217,7 +217,7 @@ class ActivityLogRepository {
                 'activity_log_query_failed',
                 sprintf(
                     /* translators: %s: Database error */
-                    __('Database error querying activity log records: %s', 'sync-suitecrm-users'),
+                    __('Database error querying activity log records: %s', 'sync-users-suitecrm'),
                     $wpdb->last_error
                 )
             );
@@ -273,7 +273,7 @@ class ActivityLogRepository {
                 'activity_log_delete_failed',
                 sprintf(
                     /* translators: %s: Database error */
-                    __('Database error deleting activity log rows: %s', 'sync-suitecrm-users'),
+                    __('Database error deleting activity log rows: %s', 'sync-users-suitecrm'),
                     $wpdb->last_error
                 )
             );
@@ -298,7 +298,7 @@ class ActivityLogRepository {
                 'activity_log_clear_failed',
                 sprintf(
                     /* translators: %s: Database error */
-                    __('Database error counting activity log rows for clearing: %s', 'sync-suitecrm-users'),
+                    __('Database error counting activity log rows for clearing: %s', 'sync-users-suitecrm'),
                     $wpdb->last_error
                 )
             );
@@ -313,7 +313,7 @@ class ActivityLogRepository {
                 'activity_log_clear_failed',
                 sprintf(
                     /* translators: %s: Database error */
-                    __('Database error truncating activity log: %s', 'sync-suitecrm-users'),
+                    __('Database error truncating activity log: %s', 'sync-users-suitecrm'),
                     $wpdb->last_error
                 )
             );

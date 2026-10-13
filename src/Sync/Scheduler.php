@@ -21,21 +21,21 @@ class Scheduler {
     /**
      * Cron action hook names.
      */
-    public const HOOK_BATCH_CRON        = 'ssu_batch_sync_cron';
-    public const HOOK_REALTIME_CRON     = 'ssu_realtime_worker_cron';
-    public const HOOK_MANUAL_BULK_CRON  = 'ssu_manual_bulk_cron';
-    public const HOOK_TOKEN_RENEWAL_CRON = 'ssu_token_renewal_cron';
+    public const HOOK_BATCH_CRON        = 'syus_batch_sync_cron';
+    public const HOOK_REALTIME_CRON     = 'syus_realtime_worker_cron';
+    public const HOOK_MANUAL_BULK_CRON  = 'syus_manual_bulk_cron';
+    public const HOOK_TOKEN_RENEWAL_CRON = 'syus_token_renewal_cron';
 
     /**
      * Ajax action name for real-time async loopback worker.
      */
-    public const AJAX_ACTION_REALTIME_WORKER = 'ssu_process_queue_worker';
+    public const AJAX_ACTION_REALTIME_WORKER = 'syus_process_queue_worker';
 
     /**
      * Short-lived, per-dispatch nonce for the HTTP worker only.
      */
     public const WORKER_NONCE_FIELD = 'worker_nonce';
-    private const WORKER_NONCE_PREFIX = 'ssu_worker_nonce_';
+    private const WORKER_NONCE_PREFIX = 'syus_worker_nonce_';
     private const WORKER_NONCE_TTL = 300;
 
     /**
@@ -77,8 +77,8 @@ class Scheduler {
 
         if (!set_transient($nonceKey, true, self::WORKER_NONCE_TTL)) {
             return new WP_Error(
-                'ssu_worker_nonce_failed',
-                __('Could not prepare the background sync request.', 'sync-suitecrm-users')
+                'syus_worker_nonce_failed',
+                __('Could not prepare the background sync request.', 'sync-users-suitecrm')
             );
         }
 

@@ -165,7 +165,7 @@ class Plugin {
             $this->settingsPage->register();
 
             // Plugin row action links
-            add_filter('plugin_action_links_' . SSU_PLUGIN_BASENAME, [$this, 'addPluginActionLinks']);
+            add_filter('plugin_action_links_' . SYUS_PLUGIN_BASENAME, [$this, 'addPluginActionLinks']);
         }
 
         // Register action hooks for cron callbacks to avoid unhandled hook warnings
@@ -179,11 +179,11 @@ class Plugin {
      * @return array<string, string>
      */
     public function addPluginActionLinks(array $links): array {
-        $settingsUrl = admin_url('admin.php?page=ssu-settings');
+        $settingsUrl = admin_url('admin.php?page=syus-settings');
         $settingsLink = sprintf(
             '<a href="%s">%s</a>',
             esc_url($settingsUrl),
-            esc_html__('Settings', 'sync-suitecrm-users')
+            esc_html__('Settings', 'sync-users-suitecrm')
         );
 
         array_unshift($links, $settingsLink);
@@ -197,10 +197,10 @@ class Plugin {
      */
     private function registerCronHooks(): void {
         // Scheduled task hooks defined in specification
-        add_action('ssu_batch_sync_cron', [$this, 'handleBatchSyncCron'], 10, 1);
-        add_action('ssu_realtime_worker_cron', [$this, 'handleRealtimeWorkerCron'], 10, 1);
-        add_action('ssu_manual_bulk_cron', [$this, 'handleManualBulkCron'], 10, 1);
-        add_action('ssu_token_renewal_cron', [$this, 'handleTokenRenewalCron']);
+        add_action('syus_batch_sync_cron', [$this, 'handleBatchSyncCron'], 10, 1);
+        add_action('syus_realtime_worker_cron', [$this, 'handleRealtimeWorkerCron'], 10, 1);
+        add_action('syus_manual_bulk_cron', [$this, 'handleManualBulkCron'], 10, 1);
+        add_action('syus_token_renewal_cron', [$this, 'handleTokenRenewalCron']);
     }
 
     /**
@@ -210,7 +210,7 @@ class Plugin {
      * @return void
      */
     public function handleBatchSyncCron($context = []): void {
-        do_action('ssu_execute_batch_sync', $context);
+        do_action('syus_execute_batch_sync', $context);
     }
 
     /**
@@ -220,7 +220,7 @@ class Plugin {
      * @return void
      */
     public function handleRealtimeWorkerCron($context = []): void {
-        do_action('ssu_execute_realtime_worker', $context);
+        do_action('syus_execute_realtime_worker', $context);
     }
 
     /**
@@ -230,7 +230,7 @@ class Plugin {
      * @return void
      */
     public function handleManualBulkCron($context = []): void {
-        do_action('ssu_execute_manual_bulk', $context);
+        do_action('syus_execute_manual_bulk', $context);
     }
 
     /**
@@ -239,7 +239,7 @@ class Plugin {
      * @return void
      */
     public function handleTokenRenewalCron(): void {
-        do_action('ssu_execute_token_renewal');
+        do_action('syus_execute_token_renewal');
     }
 
     /**

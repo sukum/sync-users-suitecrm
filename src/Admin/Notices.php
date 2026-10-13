@@ -58,20 +58,20 @@ class Notices {
 
         // Check if SuiteCRM reconnection is required
         if ($status === 'reconnect_required') {
-            $settingsUrl = admin_url('admin.php?page=ssu-settings#tab-authentication');
+            $settingsUrl = admin_url('admin.php?page=syus-settings#tab-authentication');
             $lastError   = !empty($connection['last_error']) ? $connection['last_error'] : '';
             ?>
             <div class="notice notice-warning is-dismissible">
                 <p>
-                    <strong><?php esc_html_e('SuiteCRM User Sync:', 'sync-suitecrm-users'); ?></strong>
-                    <?php esc_html_e('SuiteCRM reconnection is required. API requests are currently paused.', 'sync-suitecrm-users'); ?>
+                    <strong><?php esc_html_e('SuiteCRM User Sync:', 'sync-users-suitecrm'); ?></strong>
+                    <?php esc_html_e('SuiteCRM reconnection is required. API requests are currently paused.', 'sync-users-suitecrm'); ?>
                     <?php if ($lastError !== '') : ?>
                         <br>
                         <span style="color: #646970;">
                             <?php
                             printf(
                                 /* translators: %s: Sanitized last error message */
-                                esc_html__('Reason: %s', 'sync-suitecrm-users'),
+                                esc_html__('Reason: %s', 'sync-users-suitecrm'),
                                 esc_html($lastError)
                             );
                             ?>
@@ -79,7 +79,7 @@ class Notices {
                     <?php endif; ?>
                     <br>
                     <a href="<?php echo esc_url($settingsUrl); ?>" class="button button-small" style="margin-top: 5px;">
-                        <?php esc_html_e('Update SuiteCRM Credentials', 'sync-suitecrm-users'); ?>
+                        <?php esc_html_e('Update SuiteCRM Credentials', 'sync-users-suitecrm'); ?>
                     </a>
                 </p>
             </div>
@@ -87,9 +87,9 @@ class Notices {
         }
 
         // Render transient flash notice if stored
-        $flash = get_transient('ssu_admin_flash_notice');
+        $flash = get_transient('syus_admin_flash_notice');
         if (is_array($flash) && !empty($flash['message'])) {
-            delete_transient('ssu_admin_flash_notice');
+            delete_transient('syus_admin_flash_notice');
             $type = in_array($flash['type'] ?? 'info', ['info', 'success', 'warning', 'error'], true)
                 ? $flash['type']
                 : 'info';
@@ -109,7 +109,7 @@ class Notices {
      * @return void
      */
     public static function setFlashNotice(string $message, string $type = 'info'): void {
-        set_transient('ssu_admin_flash_notice', [
+        set_transient('syus_admin_flash_notice', [
             'message' => $message,
             'type'    => $type,
         ], 60);

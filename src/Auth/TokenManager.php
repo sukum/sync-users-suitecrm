@@ -32,7 +32,7 @@ class TokenManager {
     /**
      * Cron hook name for proactive renewal.
      */
-    public const CRON_HOOK = 'ssu_token_renewal_cron';
+    public const CRON_HOOK = 'syus_token_renewal_cron';
 
     /**
      * Settings service.
@@ -77,7 +77,7 @@ class TokenManager {
      *
      * - Checks current connection status and token_expires_at.
      * - If token expires within 300 seconds, initiates token renewal.
-     * - Acquires _ssu_lock_token_refresh mutex lock before requesting renewal.
+     * - Acquires _syus_lock_token_refresh mutex lock before requesting renewal.
      * - On failure, saves connection_status = 'reconnect_required' and returns WP_Error('authentication_unavailable', ...).
      *
      * @return string|WP_Error Valid access token string or WP_Error.
@@ -93,7 +93,7 @@ class TokenManager {
             empty($conn['username']) ||
             empty($conn['password'])
         ) {
-            $msg = __('SuiteCRM connection credentials are not configured.', 'sync-suitecrm-users');
+            $msg = __('SuiteCRM connection credentials are not configured.', 'sync-users-suitecrm');
             $this->settings->setConnectionStatus('not_configured', $msg);
             return new WP_Error('authentication_unavailable', $msg, ['http_status' => 401]);
         }
@@ -115,7 +115,7 @@ class TokenManager {
                 'authentication_unavailable',
                 sprintf(
                     /* translators: %s: Error message */
-                    __('Lock acquisition error during token refresh: %s', 'sync-suitecrm-users'),
+                    __('Lock acquisition error during token refresh: %s', 'sync-users-suitecrm'),
                     $lockHandle->get_error_message()
                 ),
                 ['http_status' => 500]
@@ -150,7 +150,7 @@ class TokenManager {
 
             return new WP_Error(
                 'authentication_unavailable',
-                __('SuiteCRM token renewal is in progress by another worker.', 'sync-suitecrm-users'),
+                __('SuiteCRM token renewal is in progress by another worker.', 'sync-users-suitecrm'),
                 ['http_status' => 409]
             );
         }
@@ -181,7 +181,7 @@ class TokenManager {
      * Perform token refresh via refresh_token or password grant fallback.
      *
      * - Uses stored refresh_token if available; otherwise falls back to password grant credentials.
-     * - Updates ssu_connection option atomically with new token and computed UTC expiry timestamp.
+     * - Updates syus_connection option atomically with new token and computed UTC expiry timestamp.
      * - On renewal, replaces refresh_token when returned; otherwise retains existing refresh_token.
      * - Schedules next proactive renewal cron event.
      *
@@ -195,7 +195,7 @@ class TokenManager {
             empty($conn['client_id']) ||
             empty($conn['client_secret'])
         ) {
-            $msg = __('SuiteCRM connection credentials are incomplete.', 'sync-suitecrm-users');
+            $msg = __('SuiteCRM connection credentials are incomplete.', 'sync-users-suitecrm');
             $this->settings->setConnectionStatus('not_configured', $msg);
             return new WP_Error('authentication_unavailable', $msg, ['http_status' => 401]);
         }
@@ -215,7 +215,7 @@ class TokenManager {
         // 2. Fall back to password grant credentials
         if ($response === null) {
             if (empty($conn['username']) || empty($conn['password'])) {
-                $msg = __('SuiteCRM API username and password are required for renewal.', 'sync-suitecrm-users');
+                $msg = __('SuiteCRM API username and password are required for renewal.', 'sync-users-suitecrm');
                 $this->settings->setConnectionStatus('reconnect_required', $msg);
                 return new WP_Error('authentication_unavailable', $msg, ['http_status' => 401]);
             }
@@ -232,7 +232,7 @@ class TokenManager {
                 'authentication_unavailable',
                 sprintf(
                     /* translators: %s: Error message */
-                    __('SuiteCRM authentication failed: %s', 'sync-suitecrm-users'),
+                    __('SuiteCRM authentication failed: %s', 'sync-users-suitecrm'),
                     $errorMsg
                 ),
                 $response->get_error_data()

@@ -25,13 +25,13 @@ class BulkStoreClear implements BulkStoreAction {
         if ($current === null || $current->getRunId() !== $this->runId || !$current->isRunning()) {
             return new WP_Error(
                 'run_not_active',
-                __('The specified bulk run is not active or has already completed.', 'sync-suitecrm-users'),
+                __('The specified bulk run is not active or has already completed.', 'sync-users-suitecrm'),
                 ['http_status' => 409]
             );
         }
 
         return BulkStoreActionResult::delete(
-            __('Failed to delete bulk progress transient.', 'sync-suitecrm-users')
+            __('Failed to delete bulk progress transient.', 'sync-users-suitecrm')
         );
     }
 }

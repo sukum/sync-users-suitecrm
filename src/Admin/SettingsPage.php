@@ -48,23 +48,23 @@ class SettingsPage {
         add_action('admin_enqueue_scripts', [$this, 'enqueueAssets']);
 
         // Register AJAX fallback hooks if ActionHandlers has not already registered them
-        if (!has_action('wp_ajax_ssu_save_settings')) {
-            add_action('wp_ajax_ssu_save_settings', [$this, 'handleSaveSettings']);
+        if (!has_action('wp_ajax_syus_save_settings')) {
+            add_action('wp_ajax_syus_save_settings', [$this, 'handleSaveSettings']);
         }
-        if (!has_action('wp_ajax_ssu_test_api')) {
-            add_action('wp_ajax_ssu_test_api', [$this, 'handleTestApi']);
+        if (!has_action('wp_ajax_syus_test_api')) {
+            add_action('wp_ajax_syus_test_api', [$this, 'handleTestApi']);
         }
-        if (!has_action('wp_ajax_ssu_connect')) {
-            add_action('wp_ajax_ssu_connect', [$this, 'handleConnect']);
+        if (!has_action('wp_ajax_syus_connect')) {
+            add_action('wp_ajax_syus_connect', [$this, 'handleConnect']);
         }
-        if (!has_action('wp_ajax_ssu_start_bulk')) {
-            add_action('wp_ajax_ssu_start_bulk', [$this, 'handleStartBulk']);
+        if (!has_action('wp_ajax_syus_start_bulk')) {
+            add_action('wp_ajax_syus_start_bulk', [$this, 'handleStartBulk']);
         }
-        if (!has_action('wp_ajax_ssu_poll_progress')) {
-            add_action('wp_ajax_ssu_poll_progress', [$this, 'handlePollProgress']);
+        if (!has_action('wp_ajax_syus_poll_progress')) {
+            add_action('wp_ajax_syus_poll_progress', [$this, 'handlePollProgress']);
         }
-        if (!has_action('wp_ajax_ssu_cancel_bulk')) {
-            add_action('wp_ajax_ssu_cancel_bulk', [$this, 'handleCancelBulk']);
+        if (!has_action('wp_ajax_syus_cancel_bulk')) {
+            add_action('wp_ajax_syus_cancel_bulk', [$this, 'handleCancelBulk']);
         }
     }
 
@@ -75,30 +75,30 @@ class SettingsPage {
      */
     public function addAdminMenu(): void {
         add_menu_page(
-            __('SuiteCRM Sync', 'sync-suitecrm-users'),
-            __('SuiteCRM Sync', 'sync-suitecrm-users'),
+            __('SuiteCRM Sync', 'sync-users-suitecrm'),
+            __('SuiteCRM Sync', 'sync-users-suitecrm'),
             'manage_options',
-            'ssu-settings',
+            'syus-settings',
             [$this, 'render'],
             'dashicons-update',
             80
         );
 
         add_submenu_page(
-            'ssu-settings',
-            __('Settings', 'sync-suitecrm-users'),
-            __('Settings', 'sync-suitecrm-users'),
+            'syus-settings',
+            __('Settings', 'sync-users-suitecrm'),
+            __('Settings', 'sync-users-suitecrm'),
             'manage_options',
-            'ssu-settings',
+            'syus-settings',
             [$this, 'render']
         );
 
         add_submenu_page(
-            'ssu-settings',
-            __('Activity Log', 'sync-suitecrm-users'),
-            __('Activity Log', 'sync-suitecrm-users'),
+            'syus-settings',
+            __('Activity Log', 'sync-users-suitecrm'),
+            __('Activity Log', 'sync-users-suitecrm'),
             'manage_options',
-            'ssu-activity-log',
+            'syus-activity-log',
             [$this, 'renderActivityLog']
         );
     }
@@ -110,81 +110,81 @@ class SettingsPage {
      * @return void
      */
     public function enqueueAssets(string $hook): void {
-        if (strpos($hook, 'ssu-settings') === false && strpos($hook, 'ssu-activity-log') === false) {
+        if (strpos($hook, 'syus-settings') === false && strpos($hook, 'syus-activity-log') === false) {
             return;
         }
 
         wp_enqueue_style('dashicons');
 
-        $assetFile    = SSU_PLUGIN_DIR . 'assets/admin.js';
-        $scriptHandle = 'ssu-admin';
+        $assetFile    = SYUS_PLUGIN_DIR . 'assets/admin.js';
+        $scriptHandle = 'syus-admin';
         $dependencies = ['jquery'];
 
-        if (strpos($hook, 'ssu-settings') !== false) {
-            $settingsAssetFile = SSU_PLUGIN_DIR . 'assets/settings.js';
+        if (strpos($hook, 'syus-settings') !== false) {
+            $settingsAssetFile = SYUS_PLUGIN_DIR . 'assets/settings.js';
             wp_enqueue_script(
-                'ssu-settings',
-                SSU_PLUGIN_URL . 'assets/settings.js',
+                'syus-settings',
+                SYUS_PLUGIN_URL . 'assets/settings.js',
                 ['jquery', 'backbone'],
-                file_exists($settingsAssetFile) ? (string) filemtime($settingsAssetFile) : SSU_VERSION,
+                file_exists($settingsAssetFile) ? (string) filemtime($settingsAssetFile) : SYUS_VERSION,
                 true
             );
-            $dependencies[] = 'ssu-settings';
+            $dependencies[] = 'syus-settings';
         }
 
         if (file_exists($assetFile)) {
             wp_enqueue_script(
                 $scriptHandle,
-                SSU_PLUGIN_URL . 'assets/admin.js',
+                SYUS_PLUGIN_URL . 'assets/admin.js',
                 $dependencies,
                 (string) filemtime($assetFile),
                 true
             );
         } else {
-            wp_register_script($scriptHandle, false, $dependencies, SSU_VERSION, true);
+            wp_register_script($scriptHandle, false, $dependencies, SYUS_VERSION, true);
             wp_enqueue_script($scriptHandle);
         }
 
-        wp_localize_script($scriptHandle, 'ssuAdminData', [
+        wp_localize_script($scriptHandle, 'syusAdminData', [
             'ajax_url'      => admin_url('admin-ajax.php'),
-            'nonce'         => wp_create_nonce('ssu_admin_nonce'),
+            'nonce'         => wp_create_nonce('syus_admin_nonce'),
             'poll_interval' => 3000,
             'strings'       => [
-                'saving'               => __('Saving settings...', 'sync-suitecrm-users'),
-                'saved'                => __('Settings saved successfully.', 'sync-suitecrm-users'),
-                'testing'              => __('Testing API reachability...', 'sync-suitecrm-users'),
-                'connecting'           => __('Connecting to SuiteCRM...', 'sync-suitecrm-users'),
-                'connected'            => __('Connected successfully.', 'sync-suitecrm-users'),
-                'connect_failed'       => __('Connection failed.', 'sync-suitecrm-users'),
-                'connection_connected' => __('Connected', 'sync-suitecrm-users'),
-                'connection_reconnect_required' => __('Reconnect Required', 'sync-suitecrm-users'),
-                'connection_not_configured' => __('Not Configured', 'sync-suitecrm-users'),
-                'api_reachable'        => __('SuiteCRM REST V8 API is reachable.', 'sync-suitecrm-users'),
-                'api_test_failed'      => __('API reachability test failed.', 'sync-suitecrm-users'),
-                'start_bulk'           => __('Sync all existing users', 'sync-suitecrm-users'),
-                'cancel_bulk'          => __('Cancel sync', 'sync-suitecrm-users'),
-                'clear_bulk'           => __('Clear sync', 'sync-suitecrm-users'),
-                'bulk_started'         => __('Bulk synchronization initiated in background.', 'sync-suitecrm-users'),
-                'bulk_start_failed'    => __('Failed to start bulk synchronization.', 'sync-suitecrm-users'),
-                'bulk_cancel_requested' => __('Cancellation requested. Processing will halt at the next user boundary.', 'sync-suitecrm-users'),
-                'bulk_cancel_failed'   => __('Failed to request cancellation.', 'sync-suitecrm-users'),
-                'bulk_cleared'         => __('Bulk synchronization progress cleared.', 'sync-suitecrm-users'),
-                'bulk_clear_failed'    => __('Failed to clear bulk synchronization progress.', 'sync-suitecrm-users'),
-                'bulk_idle'            => __('IDLE', 'sync-suitecrm-users'),
-                'bulk_running'         => __('RUNNING', 'sync-suitecrm-users'),
-                'bulk_completed'       => __('COMPLETED', 'sync-suitecrm-users'),
-                'bulk_cancelled'       => __('CANCELLED', 'sync-suitecrm-users'),
-                'bulk_interrupted'     => __('INTERRUPTED', 'sync-suitecrm-users'),
-                'bulk_stalled'         => __('STALLED / INTERRUPTED', 'sync-suitecrm-users'),
-                'poll_failed'          => __('Unable to retrieve bulk synchronization progress.', 'sync-suitecrm-users'),
-                'starting_bulk'        => __('Starting bulk sync...', 'sync-suitecrm-users'),
-                'cancelling_bulk'      => __('Requesting cancellation...', 'sync-suitecrm-users'),
-                'confirm_cancel'       => __('Are you sure you want to cancel the active bulk synchronization?', 'sync-suitecrm-users'),
-                'confirm_same_crm'     => __('Changing SuiteCRM URL without checking "Same CRM" will purge outstanding queue items and reset all saved CRM record IDs. Do you wish to continue?', 'sync-suitecrm-users'),
-                'confirm_delete_shown' => __('Are you sure you want to delete the records currently displayed on this page?', 'sync-suitecrm-users'),
-                'confirm_clear_all'    => __('Are you sure you want to permanently clear ALL activity log records? This cannot be undone.', 'sync-suitecrm-users'),
-                'deleting'             => __('Deleting records...', 'sync-suitecrm-users'),
-                'clearing'             => __('Clearing all logs...', 'sync-suitecrm-users'),
+                'saving'               => __('Saving settings...', 'sync-users-suitecrm'),
+                'saved'                => __('Settings saved successfully.', 'sync-users-suitecrm'),
+                'testing'              => __('Testing API reachability...', 'sync-users-suitecrm'),
+                'connecting'           => __('Connecting to SuiteCRM...', 'sync-users-suitecrm'),
+                'connected'            => __('Connected successfully.', 'sync-users-suitecrm'),
+                'connect_failed'       => __('Connection failed.', 'sync-users-suitecrm'),
+                'connection_connected' => __('Connected', 'sync-users-suitecrm'),
+                'connection_reconnect_required' => __('Reconnect Required', 'sync-users-suitecrm'),
+                'connection_not_configured' => __('Not Configured', 'sync-users-suitecrm'),
+                'api_reachable'        => __('SuiteCRM REST V8 API is reachable.', 'sync-users-suitecrm'),
+                'api_test_failed'      => __('API reachability test failed.', 'sync-users-suitecrm'),
+                'start_bulk'           => __('Sync all existing users', 'sync-users-suitecrm'),
+                'cancel_bulk'          => __('Cancel sync', 'sync-users-suitecrm'),
+                'clear_bulk'           => __('Clear sync', 'sync-users-suitecrm'),
+                'bulk_started'         => __('Bulk synchronization initiated in background.', 'sync-users-suitecrm'),
+                'bulk_start_failed'    => __('Failed to start bulk synchronization.', 'sync-users-suitecrm'),
+                'bulk_cancel_requested' => __('Cancellation requested. Processing will halt at the next user boundary.', 'sync-users-suitecrm'),
+                'bulk_cancel_failed'   => __('Failed to request cancellation.', 'sync-users-suitecrm'),
+                'bulk_cleared'         => __('Bulk synchronization progress cleared.', 'sync-users-suitecrm'),
+                'bulk_clear_failed'    => __('Failed to clear bulk synchronization progress.', 'sync-users-suitecrm'),
+                'bulk_idle'            => __('IDLE', 'sync-users-suitecrm'),
+                'bulk_running'         => __('RUNNING', 'sync-users-suitecrm'),
+                'bulk_completed'       => __('COMPLETED', 'sync-users-suitecrm'),
+                'bulk_cancelled'       => __('CANCELLED', 'sync-users-suitecrm'),
+                'bulk_interrupted'     => __('INTERRUPTED', 'sync-users-suitecrm'),
+                'bulk_stalled'         => __('STALLED / INTERRUPTED', 'sync-users-suitecrm'),
+                'poll_failed'          => __('Unable to retrieve bulk synchronization progress.', 'sync-users-suitecrm'),
+                'starting_bulk'        => __('Starting bulk sync...', 'sync-users-suitecrm'),
+                'cancelling_bulk'      => __('Requesting cancellation...', 'sync-users-suitecrm'),
+                'confirm_cancel'       => __('Are you sure you want to cancel the active bulk synchronization?', 'sync-users-suitecrm'),
+                'confirm_same_crm'     => __('Changing SuiteCRM URL without checking "Same CRM" will purge outstanding queue items and reset all saved CRM record IDs. Do you wish to continue?', 'sync-users-suitecrm'),
+                'confirm_delete_shown' => __('Are you sure you want to delete the records currently displayed on this page?', 'sync-users-suitecrm'),
+                'confirm_clear_all'    => __('Are you sure you want to permanently clear ALL activity log records? This cannot be undone.', 'sync-users-suitecrm'),
+                'deleting'             => __('Deleting records...', 'sync-users-suitecrm'),
+                'clearing'             => __('Clearing all logs...', 'sync-users-suitecrm'),
             ],
         ]);
     }
@@ -196,7 +196,7 @@ class SettingsPage {
      */
     public function render(): void {
         if (!current_user_can('manage_options')) {
-            wp_die(esc_html__('You do not have sufficient permissions to access this page.', 'sync-suitecrm-users'));
+            wp_die(esc_html__('You do not have sufficient permissions to access this page.', 'sync-users-suitecrm'));
         }
 
         $settings   = $this->settings->getSettings();
@@ -206,19 +206,19 @@ class SettingsPage {
         $timezoneString = wp_timezone_string();
         $currentTime    = wp_date('Y-m-d H:i:s');
 
-        $progress        = get_transient('ssu_bulk_progress');
+        $progress        = get_transient('syus_bulk_progress');
         $isProgressStale = false;
         if (is_array($progress) && !empty($progress['last_update_time'])) {
             $isProgressStale = (time() - (int) $progress['last_update_time'] > 60);
         }
 
-        $nonce = wp_create_nonce('ssu_admin_nonce');
+        $nonce = wp_create_nonce('syus_admin_nonce');
 
-        $templatePath = SSU_PLUGIN_DIR . 'templates/settings.php';
+        $templatePath = SYUS_PLUGIN_DIR . 'templates/settings.php';
         if (file_exists($templatePath)) {
             include $templatePath;
         } else {
-            echo '<div class="wrap"><p>' . esc_html__('Settings template not found.', 'sync-suitecrm-users') . '</p></div>';
+            echo '<div class="wrap"><p>' . esc_html__('Settings template not found.', 'sync-users-suitecrm') . '</p></div>';
         }
     }
 
@@ -229,7 +229,7 @@ class SettingsPage {
      */
     public function renderActivityLog(): void {
         if (!current_user_can('manage_options')) {
-            wp_die(esc_html__('You do not have sufficient permissions to access this page.', 'sync-suitecrm-users'));
+            wp_die(esc_html__('You do not have sufficient permissions to access this page.', 'sync-users-suitecrm'));
         }
 
         if ($this->activityLogPage !== null) {

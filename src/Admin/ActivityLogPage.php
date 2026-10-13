@@ -48,36 +48,36 @@ class ActivityLogPage {
      * @return void
      */
     public function enqueueAssets(string $hook): void {
-        if (strpos($hook, 'ssu-activity-log') === false) {
+        if (strpos($hook, 'syus-activity-log') === false) {
             return;
         }
 
         wp_enqueue_style('dashicons');
 
-        $assetFile    = SSU_PLUGIN_DIR . 'assets/admin.js';
-        $scriptHandle = 'ssu-admin';
+        $assetFile    = SYUS_PLUGIN_DIR . 'assets/admin.js';
+        $scriptHandle = 'syus-admin';
 
         if (file_exists($assetFile)) {
             wp_enqueue_script(
                 $scriptHandle,
-                SSU_PLUGIN_URL . 'assets/admin.js',
+                SYUS_PLUGIN_URL . 'assets/admin.js',
                 ['jquery'],
-                SSU_VERSION,
+                SYUS_VERSION,
                 true
             );
         } else {
-            wp_register_script($scriptHandle, false, ['jquery'], SSU_VERSION, true);
+            wp_register_script($scriptHandle, false, ['jquery'], SYUS_VERSION, true);
             wp_enqueue_script($scriptHandle);
         }
 
-        wp_localize_script($scriptHandle, 'ssuAdminData', [
+        wp_localize_script($scriptHandle, 'syusAdminData', [
             'ajax_url' => admin_url('admin-ajax.php'),
-            'nonce'    => wp_create_nonce('ssu_admin_nonce'),
+            'nonce'    => wp_create_nonce('syus_admin_nonce'),
             'strings'  => [
-                'confirm_delete_shown' => __('Are you sure you want to delete the records currently displayed on this page?', 'sync-suitecrm-users'),
-                'confirm_clear_all'    => __('Are you sure you want to permanently clear ALL activity log records? This cannot be undone.', 'sync-suitecrm-users'),
-                'deleting'             => __('Deleting records...', 'sync-suitecrm-users'),
-                'clearing'             => __('Clearing all logs...', 'sync-suitecrm-users'),
+                'confirm_delete_shown' => __('Are you sure you want to delete the records currently displayed on this page?', 'sync-users-suitecrm'),
+                'confirm_clear_all'    => __('Are you sure you want to permanently clear ALL activity log records? This cannot be undone.', 'sync-users-suitecrm'),
+                'deleting'             => __('Deleting records...', 'sync-users-suitecrm'),
+                'clearing'             => __('Clearing all logs...', 'sync-users-suitecrm'),
             ],
         ]);
     }
@@ -95,15 +95,15 @@ class ActivityLogPage {
      */
     public function render(): void {
         if (!current_user_can('manage_options')) {
-            wp_die(esc_html__('You do not have sufficient permissions to access this page.', 'sync-suitecrm-users'));
+            wp_die(esc_html__('You do not have sufficient permissions to access this page.', 'sync-users-suitecrm'));
             return;
         }
 
         if (isset($_GET['username']) || isset($_GET['status']) || isset($_GET['module']) || isset($_GET['paged'])) {
-            $requestNonce = isset($_GET['_ssu_activity_log_nonce']) && is_string($_GET['_ssu_activity_log_nonce'])
-                ? sanitize_text_field(wp_unslash($_GET['_ssu_activity_log_nonce'])) : '';
-            if (!wp_verify_nonce($requestNonce, 'ssu_activity_log_filters')) {
-                wp_die(esc_html__('The activity log filter link has expired or is invalid. Please reopen the Activity Log page.', 'sync-suitecrm-users'), '', ['response' => 403]);
+            $requestNonce = isset($_GET['_syus_activity_log_nonce']) && is_string($_GET['_syus_activity_log_nonce'])
+                ? sanitize_text_field(wp_unslash($_GET['_syus_activity_log_nonce'])) : '';
+            if (!wp_verify_nonce($requestNonce, 'syus_activity_log_filters')) {
+                wp_die(esc_html__('The activity log filter link has expired or is invalid. Please reopen the Activity Log page.', 'sync-users-suitecrm'), '', ['response' => 403]);
                 return;
             }
         }
@@ -165,13 +165,13 @@ class ActivityLogPage {
             )
         );
 
-        $nonce = wp_create_nonce('ssu_admin_nonce');
+        $nonce = wp_create_nonce('syus_admin_nonce');
 
-        $templatePath = SSU_PLUGIN_DIR . 'templates/activity-log.php';
+        $templatePath = SYUS_PLUGIN_DIR . 'templates/activity-log.php';
         if (file_exists($templatePath)) {
             include $templatePath;
         } else {
-            echo '<div class="wrap"><p>' . esc_html__('Activity log template not found.', 'sync-suitecrm-users') . '</p></div>';
+            echo '<div class="wrap"><p>' . esc_html__('Activity log template not found.', 'sync-users-suitecrm') . '</p></div>';
         }
     }
 }

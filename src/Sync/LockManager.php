@@ -21,7 +21,7 @@ class LockManager {
     /**
      * Option prefix for locks.
      */
-    public const OPTION_PREFIX = '_ssu_lock_';
+    public const OPTION_PREFIX = '_syus_lock_';
 
     /**
      * Acquire a resource lock.
@@ -52,7 +52,7 @@ class LockManager {
             $storedPayload
         ));
         if ($inserted === false) {
-            return new WP_Error('lock_storage_error', __('Failed to insert synchronization lock.', 'sync-suitecrm-users'), ['http_status' => 500]);
+            return new WP_Error('lock_storage_error', __('Failed to insert synchronization lock.', 'sync-users-suitecrm'), ['http_status' => 500]);
         }
         if ($inserted === 1) {
             return new LockHandle($resourceKey, $token, $expires);
@@ -69,7 +69,7 @@ class LockManager {
 
         $existing = maybe_unserialize($existingValue);
         if (!$this->isValidPayload($existing)) {
-            return new WP_Error('invalid_lock', __('Stored synchronization lock is malformed.', 'sync-suitecrm-users'), ['http_status' => 500]);
+            return new WP_Error('invalid_lock', __('Stored synchronization lock is malformed.', 'sync-users-suitecrm'), ['http_status' => 500]);
         }
         if (time() <= $existing['expires']) {
             return null;
@@ -83,7 +83,7 @@ class LockManager {
             $existingValue
         ));
         if ($updated === false) {
-            return new WP_Error('lock_storage_error', __('Failed to replace synchronization lock.', 'sync-suitecrm-users'), ['http_status' => 500]);
+            return new WP_Error('lock_storage_error', __('Failed to replace synchronization lock.', 'sync-users-suitecrm'), ['http_status' => 500]);
         }
 
         return $updated === 1 ? new LockHandle($resourceKey, $token, $expires) : null;
@@ -115,7 +115,7 @@ class LockManager {
             $payload
         ));
         if ($deleted === false) {
-            return new WP_Error('lock_storage_error', __('Failed to release synchronization lock.', 'sync-suitecrm-users'), ['http_status' => 500]);
+            return new WP_Error('lock_storage_error', __('Failed to release synchronization lock.', 'sync-users-suitecrm'), ['http_status' => 500]);
         }
 
         return $deleted === 1;
@@ -151,7 +151,7 @@ class LockManager {
             $optionName
         ));
         if ($wpdb->last_error !== '') {
-            return new WP_Error('lock_storage_error', __('Failed to read synchronization lock.', 'sync-suitecrm-users'), ['http_status' => 500]);
+            return new WP_Error('lock_storage_error', __('Failed to read synchronization lock.', 'sync-users-suitecrm'), ['http_status' => 500]);
         }
 
         return $row === null ? null : $row->option_value;

@@ -3,7 +3,7 @@
  * User mapping repository.
  *
  * Manages mappings between WordPress users and SuiteCRM record IDs stored
- * as user metadata keys formatted as `_ssu_crm_id_{module_lowercase}`.
+ * as user metadata keys formatted as `_syus_crm_id_{module_lowercase}`.
  *
  * @package SyncSuiteCRMUsers
  */
@@ -16,7 +16,7 @@ defined('ABSPATH') || exit;
 
 class UserMappingRepository {
 
-    public const META_PREFIX = '_ssu_crm_id_';
+    public const META_PREFIX = '_syus_crm_id_';
 
     public const MODULES = [
         'Accounts',
@@ -30,7 +30,7 @@ class UserMappingRepository {
      *
      * Lowercase module name when forming metadata keys.
      *
-     * @param string $module Module name (e.g., Accounts -> _ssu_crm_id_accounts).
+     * @param string $module Module name (e.g., Accounts -> _syus_crm_id_accounts).
      * @return string
      */
     public static function getMetaKey(string $module): string {
@@ -104,7 +104,7 @@ class UserMappingRepository {
         if ($userId <= 0 || empty($module) || empty($crmId)) {
             return new WP_Error(
                 'invalid_mapping_input',
-                __('User ID, module, and CRM ID are required to set mapping.', 'sync-suitecrm-users')
+                __('User ID, module, and CRM ID are required to set mapping.', 'sync-users-suitecrm')
             );
         }
 
@@ -128,7 +128,7 @@ class UserMappingRepository {
                 'mapping_save_failed',
                 sprintf(
                     /* translators: 1: User ID, 2: Module */
-                    __('Failed to save CRM ID mapping for user %1$d and module %2$s.', 'sync-suitecrm-users'),
+                    __('Failed to save CRM ID mapping for user %1$d and module %2$s.', 'sync-users-suitecrm'),
                     $userId,
                     $module
                 )
@@ -164,7 +164,7 @@ class UserMappingRepository {
                 'mapping_delete_failed',
                 sprintf(
                     /* translators: 1: User ID, 2: Module */
-                    __('Failed to delete CRM ID mapping for user %1$d and module %2$s.', 'sync-suitecrm-users'),
+                    __('Failed to delete CRM ID mapping for user %1$d and module %2$s.', 'sync-users-suitecrm'),
                     $userId,
                     $module
                 )
@@ -195,7 +195,7 @@ class UserMappingRepository {
                 'clear_mappings_failed',
                 sprintf(
                     /* translators: %s: Database error */
-                    __('Database error clearing CRM user mappings: %s', 'sync-suitecrm-users'),
+                    __('Database error clearing CRM user mappings: %s', 'sync-users-suitecrm'),
                     $wpdb->last_error
                 )
             );
@@ -231,7 +231,7 @@ class UserMappingRepository {
                 'find_user_by_crm_id_failed',
                 sprintf(
                     /* translators: %s: Database error */
-                    __('Database error looking up user by CRM ID: %s', 'sync-suitecrm-users'),
+                    __('Database error looking up user by CRM ID: %s', 'sync-users-suitecrm'),
                     $wpdb->last_error
                 )
             );

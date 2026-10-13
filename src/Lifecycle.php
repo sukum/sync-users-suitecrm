@@ -42,10 +42,10 @@ class Lifecycle {
      */
     public static function deactivate(): void {
         $cronHooks = [
-            'ssu_batch_sync_cron',
-            'ssu_realtime_worker_cron',
-            'ssu_manual_bulk_cron',
-            'ssu_token_renewal_cron',
+            'syus_batch_sync_cron',
+            'syus_realtime_worker_cron',
+            'syus_manual_bulk_cron',
+            'syus_token_renewal_cron',
         ];
 
         foreach ($cronHooks as $hook) {

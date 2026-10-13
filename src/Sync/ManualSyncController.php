@@ -95,7 +95,7 @@ class ManualSyncController {
         if ($userId <= 0) {
             return new WP_Error(
                 'invalid_user_id',
-                __('Invalid user ID provided.', 'sync-suitecrm-users'),
+                __('Invalid user ID provided.', 'sync-users-suitecrm'),
                 ['http_status' => 400]
             );
         }
@@ -105,7 +105,7 @@ class ManualSyncController {
         if (($conn['connection_status'] ?? '') !== 'connected') {
             return new WP_Error(
                 'authentication_unavailable',
-                __('SuiteCRM connection is not configured or requires reconnect.', 'sync-suitecrm-users'),
+                __('SuiteCRM connection is not configured or requires reconnect.', 'sync-users-suitecrm'),
                 ['http_status' => 502]
             );
         }
@@ -114,7 +114,7 @@ class ManualSyncController {
         if (empty($enabledModules)) {
             return new WP_Error(
                 'no_modules_enabled',
-                __('No SuiteCRM modules are currently enabled in settings.', 'sync-suitecrm-users'),
+                __('No SuiteCRM modules are currently enabled in settings.', 'sync-users-suitecrm'),
                 ['http_status' => 400]
             );
         }
@@ -192,7 +192,7 @@ class ManualSyncController {
         if (($conn['connection_status'] ?? '') !== 'connected') {
             return new WP_Error(
                 'authentication_unavailable',
-                __('SuiteCRM connection is not configured or requires reconnect.', 'sync-suitecrm-users'),
+                __('SuiteCRM connection is not configured or requires reconnect.', 'sync-users-suitecrm'),
                 ['http_status' => 502]
             );
         }
@@ -202,7 +202,7 @@ class ManualSyncController {
         if (empty($enabledModules)) {
             return new WP_Error(
                 'no_modules_enabled',
-                __('No SuiteCRM modules are enabled in settings.', 'sync-suitecrm-users'),
+                __('No SuiteCRM modules are enabled in settings.', 'sync-users-suitecrm'),
                 ['http_status' => 400]
             );
         }
@@ -211,7 +211,7 @@ class ManualSyncController {
         if (empty($eligibleRoles)) {
             return new WP_Error(
                 'no_roles_eligible',
-                __('No user roles are selected for synchronization.', 'sync-suitecrm-users'),
+                __('No user roles are selected for synchronization.', 'sync-users-suitecrm'),
                 ['http_status' => 400]
             );
         }
@@ -237,7 +237,7 @@ class ManualSyncController {
             $this->progressStore->finishRun($runId, BulkProgress::STATUS_INTERRUPTED);
             return new WP_Error(
                 'scheduling_failed',
-                __('Failed to schedule background bulk execution chunk.', 'sync-suitecrm-users'),
+                __('Failed to schedule background bulk execution chunk.', 'sync-users-suitecrm'),
                 ['http_status' => 500]
             );
         }
@@ -259,7 +259,7 @@ class ManualSyncController {
         if (empty($runId)) {
             return new WP_Error(
                 'invalid_run_id',
-                __('Run ID is required for cancellation.', 'sync-suitecrm-users'),
+                __('Run ID is required for cancellation.', 'sync-users-suitecrm'),
                 ['http_status' => 400]
             );
         }
@@ -284,7 +284,7 @@ class ManualSyncController {
         if (empty($runId)) {
             return new WP_Error(
                 'invalid_run_id',
-                __('Run ID is required for cancellation.', 'sync-suitecrm-users'),
+                __('Run ID is required for cancellation.', 'sync-users-suitecrm'),
                 ['http_status' => 400]
             );
         }
