@@ -1,0 +1,42 @@
+<?php
+/**
+ * Report terminal skips when another process owns the user lock.
+ *
+ * @package SyncSuiteCRMUsers\Sync\Processing\Handlers
+ */
+
+namespace SyncSuiteCRMUsers\Sync\Processing\Handlers;
+
+use SyncSuiteCRMUsers\Model\SyncOutcome;
+use SyncSuiteCRMUsers\Sync\ChunkHandler;
+
+defined('ABSPATH') || exit;
+
+class LockConflictHandler extends AbstractOutcomeHandler implements OutcomeHandler {
+
+    /** {@inheritDoc} */
+    public function handle(
+        int $userId,
+        ?string $username,
+        array $modules,
+        ChunkHandler $handler,
+        ?string $errorMessage = null
+    ): array {
+        $handledModules = [];
+
+        foreach ($modules as $module) {
+            $outcome = SyncOutcome::skipped(
+                $userId,
+                $username,
+                $module,
+                SyncOutcome::REASON_LOCK_CONFLICT,
+                __('Resource locked by another active synchronization process.', 'sync-suitecrm-users')
+            );
+            $this->logOutcome($outcome);
+            $handler->onOutcome($outcome);
+            $handledModules[] = $module;
+        }
+
+        return $handledModules;
+    }
+}
