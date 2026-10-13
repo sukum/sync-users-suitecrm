@@ -31,7 +31,7 @@ if (file_exists(SYUS_PLUGIN_DIR . 'vendor/autoload.php')) {
     require_once SYUS_PLUGIN_DIR . 'vendor/autoload.php';
 } else {
     spl_autoload_register(function ($class) {
-        $prefix = 'SyncSuiteCRMUsers\\';
+        $prefix = 'SyncUsersSuitecrm\\';
         $baseDir = SYUS_PLUGIN_DIR . 'src/';
 
         $len = strlen($prefix);
@@ -49,16 +49,16 @@ if (file_exists(SYUS_PLUGIN_DIR . 'vendor/autoload.php')) {
 }
 
 // Lifecycle registration
-register_activation_hook(__FILE__, ['SyncSuiteCRMUsers\\Lifecycle', 'activate']);
-register_deactivation_hook(__FILE__, ['SyncSuiteCRMUsers\\Lifecycle', 'deactivate']);
+register_activation_hook(__FILE__, ['SyncUsersSuitecrm\\Lifecycle', 'activate']);
+register_deactivation_hook(__FILE__, ['SyncUsersSuitecrm\\Lifecycle', 'deactivate']);
 
 /**
  * Access the main plugin instance.
  *
- * @return \SyncSuiteCRMUsers\Plugin
+ * @return \SyncUsersSuitecrm\Plugin
  */
-function sync_suitecrm_users(): SyncSuiteCRMUsers\Plugin {
-    return SyncSuiteCRMUsers\Plugin::instance();
+function sync_suitecrm_users(): SyncUsersSuitecrm\Plugin {
+    return SyncUsersSuitecrm\Plugin::instance();
 }
 
 // Bootstrap plugin on plugins_loaded

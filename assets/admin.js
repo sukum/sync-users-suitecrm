@@ -6,7 +6,7 @@
  * - Settings page initialization
  * - Activity log row deletion and clearing
  *
- * @package SyncSuiteCRMUsers
+ * @package SyncUsersSuitecrm
  */
 
 (function($) {

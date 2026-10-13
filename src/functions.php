@@ -2,10 +2,10 @@
 /**
  * Shared plugin helpers.
  *
- * @package SyncSuiteCRMUsers
+ * @package SyncUsersSuitecrm
  */
 
-namespace SyncSuiteCRMUsers;
+namespace SyncUsersSuitecrm;
 
 defined('ABSPATH') || exit;
 

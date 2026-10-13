@@ -4,10 +4,10 @@
  *
  * Immutable data object representing one persisted outstanding automatic work item.
  *
- * @package SyncSuiteCRMUsers
+ * @package SyncUsersSuitecrm
  */
 
-namespace SyncSuiteCRMUsers\Model;
+namespace SyncUsersSuitecrm\Model;
 
 defined('ABSPATH') || exit;
 

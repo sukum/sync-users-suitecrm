@@ -5,12 +5,12 @@
  * Owns enqueue/upsert, selection, expiry cleanup, and deletion by row ID for
  * automatic synchronization queue items.
  *
- * @package SyncSuiteCRMUsers
+ * @package SyncUsersSuitecrm
  */
 
-namespace SyncSuiteCRMUsers\Storage;
+namespace SyncUsersSuitecrm\Storage;
 
-use SyncSuiteCRMUsers\Model\QueueItem;
+use SyncUsersSuitecrm\Model\QueueItem;
 use WP_Error;
 
 defined('ABSPATH') || exit;

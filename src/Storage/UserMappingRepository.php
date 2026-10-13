@@ -5,10 +5,10 @@
  * Manages mappings between WordPress users and SuiteCRM record IDs stored
  * as user metadata keys formatted as `_syus_crm_id_{module_lowercase}`.
  *
- * @package SyncSuiteCRMUsers
+ * @package SyncUsersSuitecrm
  */
 
-namespace SyncSuiteCRMUsers\Storage;
+namespace SyncUsersSuitecrm\Storage;
 
 use WP_Error;
 

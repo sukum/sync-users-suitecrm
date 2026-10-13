@@ -5,12 +5,12 @@
  * Provides validated options access, normalization, secret masking,
  * and connection revision tracking.
  *
- * @package SyncSuiteCRMUsers
+ * @package SyncUsersSuitecrm
  */
 
-namespace SyncSuiteCRMUsers;
+namespace SyncUsersSuitecrm;
 
-use SyncSuiteCRMUsers\Storage\MySqlLock;
+use SyncUsersSuitecrm\Storage\MySqlLock;
 
 defined('ABSPATH') || exit;
 

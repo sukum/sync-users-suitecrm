@@ -5,16 +5,16 @@
  * Implements serial matching: saved ID lookup first, then email fallback,
  * inspecting results to distinguish none, single, and multiple matches.
  *
- * @package SyncSuiteCRMUsers\SuiteCRM
+ * @package SyncUsersSuitecrm\SuiteCRM
  */
 
-namespace SyncSuiteCRMUsers\SuiteCRM;
+namespace SyncUsersSuitecrm\SuiteCRM;
 
 use WP_Error;
 use WP_User;
-use SyncSuiteCRMUsers\Model\MatchResult;
-use SyncSuiteCRMUsers\Storage\UserMappingRepository;
-use SyncSuiteCRMUsers\Settings;
+use SyncUsersSuitecrm\Model\MatchResult;
+use SyncUsersSuitecrm\Storage\UserMappingRepository;
+use SyncUsersSuitecrm\Settings;
 
 defined('ABSPATH') || exit;
 

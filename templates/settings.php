@@ -12,7 +12,7 @@
  * - $isProgressStale (bool): Whether the active bulk progress is stale (>60s).
  * - $nonce (string): Security nonce for AJAX actions.
  *
- * @package SyncSuiteCRMUsers
+ * @package SyncUsersSuitecrm
  */
 
 defined('ABSPATH') || exit;

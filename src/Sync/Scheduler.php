@@ -5,14 +5,14 @@
  * Manages scheduling for daily batches, real-time HTTP loopbacks and fallbacks,
  * manual bulk chunk continuations, and token renewals.
  *
- * @package SyncSuiteCRMUsers\Sync
+ * @package SyncUsersSuitecrm\Sync
  */
 
-namespace SyncSuiteCRMUsers\Sync;
+namespace SyncUsersSuitecrm\Sync;
 
-use SyncSuiteCRMUsers\Settings;
+use SyncUsersSuitecrm\Settings;
 use WP_Error;
-use function SyncSuiteCRMUsers\write_log;
+use function SyncUsersSuitecrm\write_log;
 
 defined('ABSPATH') || exit;
 

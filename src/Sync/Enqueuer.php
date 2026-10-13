@@ -5,15 +5,15 @@
  * Handles atomic queue insertion for qualifying user creations, updates,
  * and role changes, and triggers real-time async loopback/fallback processing.
  *
- * @package SyncSuiteCRMUsers\Sync
+ * @package SyncUsersSuitecrm\Sync
  */
 
-namespace SyncSuiteCRMUsers\Sync;
+namespace SyncUsersSuitecrm\Sync;
 
-use SyncSuiteCRMUsers\Settings;
-use SyncSuiteCRMUsers\Storage\QueueRepository;
+use SyncUsersSuitecrm\Settings;
+use SyncUsersSuitecrm\Storage\QueueRepository;
 use WP_Error;
-use function SyncSuiteCRMUsers\write_log;
+use function SyncUsersSuitecrm\write_log;
 
 defined('ABSPATH') || exit;
 

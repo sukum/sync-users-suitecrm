@@ -2,12 +2,12 @@
 /**
  * Deletes a matching running bulk run, preserving the existing clear policy.
  *
- * @package SyncSuiteCRMUsers\Storage\BulkStoreActions
+ * @package SyncUsersSuitecrm\Storage\BulkStoreActions
  */
 
-namespace SyncSuiteCRMUsers\Storage\BulkStoreActions;
+namespace SyncUsersSuitecrm\Storage\BulkStoreActions;
 
-use SyncSuiteCRMUsers\Model\BulkProgress;
+use SyncUsersSuitecrm\Model\BulkProgress;
 use WP_Error;
 
 defined('ABSPATH') || exit;

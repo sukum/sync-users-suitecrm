@@ -2,13 +2,13 @@
 /**
  * Explicit save or delete instruction returned by a bulk store action.
  *
- * @package SyncSuiteCRMUsers\Storage\BulkStoreActions
+ * @package SyncUsersSuitecrm\Storage\BulkStoreActions
  */
 
-namespace SyncSuiteCRMUsers\Storage\BulkStoreActions;
+namespace SyncUsersSuitecrm\Storage\BulkStoreActions;
 
 use LogicException;
-use SyncSuiteCRMUsers\Model\BulkProgress;
+use SyncUsersSuitecrm\Model\BulkProgress;
 
 defined('ABSPATH') || exit;
 

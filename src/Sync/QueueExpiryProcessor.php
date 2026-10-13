@@ -2,14 +2,14 @@
 /**
  * Logs and removes expired automatic queue work without making CRM calls.
  *
- * @package SyncSuiteCRMUsers\Sync
+ * @package SyncUsersSuitecrm\Sync
  */
 
-namespace SyncSuiteCRMUsers\Sync;
+namespace SyncUsersSuitecrm\Sync;
 
-use SyncSuiteCRMUsers\Model\SyncOutcome;
-use SyncSuiteCRMUsers\Storage\ActivityLogRepository;
-use SyncSuiteCRMUsers\Storage\QueueRepository;
+use SyncUsersSuitecrm\Model\SyncOutcome;
+use SyncUsersSuitecrm\Storage\ActivityLogRepository;
+use SyncUsersSuitecrm\Storage\QueueRepository;
 
 defined('ABSPATH') || exit;
 

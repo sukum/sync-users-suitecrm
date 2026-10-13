@@ -1,7 +1,7 @@
 /**
  * Backbone models and views for manual SuiteCRM user synchronization.
  *
- * @package SyncSuiteCRMUsers
+ * @package SyncUsersSuitecrm
  */
 
 (($, Backbone) => {

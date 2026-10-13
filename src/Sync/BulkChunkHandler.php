@@ -5,15 +5,15 @@
  * Checks live cancellation and connection validity, records outcomes and user
  * completion, and finalizes the run or schedules its next chunk.
  *
- * @package SyncSuiteCRMUsers\Sync
+ * @package SyncUsersSuitecrm\Sync
  */
 
-namespace SyncSuiteCRMUsers\Sync;
+namespace SyncUsersSuitecrm\Sync;
 
-use SyncSuiteCRMUsers\Model\BulkProgress;
-use SyncSuiteCRMUsers\Model\SyncOutcome;
-use SyncSuiteCRMUsers\Settings;
-use SyncSuiteCRMUsers\Storage\BulkProgressStore;
+use SyncUsersSuitecrm\Model\BulkProgress;
+use SyncUsersSuitecrm\Model\SyncOutcome;
+use SyncUsersSuitecrm\Settings;
+use SyncUsersSuitecrm\Storage\BulkProgressStore;
 
 defined('ABSPATH') || exit;
 

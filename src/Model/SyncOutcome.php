@@ -5,10 +5,10 @@
  * Immutable data object representing one terminal user/module synchronization outcome.
  * Independent of whether audit logging succeeds.
  *
- * @package SyncSuiteCRMUsers
+ * @package SyncUsersSuitecrm
  */
 
-namespace SyncSuiteCRMUsers\Model;
+namespace SyncUsersSuitecrm\Model;
 
 use InvalidArgumentException;
 

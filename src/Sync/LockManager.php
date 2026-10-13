@@ -4,12 +4,12 @@
  *
  * Bypasses option caches and uses conditional SQL writes for ownership changes.
  *
- * @package SyncSuiteCRMUsers\Sync
+ * @package SyncUsersSuitecrm\Sync
  */
 
-namespace SyncSuiteCRMUsers\Sync;
+namespace SyncUsersSuitecrm\Sync;
 
-use SyncSuiteCRMUsers\Model\LockHandle;
+use SyncUsersSuitecrm\Model\LockHandle;
 use WP_Error;
 
 defined('ABSPATH') || exit;

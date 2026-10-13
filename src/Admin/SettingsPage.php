@@ -5,13 +5,13 @@
  * Registers the SuiteCRM Sync admin menus, enqueues scripts,
  * renders the settings view, and handles administrative AJAX operations.
  *
- * @package SyncSuiteCRMUsers\Admin
+ * @package SyncUsersSuitecrm\Admin
  */
 
-namespace SyncSuiteCRMUsers\Admin;
+namespace SyncUsersSuitecrm\Admin;
 
-use SyncSuiteCRMUsers\Settings;
-use SyncSuiteCRMUsers\Sync\ManualSyncController;
+use SyncUsersSuitecrm\Settings;
+use SyncUsersSuitecrm\Sync\ManualSyncController;
 
 defined('ABSPATH') || exit;
 

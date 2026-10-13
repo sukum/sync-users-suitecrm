@@ -2,14 +2,14 @@
 /**
  * Loopback continuation for automatic real-time queue chunks.
  *
- * @package SyncSuiteCRMUsers\Sync
+ * @package SyncUsersSuitecrm\Sync
  */
 
-namespace SyncSuiteCRMUsers\Sync;
+namespace SyncUsersSuitecrm\Sync;
 
-use SyncSuiteCRMUsers\Model\QueueItem;
-use SyncSuiteCRMUsers\Settings;
-use SyncSuiteCRMUsers\Storage\QueueRepository;
+use SyncUsersSuitecrm\Model\QueueItem;
+use SyncUsersSuitecrm\Settings;
+use SyncUsersSuitecrm\Storage\QueueRepository;
 
 defined('ABSPATH') || exit;
 

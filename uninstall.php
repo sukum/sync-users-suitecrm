@@ -10,7 +10,7 @@
  * - Clear all scheduled cron events.
  * - SuiteCRM records are NEVER deleted.
  *
- * @package SyncSuiteCRMUsers
+ * @package SyncUsersSuitecrm
  */
 
 defined('WP_UNINSTALL_PLUGIN') || exit;

@@ -2,13 +2,13 @@
 /**
  * Shared activity log persistence for terminal outcome handlers.
  *
- * @package SyncSuiteCRMUsers\Sync\Processing\Handlers
+ * @package SyncUsersSuitecrm\Sync\Processing\Handlers
  */
 
-namespace SyncSuiteCRMUsers\Sync\Processing\Handlers;
+namespace SyncUsersSuitecrm\Sync\Processing\Handlers;
 
-use SyncSuiteCRMUsers\Model\SyncOutcome;
-use SyncSuiteCRMUsers\Storage\ActivityLogRepository;
+use SyncUsersSuitecrm\Model\SyncOutcome;
+use SyncUsersSuitecrm\Storage\ActivityLogRepository;
 
 defined('ABSPATH') || exit;
 

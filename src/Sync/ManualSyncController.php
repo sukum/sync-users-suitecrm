@@ -5,15 +5,15 @@
  * Provides direct individual user synchronization and coordinates manual
  * bulk runs (starting runs, polling progress, requesting cancellation).
  *
- * @package SyncSuiteCRMUsers\Sync
+ * @package SyncUsersSuitecrm\Sync
  */
 
-namespace SyncSuiteCRMUsers\Sync;
+namespace SyncUsersSuitecrm\Sync;
 
-use SyncSuiteCRMUsers\Model\BulkProgress;
-use SyncSuiteCRMUsers\Model\SyncOutcome;
-use SyncSuiteCRMUsers\Settings;
-use SyncSuiteCRMUsers\Storage\BulkProgressStore;
+use SyncUsersSuitecrm\Model\BulkProgress;
+use SyncUsersSuitecrm\Model\SyncOutcome;
+use SyncUsersSuitecrm\Settings;
+use SyncUsersSuitecrm\Storage\BulkProgressStore;
 use WP_Error;
 use WP_User_Query;
 

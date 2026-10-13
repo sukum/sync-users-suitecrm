@@ -6,14 +6,14 @@
  * monitoring cooperative cancellation, updating progress transients,
  * and scheduling subsequent chunks.
  *
- * @package SyncSuiteCRMUsers\Sync
+ * @package SyncUsersSuitecrm\Sync
  */
 
-namespace SyncSuiteCRMUsers\Sync;
+namespace SyncUsersSuitecrm\Sync;
 
-use SyncSuiteCRMUsers\Model\BulkProgress;
-use SyncSuiteCRMUsers\Settings;
-use SyncSuiteCRMUsers\Storage\BulkProgressStore;
+use SyncUsersSuitecrm\Model\BulkProgress;
+use SyncUsersSuitecrm\Settings;
+use SyncUsersSuitecrm\Storage\BulkProgressStore;
 
 defined('ABSPATH') || exit;
 

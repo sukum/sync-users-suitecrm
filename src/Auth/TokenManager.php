@@ -5,15 +5,15 @@
  * Governs token freshness, coordinated renewal with distributed locking,
  * and proactive renewal scheduling for SuiteCRM 7 REST V8 authentication.
  *
- * @package SyncSuiteCRMUsers\Auth
+ * @package SyncUsersSuitecrm\Auth
  */
 
-namespace SyncSuiteCRMUsers\Auth;
+namespace SyncUsersSuitecrm\Auth;
 
 use WP_Error;
-use SyncSuiteCRMUsers\Settings;
-use SyncSuiteCRMUsers\SuiteCRM\Client;
-use SyncSuiteCRMUsers\Sync\LockManager;
+use SyncUsersSuitecrm\Settings;
+use SyncUsersSuitecrm\SuiteCRM\Client;
+use SyncUsersSuitecrm\Sync\LockManager;
 
 defined('ABSPATH') || exit;
 

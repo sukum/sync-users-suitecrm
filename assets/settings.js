@@ -1,7 +1,7 @@
 /**
  * Backbone models and views for SuiteCRM settings interactions.
  *
- * @package SyncSuiteCRMUsers
+ * @package SyncUsersSuitecrm
  */
 
 window.syus_app = (function($, Backbone) {

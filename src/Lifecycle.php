@@ -4,12 +4,12 @@
  *
  * Handles activation, deactivation, and database schema migrations.
  *
- * @package SyncSuiteCRMUsers
+ * @package SyncUsersSuitecrm
  */
 
-namespace SyncSuiteCRMUsers;
+namespace SyncUsersSuitecrm;
 
-use SyncSuiteCRMUsers\Storage\Schema;
+use SyncUsersSuitecrm\Storage\Schema;
 
 defined('ABSPATH') || exit;
 

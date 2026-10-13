@@ -2,15 +2,15 @@
 /**
  * Outstanding automatic synchronization queue administration.
  *
- * @package SyncSuiteCRMUsers\Admin
+ * @package SyncUsersSuitecrm\Admin
  */
 
-namespace SyncSuiteCRMUsers\Admin;
+namespace SyncUsersSuitecrm\Admin;
 
-use SyncSuiteCRMUsers\Model\QueueItem;
-use SyncSuiteCRMUsers\Settings;
-use SyncSuiteCRMUsers\Storage\QueueRepository;
-use SyncSuiteCRMUsers\Sync\Scheduler;
+use SyncUsersSuitecrm\Model\QueueItem;
+use SyncUsersSuitecrm\Settings;
+use SyncUsersSuitecrm\Storage\QueueRepository;
+use SyncUsersSuitecrm\Sync\Scheduler;
 
 defined('ABSPATH') || exit;
 

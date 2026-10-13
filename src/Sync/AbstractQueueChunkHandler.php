@@ -2,15 +2,15 @@
 /**
  * Shared lifecycle and outcome bookkeeping for automatic queue chunks.
  *
- * @package SyncSuiteCRMUsers\Sync
+ * @package SyncUsersSuitecrm\Sync
  */
 
-namespace SyncSuiteCRMUsers\Sync;
+namespace SyncUsersSuitecrm\Sync;
 
-use SyncSuiteCRMUsers\Model\QueueItem;
-use SyncSuiteCRMUsers\Model\SyncOutcome;
-use SyncSuiteCRMUsers\Settings;
-use SyncSuiteCRMUsers\Storage\QueueRepository;
+use SyncUsersSuitecrm\Model\QueueItem;
+use SyncUsersSuitecrm\Model\SyncOutcome;
+use SyncUsersSuitecrm\Settings;
+use SyncUsersSuitecrm\Storage\QueueRepository;
 
 defined('ABSPATH') || exit;
 

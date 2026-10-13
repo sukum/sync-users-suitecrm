@@ -12,10 +12,10 @@
  * - $userRoles (list<string>): List of roles assigned to this user.
  * - $nonce (string): Security nonce for syus_user_sync_nonce.
  *
- * @package SyncSuiteCRMUsers
+ * @package SyncUsersSuitecrm
  */
 
-namespace SyncSuiteCRMUsers;
+namespace SyncUsersSuitecrm;
 
 defined('ABSPATH') || exit;
 ?>

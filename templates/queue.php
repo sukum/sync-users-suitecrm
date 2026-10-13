@@ -2,12 +2,12 @@
 /**
  * Outstanding queue table; variables supplied by Admin\QueuePage.
  *
- * @package SyncSuiteCRMUsers
+ * @package SyncUsersSuitecrm
  */
 
-namespace SyncSuiteCRMUsers;
+namespace SyncUsersSuitecrm;
 
-use SyncSuiteCRMUsers\Model\QueueItem;
+use SyncUsersSuitecrm\Model\QueueItem;
 
 defined('ABSPATH') || exit;
 

@@ -2,12 +2,12 @@
 /**
  * Applies a terminal transition to the matching bulk run.
  *
- * @package SyncSuiteCRMUsers\Storage\BulkStoreActions
+ * @package SyncUsersSuitecrm\Storage\BulkStoreActions
  */
 
-namespace SyncSuiteCRMUsers\Storage\BulkStoreActions;
+namespace SyncUsersSuitecrm\Storage\BulkStoreActions;
 
-use SyncSuiteCRMUsers\Model\BulkProgress;
+use SyncUsersSuitecrm\Model\BulkProgress;
 use WP_Error;
 
 defined('ABSPATH') || exit;

@@ -6,15 +6,15 @@
  * API connectivity tests, OAuth authentication, bulk run triggers,
  * user synchronization, and audit activity log pruning.
  *
- * @package SyncSuiteCRMUsers\Admin
+ * @package SyncUsersSuitecrm\Admin
  */
 
-namespace SyncSuiteCRMUsers\Admin;
+namespace SyncUsersSuitecrm\Admin;
 
-use SyncSuiteCRMUsers\Settings;
-use SyncSuiteCRMUsers\Sync\ManualSyncController;
-use SyncSuiteCRMUsers\Sync\Scheduler;
-use SyncSuiteCRMUsers\Storage\ActivityLogRepository;
+use SyncUsersSuitecrm\Settings;
+use SyncUsersSuitecrm\Sync\ManualSyncController;
+use SyncUsersSuitecrm\Sync\Scheduler;
+use SyncUsersSuitecrm\Storage\ActivityLogRepository;
 use WP_Error;
 
 defined('ABSPATH') || exit;

@@ -5,10 +5,10 @@
  * Represents an acquired resource lock, holding the resource key,
  * owner token, and expiry timestamp.
  *
- * @package SyncSuiteCRMUsers
+ * @package SyncUsersSuitecrm
  */
 
-namespace SyncSuiteCRMUsers\Model;
+namespace SyncUsersSuitecrm\Model;
 
 defined('ABSPATH') || exit;
 

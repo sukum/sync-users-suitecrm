@@ -5,12 +5,12 @@
  * Encapsulates role qualification, module enablement checks, sync modes,
  * and detection of relevant profile changes on mapped fields.
  *
- * @package SyncSuiteCRMUsers\Sync
+ * @package SyncUsersSuitecrm\Sync
  */
 
-namespace SyncSuiteCRMUsers\Sync;
+namespace SyncUsersSuitecrm\Sync;
 
-use SyncSuiteCRMUsers\Settings;
+use SyncUsersSuitecrm\Settings;
 use WP_User;
 
 defined('ABSPATH') || exit;

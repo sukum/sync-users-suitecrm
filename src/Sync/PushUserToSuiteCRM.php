@@ -6,18 +6,18 @@
  * synchronizing a WordPress user to a SuiteCRM module (Accounts, Contacts,
  * Leads, or Users) through the REST V8 API.
  *
- * @package SyncSuiteCRMUsers\Sync
+ * @package SyncUsersSuitecrm\Sync
  */
 
-namespace SyncSuiteCRMUsers\Sync;
+namespace SyncUsersSuitecrm\Sync;
 
-use SyncSuiteCRMUsers\Model\MatchResult;
-use SyncSuiteCRMUsers\Model\SyncOutcome;
-use SyncSuiteCRMUsers\Settings;
-use SyncSuiteCRMUsers\Storage\UserMappingRepository;
-use SyncSuiteCRMUsers\SuiteCRM\Client;
-use SyncSuiteCRMUsers\SuiteCRM\OutboundFieldMapper;
-use SyncSuiteCRMUsers\SuiteCRM\RecordMatcher;
+use SyncUsersSuitecrm\Model\MatchResult;
+use SyncUsersSuitecrm\Model\SyncOutcome;
+use SyncUsersSuitecrm\Settings;
+use SyncUsersSuitecrm\Storage\UserMappingRepository;
+use SyncUsersSuitecrm\SuiteCRM\Client;
+use SyncUsersSuitecrm\SuiteCRM\OutboundFieldMapper;
+use SyncUsersSuitecrm\SuiteCRM\RecordMatcher;
 use WP_Error;
 use WP_User;
 

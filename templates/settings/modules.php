@@ -4,13 +4,13 @@
  *
  * Variables inherited from settings.php: $settings.
  *
- * @package SyncSuiteCRMUsers
+ * @package SyncUsersSuitecrm
  */
 
 defined('ABSPATH') || exit;
 
 $modulesState = [];
-foreach (\SyncSuiteCRMUsers\Settings::SUPPORTED_MODULES as $module) {
+foreach (\SyncUsersSuitecrm\Settings::SUPPORTED_MODULES as $module) {
     $modulesState['modules_' . strtolower($module) . '_enabled'] = !empty($settings['modules'][$module]['enabled']);
 }
 ?>
@@ -50,7 +50,7 @@ foreach (\SyncSuiteCRMUsers\Settings::SUPPORTED_MODULES as $module) {
                         ],
                     ];
 
-                    foreach (\SyncSuiteCRMUsers\Settings::SUPPORTED_MODULES as $module) :
+                    foreach (\SyncUsersSuitecrm\Settings::SUPPORTED_MODULES as $module) :
                         $modSettings = $settings['modules'][$module] ?? ['enabled' => false, 'mode' => 'create_update'];
                         $info = $moduleInfo[$module] ?? ['label' => $module, 'desc' => ''];
                     ?>

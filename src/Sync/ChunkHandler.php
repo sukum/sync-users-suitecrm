@@ -6,12 +6,12 @@
  * manual sync handlers to customize candidate module selection, lifecycle
  * callbacks, and post-chunk continuation scheduling.
  *
- * @package SyncSuiteCRMUsers\Sync
+ * @package SyncUsersSuitecrm\Sync
  */
 
-namespace SyncSuiteCRMUsers\Sync;
+namespace SyncUsersSuitecrm\Sync;
 
-use SyncSuiteCRMUsers\Model\SyncOutcome;
+use SyncUsersSuitecrm\Model\SyncOutcome;
 
 defined('ABSPATH') || exit;
 

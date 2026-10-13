@@ -2,10 +2,10 @@
 /**
  * Non-blocking MySQL advisory lock scoped to a WordPress installation.
  *
- * @package SyncSuiteCRMUsers\Storage
+ * @package SyncUsersSuitecrm\Storage
  */
 
-namespace SyncSuiteCRMUsers\Storage;
+namespace SyncUsersSuitecrm\Storage;
 
 defined('ABSPATH') || exit;
 

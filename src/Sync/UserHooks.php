@@ -6,10 +6,10 @@
  * to queue qualifying users for automatic SuiteCRM synchronization.
  * Includes loop prevention via SyncGuard.
  *
- * @package SyncSuiteCRMUsers\Sync
+ * @package SyncUsersSuitecrm\Sync
  */
 
-namespace SyncSuiteCRMUsers\Sync;
+namespace SyncUsersSuitecrm\Sync;
 
 use WP_User;
 

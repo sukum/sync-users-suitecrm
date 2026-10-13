@@ -5,14 +5,14 @@
  * Encapsulates HTTP transport, serialization, deserialization, and response
  * validation against SuiteCRM 7 REST V8 JSON:API endpoints.
  *
- * @package SyncSuiteCRMUsers\SuiteCRM
+ * @package SyncUsersSuitecrm\SuiteCRM
  */
 
-namespace SyncSuiteCRMUsers\SuiteCRM;
+namespace SyncUsersSuitecrm\SuiteCRM;
 
 use WP_Error;
-use SyncSuiteCRMUsers\Settings;
-use SyncSuiteCRMUsers\Auth\TokenManager;
+use SyncUsersSuitecrm\Settings;
+use SyncUsersSuitecrm\Auth\TokenManager;
 
 defined('ABSPATH') || exit;
 

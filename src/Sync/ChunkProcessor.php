@@ -7,20 +7,20 @@
  * across all execution paths (automatic real-time, nightly batch, manual bulk,
  * and individual user sync).
  *
- * @package SyncSuiteCRMUsers\Sync
+ * @package SyncUsersSuitecrm\Sync
  */
 
-namespace SyncSuiteCRMUsers\Sync;
+namespace SyncUsersSuitecrm\Sync;
 
-use SyncSuiteCRMUsers\Model\SyncOutcome;
-use SyncSuiteCRMUsers\Settings;
-use SyncSuiteCRMUsers\Storage\ActivityLogRepository;
-use SyncSuiteCRMUsers\Sync\Processing\Handlers\DisabledModuleHandler;
-use SyncSuiteCRMUsers\Sync\Processing\Handlers\IneligibleRoleHandler;
-use SyncSuiteCRMUsers\Sync\Processing\Handlers\LockConflictHandler;
-use SyncSuiteCRMUsers\Sync\Processing\Handlers\LockStorageErrorHandler;
-use SyncSuiteCRMUsers\Sync\Processing\Handlers\MissingUserHandler;
-use SyncSuiteCRMUsers\Sync\Processing\Handlers\OutcomeHandler;
+use SyncUsersSuitecrm\Model\SyncOutcome;
+use SyncUsersSuitecrm\Settings;
+use SyncUsersSuitecrm\Storage\ActivityLogRepository;
+use SyncUsersSuitecrm\Sync\Processing\Handlers\DisabledModuleHandler;
+use SyncUsersSuitecrm\Sync\Processing\Handlers\IneligibleRoleHandler;
+use SyncUsersSuitecrm\Sync\Processing\Handlers\LockConflictHandler;
+use SyncUsersSuitecrm\Sync\Processing\Handlers\LockStorageErrorHandler;
+use SyncUsersSuitecrm\Sync\Processing\Handlers\MissingUserHandler;
+use SyncUsersSuitecrm\Sync\Processing\Handlers\OutcomeHandler;
 use WP_User;
 
 defined('ABSPATH') || exit;

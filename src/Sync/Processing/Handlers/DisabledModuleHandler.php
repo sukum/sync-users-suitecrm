@@ -2,13 +2,13 @@
 /**
  * Report terminal skips for modules disabled in configuration.
  *
- * @package SyncSuiteCRMUsers\Sync\Processing\Handlers
+ * @package SyncUsersSuitecrm\Sync\Processing\Handlers
  */
 
-namespace SyncSuiteCRMUsers\Sync\Processing\Handlers;
+namespace SyncUsersSuitecrm\Sync\Processing\Handlers;
 
-use SyncSuiteCRMUsers\Model\SyncOutcome;
-use SyncSuiteCRMUsers\Sync\ChunkHandler;
+use SyncUsersSuitecrm\Model\SyncOutcome;
+use SyncUsersSuitecrm\Sync\ChunkHandler;
 
 defined('ABSPATH') || exit;
 

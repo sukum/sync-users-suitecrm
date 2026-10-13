@@ -4,17 +4,17 @@
  *
  * Handles composition, service instantiation, and core hook registration.
  *
- * @package SyncSuiteCRMUsers
+ * @package SyncUsersSuitecrm
  */
 
-namespace SyncSuiteCRMUsers;
+namespace SyncUsersSuitecrm;
 
-use SyncSuiteCRMUsers\Admin\SettingsPage;
-use SyncSuiteCRMUsers\Admin\ActivityLogPage;
-use SyncSuiteCRMUsers\Admin\QueuePage;
-use SyncSuiteCRMUsers\Admin\UserSyncActions;
-use SyncSuiteCRMUsers\Admin\ActionHandlers;
-use SyncSuiteCRMUsers\Admin\Notices;
+use SyncUsersSuitecrm\Admin\SettingsPage;
+use SyncUsersSuitecrm\Admin\ActivityLogPage;
+use SyncUsersSuitecrm\Admin\QueuePage;
+use SyncUsersSuitecrm\Admin\UserSyncActions;
+use SyncUsersSuitecrm\Admin\ActionHandlers;
+use SyncUsersSuitecrm\Admin\Notices;
 
 defined('ABSPATH') || exit;
 

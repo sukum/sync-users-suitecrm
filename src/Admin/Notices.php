@@ -4,12 +4,12 @@
  *
  * Displays system and connection state notices across WordPress admin.
  *
- * @package SyncSuiteCRMUsers\Admin
+ * @package SyncUsersSuitecrm\Admin
  */
 
-namespace SyncSuiteCRMUsers\Admin;
+namespace SyncUsersSuitecrm\Admin;
 
-use SyncSuiteCRMUsers\Settings;
+use SyncUsersSuitecrm\Settings;
 
 defined('ABSPATH') || exit;
 

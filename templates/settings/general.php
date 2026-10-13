@@ -4,7 +4,7 @@
  *
  * Variables inherited from settings.php: $settings, $roles, $timezoneString, $currentTime.
  *
- * @package SyncSuiteCRMUsers
+ * @package SyncUsersSuitecrm
  */
 
 defined('ABSPATH') || exit;

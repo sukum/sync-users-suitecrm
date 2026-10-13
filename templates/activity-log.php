@@ -14,13 +14,13 @@
  * - $nonce (string): Security nonce for AJAX actions.
  * - $queryError (string|null): Error message if query failed.
  *
- * @package SyncSuiteCRMUsers
+ * @package SyncUsersSuitecrm
  */
 
-namespace SyncSuiteCRMUsers;
+namespace SyncUsersSuitecrm;
 
-use SyncSuiteCRMUsers\Model\ActivityLogEntry;
-use SyncSuiteCRMUsers\Storage\ActivityLogRepository;
+use SyncUsersSuitecrm\Model\ActivityLogEntry;
+use SyncUsersSuitecrm\Storage\ActivityLogRepository;
 
 defined('ABSPATH') || exit;
 

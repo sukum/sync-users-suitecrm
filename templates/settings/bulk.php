@@ -4,7 +4,7 @@
  *
  * Variables inherited from settings.php: $progress, $isProgressStale.
  *
- * @package SyncSuiteCRMUsers
+ * @package SyncUsersSuitecrm
  */
 
 defined('ABSPATH') || exit;

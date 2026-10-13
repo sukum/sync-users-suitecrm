@@ -6,10 +6,10 @@
  * WordPress user mutations originating from the synchronization engine
  * are never re-queued for outbound CRM push.
  *
- * @package SyncSuiteCRMUsers\Sync
+ * @package SyncUsersSuitecrm\Sync
  */
 
-namespace SyncSuiteCRMUsers\Sync;
+namespace SyncUsersSuitecrm\Sync;
 
 defined('ABSPATH') || exit;
 

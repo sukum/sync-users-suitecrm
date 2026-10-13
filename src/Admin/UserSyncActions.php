@@ -5,15 +5,15 @@
  * Provides the manual "Sync to SuiteCRM" interface on WordPress user edit
  * and profile screens, as well as row actions in the Users list table.
  *
- * @package SyncSuiteCRMUsers\Admin
+ * @package SyncUsersSuitecrm\Admin
  */
 
-namespace SyncSuiteCRMUsers\Admin;
+namespace SyncUsersSuitecrm\Admin;
 
-use SyncSuiteCRMUsers\Settings;
-use SyncSuiteCRMUsers\Sync\Eligibility;
-use SyncSuiteCRMUsers\Sync\ManualSyncController;
-use SyncSuiteCRMUsers\Storage\UserMappingRepository;
+use SyncUsersSuitecrm\Settings;
+use SyncUsersSuitecrm\Sync\Eligibility;
+use SyncUsersSuitecrm\Sync\ManualSyncController;
+use SyncUsersSuitecrm\Storage\UserMappingRepository;
 use WP_User;
 
 defined('ABSPATH') || exit;

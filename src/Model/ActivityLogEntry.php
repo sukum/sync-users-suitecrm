@@ -5,10 +5,10 @@
  * Immutable data object representing one outcome for logging or display.
  * Its database-generated id is null before insertion.
  *
- * @package SyncSuiteCRMUsers
+ * @package SyncUsersSuitecrm
  */
 
-namespace SyncSuiteCRMUsers\Model;
+namespace SyncUsersSuitecrm\Model;
 
 defined('ABSPATH') || exit;
 

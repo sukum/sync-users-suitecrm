@@ -5,10 +5,10 @@
  * Immutable data object representing a successful CRM record lookup result,
  * separate from operational errors.
  *
- * @package SyncSuiteCRMUsers
+ * @package SyncUsersSuitecrm
  */
 
-namespace SyncSuiteCRMUsers\Model;
+namespace SyncUsersSuitecrm\Model;
 
 use InvalidArgumentException;
 

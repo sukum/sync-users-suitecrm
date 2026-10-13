@@ -5,12 +5,12 @@
  * Owns insertion, querying with filtering/pagination, deletion, and truncation
  * for the synchronization audit activity log.
  *
- * @package SyncSuiteCRMUsers
+ * @package SyncUsersSuitecrm
  */
 
-namespace SyncSuiteCRMUsers\Storage;
+namespace SyncUsersSuitecrm\Storage;
 
-use SyncSuiteCRMUsers\Model\ActivityLogEntry;
+use SyncUsersSuitecrm\Model\ActivityLogEntry;
 use WP_Error;
 
 defined('ABSPATH') || exit;

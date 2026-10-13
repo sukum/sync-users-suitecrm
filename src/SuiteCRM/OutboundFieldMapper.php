@@ -5,14 +5,14 @@
  * Transforms WordPress user fields into SuiteCRM module attribute payloads
  * for Accounts, Contacts, Leads, and Users modules.
  *
- * @package SyncSuiteCRMUsers\SuiteCRM
+ * @package SyncUsersSuitecrm\SuiteCRM
  */
 
-namespace SyncSuiteCRMUsers\SuiteCRM;
+namespace SyncUsersSuitecrm\SuiteCRM;
 
 use WP_Error;
 use WP_User;
-use SyncSuiteCRMUsers\Settings;
+use SyncUsersSuitecrm\Settings;
 
 defined('ABSPATH') || exit;
 

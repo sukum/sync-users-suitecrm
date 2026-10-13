@@ -5,10 +5,10 @@
  * Represents an active, completed, cancelled, or interrupted manual bulk synchronization run.
  * Provides controlled state-transition methods to enforce local lifecycle invariants.
  *
- * @package SyncSuiteCRMUsers
+ * @package SyncUsersSuitecrm
  */
 
-namespace SyncSuiteCRMUsers\Model;
+namespace SyncUsersSuitecrm\Model;
 
 defined('ABSPATH') || exit;
 

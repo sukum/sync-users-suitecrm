@@ -5,12 +5,12 @@
  * Renders the SuiteCRM synchronization audit activity log, providing
  * filtering, pagination, and log pruning actions.
  *
- * @package SyncSuiteCRMUsers\Admin
+ * @package SyncUsersSuitecrm\Admin
  */
 
-namespace SyncSuiteCRMUsers\Admin;
+namespace SyncUsersSuitecrm\Admin;
 
-use SyncSuiteCRMUsers\Storage\ActivityLogRepository;
+use SyncUsersSuitecrm\Storage\ActivityLogRepository;
 
 defined('ABSPATH') || exit;
 

@@ -6,12 +6,12 @@
  * - {prefix}syus_queue: Automatic synchronization queue.
  * - {prefix}syus_activity_log: Synchronization audit activity log.
  *
- * @package SyncSuiteCRMUsers
+ * @package SyncUsersSuitecrm
  */
 
-namespace SyncSuiteCRMUsers\Storage;
+namespace SyncUsersSuitecrm\Storage;
 
-use SyncSuiteCRMUsers\Settings;
+use SyncUsersSuitecrm\Settings;
 
 defined('ABSPATH') || exit;
 

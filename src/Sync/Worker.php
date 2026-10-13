@@ -5,15 +5,15 @@
  * Coordinates bounded queue selection and chunk processing for nightly batch
  * and real-time executions, delegating bookkeeping and stale queue expiration.
  *
- * @package SyncSuiteCRMUsers\Sync
+ * @package SyncUsersSuitecrm\Sync
  */
 
-namespace SyncSuiteCRMUsers\Sync;
+namespace SyncUsersSuitecrm\Sync;
 
-use SyncSuiteCRMUsers\Model\QueueItem;
-use SyncSuiteCRMUsers\Settings;
-use SyncSuiteCRMUsers\Storage\QueueRepository;
-use function SyncSuiteCRMUsers\write_log;
+use SyncUsersSuitecrm\Model\QueueItem;
+use SyncUsersSuitecrm\Settings;
+use SyncUsersSuitecrm\Storage\QueueRepository;
+use function SyncUsersSuitecrm\write_log;
 
 defined('ABSPATH') || exit;
 

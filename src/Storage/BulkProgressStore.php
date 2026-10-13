@@ -5,20 +5,20 @@
  * Manages serialization, deserialization, and atomic coordinated mutations
  * of the `syus_bulk_progress` transient using the shared `bulk_progress` lock.
  *
- * @package SyncSuiteCRMUsers
+ * @package SyncUsersSuitecrm
  */
 
-namespace SyncSuiteCRMUsers\Storage;
+namespace SyncUsersSuitecrm\Storage;
 
-use SyncSuiteCRMUsers\Model\BulkProgress;
-use SyncSuiteCRMUsers\Storage\BulkStoreActions\BulkStoreAction;
-use SyncSuiteCRMUsers\Storage\BulkStoreActions\BulkStoreActionResult;
-use SyncSuiteCRMUsers\Storage\BulkStoreActions\BulkStoreStart;
-use SyncSuiteCRMUsers\Storage\BulkStoreActions\BulkStoreRecordProgress;
-use SyncSuiteCRMUsers\Storage\BulkStoreActions\BulkStoreRequestCancellation;
-use SyncSuiteCRMUsers\Storage\BulkStoreActions\BulkStoreFinish;
-use SyncSuiteCRMUsers\Storage\BulkStoreActions\BulkStoreClear;
-use SyncSuiteCRMUsers\Sync\LockManager;
+use SyncUsersSuitecrm\Model\BulkProgress;
+use SyncUsersSuitecrm\Storage\BulkStoreActions\BulkStoreAction;
+use SyncUsersSuitecrm\Storage\BulkStoreActions\BulkStoreActionResult;
+use SyncUsersSuitecrm\Storage\BulkStoreActions\BulkStoreStart;
+use SyncUsersSuitecrm\Storage\BulkStoreActions\BulkStoreRecordProgress;
+use SyncUsersSuitecrm\Storage\BulkStoreActions\BulkStoreRequestCancellation;
+use SyncUsersSuitecrm\Storage\BulkStoreActions\BulkStoreFinish;
+use SyncUsersSuitecrm\Storage\BulkStoreActions\BulkStoreClear;
+use SyncUsersSuitecrm\Sync\LockManager;
 use WP_Error;
 
 defined('ABSPATH') || exit;

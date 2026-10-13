@@ -4,7 +4,7 @@
  *
  * Variables inherited from settings.php: $connection, $connStatus, $statusLabels, $statusColors.
  *
- * @package SyncSuiteCRMUsers
+ * @package SyncUsersSuitecrm
  */
 
 defined('ABSPATH') || exit;
@@ -72,7 +72,7 @@ $lastConnectedLabel = !empty($connection['last_connected_at']) ? sprintf(
                     <tr>
                         <th scope="row"><label for="syus_client_secret"><?php esc_html_e('OAuth2 Client Secret', 'sync-users-suitecrm'); ?></label></th>
                         <td>
-                            <input type="password" name="client_secret" id="syus_client_secret" value="<?php echo $connection['has_client_secret'] ? esc_attr(\SyncSuiteCRMUsers\Settings::SECRET_MASK) : ''; ?>" class="regular-text" autocomplete="new-password">
+                            <input type="password" name="client_secret" id="syus_client_secret" value="<?php echo $connection['has_client_secret'] ? esc_attr(\SyncUsersSuitecrm\Settings::SECRET_MASK) : ''; ?>" class="regular-text" autocomplete="new-password">
                             <p class="description">
                                 <?php esc_html_e('Leave masked to preserve existing saved secret. Mask characters are never saved.', 'sync-users-suitecrm'); ?>
                             </p>
@@ -89,7 +89,7 @@ $lastConnectedLabel = !empty($connection['last_connected_at']) ? sprintf(
                     <tr>
                         <th scope="row"><label for="syus_password"><?php esc_html_e('SuiteCRM API Password', 'sync-users-suitecrm'); ?></label></th>
                         <td>
-                            <input type="password" name="password" id="syus_password" value="<?php echo $connection['has_password'] ? esc_attr(\SyncSuiteCRMUsers\Settings::SECRET_MASK) : ''; ?>" class="regular-text" autocomplete="current-password">
+                            <input type="password" name="password" id="syus_password" value="<?php echo $connection['has_password'] ? esc_attr(\SyncUsersSuitecrm\Settings::SECRET_MASK) : ''; ?>" class="regular-text" autocomplete="current-password">
                             <p class="description">
                                 <?php esc_html_e('Leave masked to preserve existing saved password.', 'sync-users-suitecrm'); ?>
                             </p>
