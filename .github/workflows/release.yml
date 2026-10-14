@@ -24,7 +24,7 @@ permissions:
 
 # Environment variables for easy maintenance
 env:
-  PLUGIN_SLUG: sync-users-suitecrm
+  PLUGIN_SLUG: sk-user-sync-suitecrm
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -53,7 +53,7 @@ jobs:
             "templates"
             "LICENSE"
             "readme.txt"
-            "sync-users-suitecrm.php"
+            "sk-user-sync-suitecrm.php"
             "uninstall.php"
           )
 
@@ -66,7 +66,7 @@ jobs:
           done
 
           # Create a clean staging directory named after the plugin slug
-          # WordPress expects the zip to extract into a single folder: sync-users-suitecrm/
+          # WordPress expects the zip to extract into a single folder: sk-user-sync-suitecrm/
           BUILD_DIR="/tmp/build/${PLUGIN_SLUG}"
           mkdir -p "$BUILD_DIR"
 
