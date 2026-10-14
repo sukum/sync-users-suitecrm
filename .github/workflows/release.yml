@@ -1,0 +1,107 @@
+# This workflow is triggered when a git tag is pushed (or manually from the UI)
+# It packages the WordPress plugin files into a zip archive and attaches it to a GitHub Release.
+
+name: Package WordPress Plugin
+
+# Controls when the action will run.
+on:
+  # Trigger automatically when any tag is pushed (e.g., v1.0.0 or 1.0.0)
+  push:
+    tags:
+      - '*'
+  # Keep manual trigger option for testing from the GitHub Actions UI
+  workflow_dispatch:
+    inputs:
+      tag_name:
+        description: 'Tag name to package (if running manually, e.g., v1.0.0)'
+        default: 'v1.0.0'
+        required: false
+        type: string
+
+# Grant write permissions so the workflow can create releases and upload zip assets
+permissions:
+  contents: write
+
+# Environment variables for easy maintenance
+env:
+  PLUGIN_SLUG: sync-users-suitecrm
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build-and-release"
+  build-and-release:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Step 1: Checkout the repository code at the pushed tag
+      - name: Checkout repository code
+        uses: actions/checkout@v7
+
+      # Step 2: Validate required files, stage into plugin directory, and zip
+      - name: Stage and zip plugin files
+        run: |
+          set -euo pipefail
+
+          echo "Starting packaging process for ${PLUGIN_SLUG}..."
+
+          # Define the required files and directories from the root folder
+          REQUIRED_ITEMS=(
+            "assets"
+            "src"
+            "templates"
+            "LICENSE"
+            "readme.txt"
+            "sync-users-suitecrm.php"
+            "uninstall.php"
+          )
+
+          # Verify all required files/folders exist before packaging (Edge case handling)
+          for item in "${REQUIRED_ITEMS[@]}"; do
+            if [ ! -e "$item" ]; then
+              echo "::error::Required file or directory '$item' is missing from the repository root."
+              exit 1
+            fi
+          done
+
+          # Create a clean staging directory named after the plugin slug
+          # WordPress expects the zip to extract into a single folder: sync-users-suitecrm/
+          BUILD_DIR="/tmp/build/${PLUGIN_SLUG}"
+          mkdir -p "$BUILD_DIR"
+
+          # Copy all validated items into the staging folder
+          for item in "${REQUIRED_ITEMS[@]}"; do
+            echo "Copying $item to staging directory..."
+            cp -R "$item" "$BUILD_DIR/"
+          done
+
+          # Navigate to build root and create the zip archive, excluding hidden OS/git files
+          cd /tmp/build
+          ZIP_FILE="${GITHUB_WORKSPACE}/${PLUGIN_SLUG}.zip"
+          zip -r "$ZIP_FILE" "${PLUGIN_SLUG}" -x "*.DS_Store" -x "*/.git*"
+
+          # Verify the zip file was created and is not empty
+          if [ ! -s "$ZIP_FILE" ]; then
+            echo "::error::Failed to create a valid zip archive at $ZIP_FILE"
+            exit 1
+          fi
+
+          echo "Successfully created archive: $ZIP_FILE ($(du -h "$ZIP_FILE" | cut -f1))"
+
+      # Step 3: Upload the zip as a workflow artifact (useful for manual runs and inspection)
+      - name: Upload zip as build artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: ${{ env.PLUGIN_SLUG }}-package
+          path: ${{ env.PLUGIN_SLUG }}.zip
+          if-no-files-found: error
+
+      # Step 4: Attach the zip file to the GitHub Release (runs only when triggered by a tag push)
+      - name: Create GitHub Release and attach zip
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v3
+        with:
+          files: ${{ env.PLUGIN_SLUG }}.zip
+          generate_release_notes: true
+          fail_on_unmatched_files: true
