@@ -14,18 +14,18 @@ defined('ABSPATH') || exit;
             'progress' => is_array($progress) ? $progress : null,
             'stale'    => $isProgressStale,
         ])); ?>">
-            <h2><?php esc_html_e('Manual Bulk Synchronization', 'sync-users-suitecrm'); ?></h2>
+            <h2><?php esc_html_e('Manual Bulk Synchronization', 'sk-user-sync-suitecrm'); ?></h2>
             <p class="description">
-                <?php esc_html_e('Synchronize all existing eligible WordPress users directly to enabled SuiteCRM modules in scheduled background chunks.', 'sync-users-suitecrm'); ?>
+                <?php esc_html_e('Synchronize all existing eligible WordPress users directly to enabled SuiteCRM modules in scheduled background chunks.', 'sk-user-sync-suitecrm'); ?>
             </p>
 
             <div style="margin: 20px 0; display: flex; align-items: center; gap: 10px;">
                 <button type="button" class="button button-secondary" id="syus-start-bulk-btn" <?php disabled(is_array($progress) && ($progress['status'] ?? '') === 'running' && !$isProgressStale); ?>>
-                    <?php esc_html_e('Sync all existing users', 'sync-users-suitecrm'); ?>
+                    <?php esc_html_e('Sync all existing users', 'sk-user-sync-suitecrm'); ?>
                 </button>
 
                 <button type="button" class="button button-link-delete" id="syus-cancel-bulk-btn" style="<?php echo (is_array($progress) && ($progress['status'] ?? '') === 'running') ? '' : 'display:none;'; ?>">
-                    <?php esc_html_e('Cancel sync', 'sync-users-suitecrm'); ?>
+                    <?php esc_html_e('Cancel sync', 'sk-user-sync-suitecrm'); ?>
                 </button>
 
                 <span class="spinner" id="syus-bulk-spinner" style="float: none; margin: 0;"></span>
@@ -34,7 +34,7 @@ defined('ABSPATH') || exit;
             <!-- Bulk Progress Display Panel -->
             <div id="syus-bulk-panel" class="card" style="max-width: 650px; padding: 15px 20px; <?php echo is_array($progress) ? '' : 'display:none;'; ?>">
                 <h3 style="margin-top: 0; display: flex; justify-content: space-between; align-items: center;">
-                    <span><?php esc_html_e('Bulk Run Progress', 'sync-users-suitecrm'); ?></span>
+                    <span><?php esc_html_e('Bulk Run Progress', 'sk-user-sync-suitecrm'); ?></span>
                     <span id="syus-bulk-status-badge" style="font-size: 13px; font-weight: 600; padding: 2px 8px; border-radius: 3px; color: #fff; background-color: #2271b1;">
                         <?php echo is_array($progress) ? esc_html(strtoupper($progress['status'] ?? 'IDLE')) : 'IDLE'; ?>
                     </span>
@@ -52,9 +52,9 @@ defined('ABSPATH') || exit;
                 </div>
 
                 <div id="syus-bulk-stale-notice" class="notice notice-warning inline" style="margin: 10px 0; <?php echo $isProgressStale ? '' : 'display:none;'; ?>">
-                    <p><?php esc_html_e('Background bulk run appears stalled or interrupted (>60 seconds without worker update). You may start a new run.', 'sync-users-suitecrm'); ?></p>
+                    <p><?php esc_html_e('Background bulk run appears stalled or interrupted (>60 seconds without worker update). You may start a new run.', 'sk-user-sync-suitecrm'); ?></p>
                     <button type="button" class="button button-link-delete" id="syus-clear-bulk-btn" style="<?php echo $isProgressStale ? '' : 'display:none;'; ?>">
-                        <?php esc_html_e('Clear sync', 'sync-users-suitecrm'); ?>
+                        <?php esc_html_e('Clear sync', 'sk-user-sync-suitecrm'); ?>
                     </button>
 
                 </div>
@@ -62,7 +62,7 @@ defined('ABSPATH') || exit;
                 <table class="widefat" style="margin-top: 10px;">
                     <tbody>
                         <tr>
-                            <td><strong><?php esc_html_e('Triggered:', 'sync-users-suitecrm'); ?></strong></td>
+                            <td><strong><?php esc_html_e('Triggered:', 'sk-user-sync-suitecrm'); ?></strong></td>
                             <td id="syus-stat-started-at">
                                 <code>
                                     <?php echo esc_html(
@@ -74,21 +74,21 @@ defined('ABSPATH') || exit;
                             <td></td>
                         </tr>
                         <tr>
-                            <td><strong><?php esc_html_e('Run ID:', 'sync-users-suitecrm'); ?></strong></td>
+                            <td><strong><?php esc_html_e('Run ID:', 'sk-user-sync-suitecrm'); ?></strong></td>
                             <td id="syus-stat-run-id"><code><?php echo esc_html($progress['run_id'] ?? '—'); ?></code></td>
-                            <td><strong><?php esc_html_e('Total Eligible Users:', 'sync-users-suitecrm'); ?></strong></td>
+                            <td><strong><?php esc_html_e('Total Eligible Users:', 'sk-user-sync-suitecrm'); ?></strong></td>
                             <td id="syus-stat-total-users"><?php echo esc_html($progress['total_users'] ?? 0); ?></td>
                         </tr>
                         <tr>
-                            <td><strong><?php esc_html_e('Processed Users:', 'sync-users-suitecrm'); ?></strong></td>
+                            <td><strong><?php esc_html_e('Processed Users:', 'sk-user-sync-suitecrm'); ?></strong></td>
                             <td id="syus-stat-processed-users"><?php echo esc_html($progress['processed_users'] ?? 0); ?></td>
-                            <td><strong><?php esc_html_e('Module Successes:', 'sync-users-suitecrm'); ?></strong></td>
+                            <td><strong><?php esc_html_e('Module Successes:', 'sk-user-sync-suitecrm'); ?></strong></td>
                             <td id="syus-stat-successes" style="color: #00a32a;"><?php echo esc_html($progress['success_count'] ?? 0); ?></td>
                         </tr>
                         <tr>
-                            <td><strong><?php esc_html_e('Module Failures:', 'sync-users-suitecrm'); ?></strong></td>
+                            <td><strong><?php esc_html_e('Module Failures:', 'sk-user-sync-suitecrm'); ?></strong></td>
                             <td id="syus-stat-failures" style="color: #d63638;"><?php echo esc_html($progress['failure_count'] ?? 0); ?></td>
-                            <td><strong><?php esc_html_e('Module Skips:', 'sync-users-suitecrm'); ?></strong></td>
+                            <td><strong><?php esc_html_e('Module Skips:', 'sk-user-sync-suitecrm'); ?></strong></td>
                             <td id="syus-stat-skips" style="color: #646970;"><?php echo esc_html($progress['skipped_count'] ?? 0); ?></td>
                         </tr>
                     </tbody>

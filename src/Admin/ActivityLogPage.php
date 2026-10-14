@@ -74,10 +74,10 @@ class ActivityLogPage {
             'ajax_url' => admin_url('admin-ajax.php'),
             'nonce'    => wp_create_nonce('syus_admin_nonce'),
             'strings'  => [
-                'confirm_delete_shown' => __('Are you sure you want to delete the records currently displayed on this page?', 'sync-users-suitecrm'),
-                'confirm_clear_all'    => __('Are you sure you want to permanently clear ALL activity log records? This cannot be undone.', 'sync-users-suitecrm'),
-                'deleting'             => __('Deleting records...', 'sync-users-suitecrm'),
-                'clearing'             => __('Clearing all logs...', 'sync-users-suitecrm'),
+                'confirm_delete_shown' => __('Are you sure you want to delete the records currently displayed on this page?', 'sk-user-sync-suitecrm'),
+                'confirm_clear_all'    => __('Are you sure you want to permanently clear ALL activity log records? This cannot be undone.', 'sk-user-sync-suitecrm'),
+                'deleting'             => __('Deleting records...', 'sk-user-sync-suitecrm'),
+                'clearing'             => __('Clearing all logs...', 'sk-user-sync-suitecrm'),
             ],
         ]);
     }
@@ -95,7 +95,7 @@ class ActivityLogPage {
      */
     public function render(): void {
         if (!current_user_can('manage_options')) {
-            wp_die(esc_html__('You do not have sufficient permissions to access this page.', 'sync-users-suitecrm'));
+            wp_die(esc_html__('You do not have sufficient permissions to access this page.', 'sk-user-sync-suitecrm'));
             return;
         }
 
@@ -103,7 +103,7 @@ class ActivityLogPage {
             $requestNonce = isset($_GET['_syus_activity_log_nonce']) && is_string($_GET['_syus_activity_log_nonce'])
                 ? sanitize_text_field(wp_unslash($_GET['_syus_activity_log_nonce'])) : '';
             if (!wp_verify_nonce($requestNonce, 'syus_activity_log_filters')) {
-                wp_die(esc_html__('The activity log filter link has expired or is invalid. Please reopen the Activity Log page.', 'sync-users-suitecrm'), '', ['response' => 403]);
+                wp_die(esc_html__('The activity log filter link has expired or is invalid. Please reopen the Activity Log page.', 'sk-user-sync-suitecrm'), '', ['response' => 403]);
                 return;
             }
         }
@@ -171,7 +171,7 @@ class ActivityLogPage {
         if (file_exists($templatePath)) {
             include $templatePath;
         } else {
-            echo '<div class="wrap"><p>' . esc_html__('Activity log template not found.', 'sync-users-suitecrm') . '</p></div>';
+            echo '<div class="wrap"><p>' . esc_html__('Activity log template not found.', 'sk-user-sync-suitecrm') . '</p></div>';
         }
     }
 }

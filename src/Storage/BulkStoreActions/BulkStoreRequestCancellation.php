@@ -25,7 +25,7 @@ class BulkStoreRequestCancellation implements BulkStoreAction {
         if ($current === null || $current->getRunId() !== $this->runId || !$current->isRunning()) {
             return new WP_Error(
                 'run_not_active',
-                __('The specified bulk run is not active or has already completed.', 'sync-users-suitecrm'),
+                __('The specified bulk run is not active or has already completed.', 'sk-user-sync-suitecrm'),
                 ['http_status' => 409]
             );
         }
@@ -34,7 +34,7 @@ class BulkStoreRequestCancellation implements BulkStoreAction {
 
         return BulkStoreActionResult::save(
             $current,
-            __('Failed to save cancellation request to bulk progress.', 'sync-users-suitecrm')
+            __('Failed to save cancellation request to bulk progress.', 'sk-user-sync-suitecrm')
         );
     }
 }

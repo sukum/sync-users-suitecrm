@@ -183,7 +183,7 @@ class Plugin {
         $settingsLink = sprintf(
             '<a href="%s">%s</a>',
             esc_url($settingsUrl),
-            esc_html__('Settings', 'sync-users-suitecrm')
+            esc_html__('Settings', 'sk-user-sync-suitecrm')
         );
 
         array_unshift($links, $settingsLink);

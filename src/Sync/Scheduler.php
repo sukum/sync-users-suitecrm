@@ -78,7 +78,7 @@ class Scheduler {
         if (!set_transient($nonceKey, '1', self::WORKER_NONCE_TTL)) {
             return new WP_Error(
                 'syus_worker_nonce_failed',
-                __('Could not prepare the background sync request.', 'sync-users-suitecrm')
+                __('Could not prepare the background sync request.', 'sk-user-sync-suitecrm')
             );
         }
 

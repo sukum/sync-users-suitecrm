@@ -88,7 +88,7 @@ class ActionHandlers {
         if (!current_user_can('manage_options')) {
             wp_send_json_error([
                 'code'    => 'unauthorized',
-                'message' => __('Unauthorized permission.', 'sync-users-suitecrm'),
+                'message' => __('Unauthorized permission.', 'sk-user-sync-suitecrm'),
             ], 403);
         }
 
@@ -130,7 +130,7 @@ class ActionHandlers {
         $scheduler->syncRealtimeSchedule();
 
         wp_send_json_success([
-            'message'  => __('Settings saved successfully.', 'sync-users-suitecrm'),
+            'message'  => __('Settings saved successfully.', 'sk-user-sync-suitecrm'),
             'settings' => $updated,
         ]);
     }
@@ -146,7 +146,7 @@ class ActionHandlers {
         if (!current_user_can('manage_options')) {
             wp_send_json_error([
                 'code'    => 'unauthorized',
-                'message' => __('Unauthorized permission.', 'sync-users-suitecrm'),
+                'message' => __('Unauthorized permission.', 'sk-user-sync-suitecrm'),
             ], 403);
         }
 
@@ -159,7 +159,7 @@ class ActionHandlers {
         if (empty($baseUrl) || !filter_var($baseUrl, FILTER_VALIDATE_URL)) {
             wp_send_json_error([
                 'code'    => 'invalid_url',
-                'message' => __('Please enter a valid SuiteCRM base URL.', 'sync-users-suitecrm'),
+                'message' => __('Please enter a valid SuiteCRM base URL.', 'sk-user-sync-suitecrm'),
             ], 400);
         }
 
@@ -179,7 +179,7 @@ class ActionHandlers {
                 'code'    => 'transport_error',
                 'message' => sprintf(
                     /* translators: %s: transport error message */
-                    __('Connection failed: %s', 'sync-users-suitecrm'),
+                    __('Connection failed: %s', 'sk-user-sync-suitecrm'),
                     esc_html($response->get_error_message())
                 ),
             ], 502);
@@ -193,7 +193,7 @@ class ActionHandlers {
                 'reachable'               => true,
                 'authentication_required' => true,
                 'http_status'             => $code,
-                'message'                 => __('SuiteCRM REST V8 API is reachable.', 'sync-users-suitecrm'),
+                'message'                 => __('SuiteCRM REST V8 API is reachable.', 'sk-user-sync-suitecrm'),
             ]);
         }
 
@@ -201,7 +201,7 @@ class ActionHandlers {
             'code'        => 'unexpected_status',
             'message'     => sprintf(
                 /* translators: %d: HTTP status code */
-                __('API reachable but returned unexpected HTTP status %d.', 'sync-users-suitecrm'),
+                __('API reachable but returned unexpected HTTP status %d.', 'sk-user-sync-suitecrm'),
                 $code
             ),
             'http_status' => $code,
@@ -219,7 +219,7 @@ class ActionHandlers {
         if (!current_user_can('manage_options')) {
             wp_send_json_error([
                 'code'    => 'unauthorized',
-                'message' => __('Unauthorized permission.', 'sync-users-suitecrm'),
+                'message' => __('Unauthorized permission.', 'sk-user-sync-suitecrm'),
             ], 403);
         }
 
@@ -249,7 +249,7 @@ class ActionHandlers {
         if (empty($conn['base_url']) || empty($conn['client_id']) || empty($conn['client_secret']) || empty($conn['username']) || empty($conn['password'])) {
             wp_send_json_error([
                 'code'    => 'missing_credentials',
-                'message' => __('All connection fields are required to establish an API connection.', 'sync-users-suitecrm'),
+                'message' => __('All connection fields are required to establish an API connection.', 'sk-user-sync-suitecrm'),
             ], 400);
         }
 
@@ -279,7 +279,7 @@ class ActionHandlers {
                 'code'    => 'transport_error',
                 'message' => sprintf(
                     /* translators: %s: transport error message */
-                    __('Transport error: %s', 'sync-users-suitecrm'),
+                    __('Transport error: %s', 'sk-user-sync-suitecrm'),
                     esc_html($errorMessage)
                 ),
             ], 502);
@@ -302,15 +302,15 @@ class ActionHandlers {
                 'last_connected_at' => $lastConnectedAt,
                 'last_connected_label' => sprintf(
                     /* translators: %s: formatted date of last connection */
-                    __('Last successful handshake: %s', 'sync-users-suitecrm'),
+                    __('Last successful handshake: %s', 'sk-user-sync-suitecrm'),
                     wp_date('Y-m-d H:i:s T', $lastConnectedAt)
                 ),
-                'message'           => __('Connection established and OAuth2 token saved successfully.', 'sync-users-suitecrm'),
+                'message'           => __('Connection established and OAuth2 token saved successfully.', 'sk-user-sync-suitecrm'),
             ]);
         }
 
         // Parse sanitized error message without exposing secrets
-        $errorMessage = __('Authentication failed.', 'sync-users-suitecrm');
+        $errorMessage = __('Authentication failed.', 'sk-user-sync-suitecrm');
         if (is_array($data)) {
             if (!empty($data['message'])) {
                 $errorMessage = (string) $data['message'];
@@ -343,7 +343,7 @@ class ActionHandlers {
         if (!current_user_can('manage_options')) {
             wp_send_json_error([
                 'code'    => 'unauthorized',
-                'message' => __('Unauthorized permission.', 'sync-users-suitecrm'),
+                'message' => __('Unauthorized permission.', 'sk-user-sync-suitecrm'),
             ], 403);
         }
 
@@ -359,7 +359,7 @@ class ActionHandlers {
         }
 
         wp_send_json_success(array_merge([
-            'message' => __('Manual bulk synchronization started in background.', 'sync-users-suitecrm'),
+            'message' => __('Manual bulk synchronization started in background.', 'sk-user-sync-suitecrm'),
         ], $result));
     }
 
@@ -374,7 +374,7 @@ class ActionHandlers {
         if (!current_user_can('manage_options')) {
             wp_send_json_error([
                 'code'    => 'unauthorized',
-                'message' => __('Unauthorized permission.', 'sync-users-suitecrm'),
+                'message' => __('Unauthorized permission.', 'sk-user-sync-suitecrm'),
             ], 403);
         }
 
@@ -401,7 +401,7 @@ class ActionHandlers {
         if (!current_user_can('manage_options')) {
             wp_send_json_error([
                 'code'    => 'unauthorized',
-                'message' => __('Unauthorized permission.', 'sync-users-suitecrm'),
+                'message' => __('Unauthorized permission.', 'sk-user-sync-suitecrm'),
             ], 403);
         }
 
@@ -420,7 +420,7 @@ class ActionHandlers {
         }
 
         wp_send_json_success(array_merge([
-            'message' => __('Cancellation requested. Worker will halt at the next user boundary.', 'sync-users-suitecrm'),
+            'message' => __('Cancellation requested. Worker will halt at the next user boundary.', 'sk-user-sync-suitecrm'),
         ], $result));
     }
 
@@ -435,7 +435,7 @@ class ActionHandlers {
         if (!current_user_can('manage_options')) {
             wp_send_json_error([
                 'code'    => 'unauthorized',
-                'message' => __('Unauthorized permission.', 'sync-users-suitecrm'),
+                'message' => __('Unauthorized permission.', 'sk-user-sync-suitecrm'),
             ], 403);
         }
 
@@ -454,7 +454,7 @@ class ActionHandlers {
         }
 
         wp_send_json_success([
-            'message' => __('Cleared.', 'sync-users-suitecrm'),
+            'message' => __('Cleared.', 'sk-user-sync-suitecrm'),
         ]);
     }
 
@@ -473,14 +473,14 @@ class ActionHandlers {
         if ($userId <= 0) {
             wp_send_json_error([
                 'code'    => 'invalid_user_id',
-                'message' => __('Invalid user ID provided.', 'sync-users-suitecrm'),
+                'message' => __('Invalid user ID provided.', 'sk-user-sync-suitecrm'),
             ], 400);
         }
 
         if (!current_user_can('edit_user', $userId)) {
             wp_send_json_error([
                 'code'    => 'unauthorized',
-                'message' => __('You do not have permission to sync this user.', 'sync-users-suitecrm'),
+                'message' => __('You do not have permission to sync this user.', 'sk-user-sync-suitecrm'),
             ], 403);
         }
 
@@ -513,7 +513,7 @@ class ActionHandlers {
         if (!current_user_can('manage_options')) {
             wp_send_json_error([
                 'code'    => 'unauthorized',
-                'message' => __('Unauthorized permission.', 'sync-users-suitecrm'),
+                'message' => __('Unauthorized permission.', 'sk-user-sync-suitecrm'),
             ], 403);
         }
 
@@ -546,7 +546,7 @@ class ActionHandlers {
         if (empty($sanitizedIds)) {
             wp_send_json_error([
                 'code'    => 'invalid_input',
-                'message' => __('No valid record IDs provided for deletion.', 'sync-users-suitecrm'),
+                'message' => __('No valid record IDs provided for deletion.', 'sk-user-sync-suitecrm'),
             ], 400);
         }
 
@@ -563,7 +563,7 @@ class ActionHandlers {
             'deleted_count' => $deletedCount,
             'message'       => sprintf(
                 /* translators: %d: number of deleted rows */
-                _n('%d log entry deleted successfully.', '%d log entries deleted successfully.', $deletedCount, 'sync-users-suitecrm'),
+                _n('%d log entry deleted successfully.', '%d log entries deleted successfully.', $deletedCount, 'sk-user-sync-suitecrm'),
                 $deletedCount
             ),
         ]);
@@ -583,7 +583,7 @@ class ActionHandlers {
         if (!current_user_can('manage_options')) {
             wp_send_json_error([
                 'code'    => 'unauthorized',
-                'message' => __('Unauthorized permission.', 'sync-users-suitecrm'),
+                'message' => __('Unauthorized permission.', 'sk-user-sync-suitecrm'),
             ], 403);
         }
 
@@ -600,7 +600,7 @@ class ActionHandlers {
             'deleted_count' => $clearedCount,
             'message'       => sprintf(
                 /* translators: %d: number of cleared records */
-                __('Successfully cleared %d activity log records.', 'sync-users-suitecrm'),
+                __('Successfully cleared %d activity log records.', 'sk-user-sync-suitecrm'),
                 $clearedCount
             ),
         ]);

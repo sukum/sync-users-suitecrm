@@ -260,7 +260,7 @@ class Settings {
         if (!$lock->acquire()) {
             return new \WP_Error(
                 'connection_busy',
-                __('The connection could not be locked for updating.', 'sync-users-suitecrm'),
+                __('The connection could not be locked for updating.', 'sk-user-sync-suitecrm'),
                 ['http_status' => 409]
             );
         }

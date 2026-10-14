@@ -63,15 +63,15 @@ class Notices {
             ?>
             <div class="notice notice-warning is-dismissible">
                 <p>
-                    <strong><?php esc_html_e('SuiteCRM User Sync:', 'sync-users-suitecrm'); ?></strong>
-                    <?php esc_html_e('SuiteCRM reconnection is required. API requests are currently paused.', 'sync-users-suitecrm'); ?>
+                    <strong><?php esc_html_e('SuiteCRM User Sync:', 'sk-user-sync-suitecrm'); ?></strong>
+                    <?php esc_html_e('SuiteCRM reconnection is required. API requests are currently paused.', 'sk-user-sync-suitecrm'); ?>
                     <?php if ($lastError !== '') : ?>
                         <br>
                         <span style="color: #646970;">
                             <?php
                             printf(
                                 /* translators: %s: Sanitized last error message */
-                                esc_html__('Reason: %s', 'sync-users-suitecrm'),
+                                esc_html__('Reason: %s', 'sk-user-sync-suitecrm'),
                                 esc_html($lastError)
                             );
                             ?>
@@ -79,7 +79,7 @@ class Notices {
                     <?php endif; ?>
                     <br>
                     <a href="<?php echo esc_url($settingsUrl); ?>" class="button button-small" style="margin-top: 5px;">
-                        <?php esc_html_e('Update SuiteCRM Credentials', 'sync-users-suitecrm'); ?>
+                        <?php esc_html_e('Update SuiteCRM Credentials', 'sk-user-sync-suitecrm'); ?>
                     </a>
                 </p>
             </div>

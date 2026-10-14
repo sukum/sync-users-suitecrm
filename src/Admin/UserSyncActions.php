@@ -113,21 +113,21 @@ class UserSyncActions {
             'ajax_url' => admin_url('admin-ajax.php'),
             'nonce'    => wp_create_nonce('syus_user_sync_nonce'),
             'strings'  => [
-                'syncing'          => __('Synchronizing user with SuiteCRM...', 'sync-users-suitecrm'),
-                'sync_complete'    => __('Synchronization complete.', 'sync-users-suitecrm'),
-                'sync_failed'      => __('Synchronization failed.', 'sync-users-suitecrm'),
-                'confirm_sync'     => __('Synchronize this user to SuiteCRM now?', 'sync-users-suitecrm'),
-                'sync_outcomes'    => __('Synchronization Outcomes:', 'sync-users-suitecrm'),
-                'row_syncing'      => __('Syncing...', 'sync-users-suitecrm'),
-                'row_synced'       => __('Synced', 'sync-users-suitecrm'),
-                'row_failed'       => __('Failed', 'sync-users-suitecrm'),
-                'connection_error' => __('Error communicating with synchronization engine.', 'sync-users-suitecrm'),
-                'column_module'    => __('Module', 'sync-users-suitecrm'),
-                'column_action'    => __('Action', 'sync-users-suitecrm'),
-                'column_status'    => __('Status', 'sync-users-suitecrm'),
-                'column_details'   => __('Details', 'sync-users-suitecrm'),
-                'crm_id'           => __('CRM ID:', 'sync-users-suitecrm'),
-                'mapped'           => __('Mapped', 'sync-users-suitecrm'),
+                'syncing'          => __('Synchronizing user with SuiteCRM...', 'sk-user-sync-suitecrm'),
+                'sync_complete'    => __('Synchronization complete.', 'sk-user-sync-suitecrm'),
+                'sync_failed'      => __('Synchronization failed.', 'sk-user-sync-suitecrm'),
+                'confirm_sync'     => __('Synchronize this user to SuiteCRM now?', 'sk-user-sync-suitecrm'),
+                'sync_outcomes'    => __('Synchronization Outcomes:', 'sk-user-sync-suitecrm'),
+                'row_syncing'      => __('Syncing...', 'sk-user-sync-suitecrm'),
+                'row_synced'       => __('Synced', 'sk-user-sync-suitecrm'),
+                'row_failed'       => __('Failed', 'sk-user-sync-suitecrm'),
+                'connection_error' => __('Error communicating with synchronization engine.', 'sk-user-sync-suitecrm'),
+                'column_module'    => __('Module', 'sk-user-sync-suitecrm'),
+                'column_action'    => __('Action', 'sk-user-sync-suitecrm'),
+                'column_status'    => __('Status', 'sk-user-sync-suitecrm'),
+                'column_details'   => __('Details', 'sk-user-sync-suitecrm'),
+                'crm_id'           => __('CRM ID:', 'sk-user-sync-suitecrm'),
+                'mapped'           => __('Mapped', 'sk-user-sync-suitecrm'),
             ],
         ]);
     }
@@ -180,8 +180,8 @@ class UserSyncActions {
             '<a href="#" class="syus-sync-user-row-btn" data-user-id="%d" data-nonce="%s" title="%s">%s</a>',
             (int) $user->ID,
             esc_attr($nonce),
-            esc_attr__('Push this user directly to SuiteCRM', 'sync-users-suitecrm'),
-            esc_html__('Sync to SuiteCRM', 'sync-users-suitecrm')
+            esc_attr__('Push this user directly to SuiteCRM', 'sk-user-sync-suitecrm'),
+            esc_html__('Sync to SuiteCRM', 'sk-user-sync-suitecrm')
         );
 
         return $actions;

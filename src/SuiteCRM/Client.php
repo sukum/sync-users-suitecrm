@@ -100,7 +100,7 @@ class Client {
         if ($baseUrl === '' || !filter_var($baseUrl, FILTER_VALIDATE_URL)) {
             return new WP_Error(
                 'invalid_url',
-                __('Please enter a valid SuiteCRM base URL.', 'sync-users-suitecrm'),
+                __('Please enter a valid SuiteCRM base URL.', 'sk-user-sync-suitecrm'),
                 ['http_status' => 400]
             );
         }
@@ -121,7 +121,7 @@ class Client {
                 'transport_error',
                 sprintf(
                     /* translators: %s: Error message */
-                    __('Connection failed: %s', 'sync-users-suitecrm'),
+                    __('Connection failed: %s', 'sk-user-sync-suitecrm'),
                     esc_html($response->get_error_message())
                 ),
                 ['http_status' => 502]
@@ -143,7 +143,7 @@ class Client {
             'unexpected_status',
             sprintf(
                 /* translators: %d: HTTP status code */
-                __('API reachable but returned unexpected HTTP status %d.', 'sync-users-suitecrm'),
+                __('API reachable but returned unexpected HTTP status %d.', 'sk-user-sync-suitecrm'),
                 $code
             ),
             ['http_status' => $code]
@@ -172,7 +172,7 @@ class Client {
         if ($baseUrl === '' || $clientId === '' || $clientSecret === '' || $username === '' || $password === '') {
             return new WP_Error(
                 'missing_credentials',
-                __('SuiteCRM base URL, client ID, client secret, username, and password are required.', 'sync-users-suitecrm'),
+                __('SuiteCRM base URL, client ID, client secret, username, and password are required.', 'sk-user-sync-suitecrm'),
                 ['http_status' => 400]
             );
         }
@@ -201,7 +201,7 @@ class Client {
                 'transport_error',
                 sprintf(
                     /* translators: %s: Error message */
-                    __('Transport error during authentication: %s', 'sync-users-suitecrm'),
+                    __('Transport error during authentication: %s', 'sk-user-sync-suitecrm'),
                     esc_html($response->get_error_message())
                 ),
                 ['http_status' => 502]
@@ -219,7 +219,7 @@ class Client {
         if (!is_array($data) || empty($data['access_token']) || !isset($data['expires_in']) || (int) $data['expires_in'] <= 0) {
             return new WP_Error(
                 'invalid_response',
-                __('SuiteCRM returned an invalid OAuth token response structure.', 'sync-users-suitecrm'),
+                __('SuiteCRM returned an invalid OAuth token response structure.', 'sk-user-sync-suitecrm'),
                 ['http_status' => 200]
             );
         }
@@ -252,7 +252,7 @@ class Client {
         if ($baseUrl === '' || $clientId === '' || $clientSecret === '' || $refreshToken === '') {
             return new WP_Error(
                 'missing_credentials',
-                __('SuiteCRM base URL, client ID, client secret, and refresh token are required.', 'sync-users-suitecrm'),
+                __('SuiteCRM base URL, client ID, client secret, and refresh token are required.', 'sk-user-sync-suitecrm'),
                 ['http_status' => 400]
             );
         }
@@ -280,7 +280,7 @@ class Client {
                 'transport_error',
                 sprintf(
                     /* translators: %s: Error message */
-                    __('Transport error during token renewal: %s', 'sync-users-suitecrm'),
+                    __('Transport error during token renewal: %s', 'sk-user-sync-suitecrm'),
                     esc_html($response->get_error_message())
                 ),
                 ['http_status' => 502]
@@ -298,7 +298,7 @@ class Client {
         if (!is_array($data) || empty($data['access_token']) || !isset($data['expires_in']) || (int) $data['expires_in'] <= 0) {
             return new WP_Error(
                 'invalid_response',
-                __('SuiteCRM returned an invalid OAuth refresh response structure.', 'sync-users-suitecrm'),
+                __('SuiteCRM returned an invalid OAuth refresh response structure.', 'sk-user-sync-suitecrm'),
                 ['http_status' => 200]
             );
         }
@@ -337,7 +337,7 @@ class Client {
                 'invalid_module',
                 sprintf(
                     /* translators: %s: Module name */
-                    __('Unsupported SuiteCRM module: %s.', 'sync-users-suitecrm'),
+                    __('Unsupported SuiteCRM module: %s.', 'sk-user-sync-suitecrm'),
                     $module
                 ),
                 ['http_status' => 400]
@@ -355,7 +355,7 @@ class Client {
         if ($baseUrl === '') {
             return new WP_Error(
                 'not_configured',
-                __('SuiteCRM base URL is not configured.', 'sync-users-suitecrm'),
+                __('SuiteCRM base URL is not configured.', 'sk-user-sync-suitecrm'),
                 ['http_status' => 400]
             );
         }
@@ -412,7 +412,7 @@ class Client {
                 'transport_error',
                 sprintf(
                     /* translators: %s: Error message */
-                    __('Transport error querying SuiteCRM collection: %s', 'sync-users-suitecrm'),
+                    __('Transport error querying SuiteCRM collection: %s', 'sk-user-sync-suitecrm'),
                     esc_html($response->get_error_message())
                 ),
                 ['http_status' => 502]
@@ -430,7 +430,7 @@ class Client {
         if (!is_array($data) || !isset($data['data']) || !is_array($data['data'])) {
             return new WP_Error(
                 'invalid_response',
-                __('SuiteCRM returned an invalid collection response structure.', 'sync-users-suitecrm'),
+                __('SuiteCRM returned an invalid collection response structure.', 'sk-user-sync-suitecrm'),
                 ['http_status' => 200]
             );
         }
@@ -486,7 +486,7 @@ class Client {
                 'invalid_module',
                 sprintf(
                     /* translators: %s: Module name */
-                    __('Unsupported SuiteCRM module: %s.', 'sync-users-suitecrm'),
+                    __('Unsupported SuiteCRM module: %s.', 'sk-user-sync-suitecrm'),
                     $module
                 ),
                 ['http_status' => 400]
@@ -504,7 +504,7 @@ class Client {
         if ($baseUrl === '') {
             return new WP_Error(
                 'not_configured',
-                __('SuiteCRM base URL is not configured.', 'sync-users-suitecrm'),
+                __('SuiteCRM base URL is not configured.', 'sk-user-sync-suitecrm'),
                 ['http_status' => 400]
             );
         }
@@ -533,7 +533,7 @@ class Client {
                 'transport_error',
                 sprintf(
                     /* translators: %s: Error message */
-                    __('Transport error creating record: %s', 'sync-users-suitecrm'),
+                    __('Transport error creating record: %s', 'sk-user-sync-suitecrm'),
                     esc_html($response->get_error_message())
                 ),
                 ['http_status' => 502]
@@ -551,7 +551,7 @@ class Client {
         if (!is_array($data) || empty($data['data']['id']) || empty($data['data']['type'])) {
             return new WP_Error(
                 'invalid_response',
-                __('SuiteCRM returned an invalid create response structure.', 'sync-users-suitecrm'),
+                __('SuiteCRM returned an invalid create response structure.', 'sk-user-sync-suitecrm'),
                 ['http_status' => 201]
             );
         }
@@ -566,7 +566,7 @@ class Client {
                 'invalid_response',
                 sprintf(
                     /* translators: 1: Returned type, 2: Expected module */
-                    __('SuiteCRM returned unexpected module type %1$s for requested module %2$s.', 'sync-users-suitecrm'),
+                    __('SuiteCRM returned unexpected module type %1$s for requested module %2$s.', 'sk-user-sync-suitecrm'),
                     $returnedType,
                     $module
                 ),
@@ -600,7 +600,7 @@ class Client {
                 'invalid_module',
                 sprintf(
                     /* translators: %s: Module name */
-                    __('Unsupported SuiteCRM module: %s.', 'sync-users-suitecrm'),
+                    __('Unsupported SuiteCRM module: %s.', 'sk-user-sync-suitecrm'),
                     $module
                 ),
                 ['http_status' => 400]
@@ -611,7 +611,7 @@ class Client {
         if ($id === '') {
             return new WP_Error(
                 'invalid_input',
-                __('CRM record ID cannot be empty for record update.', 'sync-users-suitecrm'),
+                __('CRM record ID cannot be empty for record update.', 'sk-user-sync-suitecrm'),
                 ['http_status' => 400]
             );
         }
@@ -627,7 +627,7 @@ class Client {
         if ($baseUrl === '') {
             return new WP_Error(
                 'not_configured',
-                __('SuiteCRM base URL is not configured.', 'sync-users-suitecrm'),
+                __('SuiteCRM base URL is not configured.', 'sk-user-sync-suitecrm'),
                 ['http_status' => 400]
             );
         }
@@ -658,7 +658,7 @@ class Client {
                 'transport_error',
                 sprintf(
                     /* translators: %s: Error message */
-                    __('Transport error updating record: %s', 'sync-users-suitecrm'),
+                    __('Transport error updating record: %s', 'sk-user-sync-suitecrm'),
                     esc_html($response->get_error_message())
                 ),
                 ['http_status' => 502]
@@ -677,7 +677,7 @@ class Client {
         if (!is_array($data) || empty($data['data']['id']) || empty($data['data']['type'])) {
             return new WP_Error(
                 'invalid_response',
-                __('SuiteCRM returned an invalid update response structure.', 'sync-users-suitecrm'),
+                __('SuiteCRM returned an invalid update response structure.', 'sk-user-sync-suitecrm'),
                 ['http_status' => $statusCode]
             );
         }
@@ -691,7 +691,7 @@ class Client {
                 'invalid_response',
                 sprintf(
                     /* translators: 1: Returned type, 2: Expected module */
-                    __('SuiteCRM returned unexpected module type %1$s for requested module %2$s.', 'sync-users-suitecrm'),
+                    __('SuiteCRM returned unexpected module type %1$s for requested module %2$s.', 'sk-user-sync-suitecrm'),
                     $returnedType,
                     $module
                 ),
@@ -705,7 +705,7 @@ class Client {
                 'invalid_response',
                 sprintf(
                     /* translators: 1: Returned ID, 2: Expected ID */
-                    __('SuiteCRM returned record ID %1$s which does not match requested ID %2$s.', 'sync-users-suitecrm'),
+                    __('SuiteCRM returned record ID %1$s which does not match requested ID %2$s.', 'sk-user-sync-suitecrm'),
                     $returnedId,
                     $id
                 ),
@@ -801,7 +801,7 @@ class Client {
         if ($errorMessage === '') {
             $errorMessage = sprintf(
                 /* translators: %d: HTTP status code */
-                __('SuiteCRM API request failed with HTTP status %d.', 'sync-users-suitecrm'),
+                __('SuiteCRM API request failed with HTTP status %d.', 'sk-user-sync-suitecrm'),
                 $statusCode
             );
         }

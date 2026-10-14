@@ -31,10 +31,10 @@ $statusColors = [
 ];
 
 $actionLabels = [
-    'create' => __('Create', 'sync-users-suitecrm'),
-    'update' => __('Update', 'sync-users-suitecrm'),
-    'none'   => __('None', 'sync-users-suitecrm'),
-    'expire' => __('Expire', 'sync-users-suitecrm'),
+    'create' => __('Create', 'sk-user-sync-suitecrm'),
+    'update' => __('Update', 'sk-user-sync-suitecrm'),
+    'none'   => __('None', 'sk-user-sync-suitecrm'),
+    'expire' => __('Expire', 'sk-user-sync-suitecrm'),
 ];
 
 $pagination = $totalPages > 1 ? paginate_links([
@@ -54,7 +54,7 @@ $pagination = $totalPages > 1 ? paginate_links([
 ?>
 
 <div class="wrap syus-wrap syus-activity-log-wrap">
-    <h1 class="wp-heading-inline"><?php echo esc_html__('SuiteCRM Sync — Activity Log', 'sync-users-suitecrm'); ?></h1>
+    <h1 class="wp-heading-inline"><?php echo esc_html__('SuiteCRM Sync — Activity Log', 'sk-user-sync-suitecrm'); ?></h1>
 
     <div id="syus-notice-container" style="margin-top: 10px;"></div>
 
@@ -72,32 +72,32 @@ $pagination = $totalPages > 1 ? paginate_links([
         <div class="tablenav top wp-clearfix" style="padding: 0; margin: 0; clear: both;">
             <div class="alignleft actions">
                 <!-- Username Search -->
-                <label for="syus-filter-username" class="screen-reader-text"><?php esc_html_e('Filter by Username', 'sync-users-suitecrm'); ?></label>
-                <input type="text" name="username" id="syus-filter-username" value="<?php echo esc_attr($filterUsername); ?>" placeholder="<?php esc_attr_e('Filter by username...', 'sync-users-suitecrm'); ?>" style="vertical-align: middle;">
+                <label for="syus-filter-username" class="screen-reader-text"><?php esc_html_e('Filter by Username', 'sk-user-sync-suitecrm'); ?></label>
+                <input type="text" name="username" id="syus-filter-username" value="<?php echo esc_attr($filterUsername); ?>" placeholder="<?php esc_attr_e('Filter by username...', 'sk-user-sync-suitecrm'); ?>" style="vertical-align: middle;">
 
                 <!-- Status Filter -->
-                <label for="syus-filter-status" class="screen-reader-text"><?php esc_html_e('Filter by Status', 'sync-users-suitecrm'); ?></label>
+                <label for="syus-filter-status" class="screen-reader-text"><?php esc_html_e('Filter by Status', 'sk-user-sync-suitecrm'); ?></label>
                 <select name="status" id="syus-filter-status" style="vertical-align: middle;">
-                    <option value="all" <?php selected($filterStatus, 'all'); ?>><?php esc_html_e('All Statuses', 'sync-users-suitecrm'); ?></option>
-                    <option value="success" <?php selected($filterStatus, 'success'); ?>><?php esc_html_e('Success', 'sync-users-suitecrm'); ?></option>
-                    <option value="failure" <?php selected($filterStatus, 'failure'); ?>><?php esc_html_e('Failure', 'sync-users-suitecrm'); ?></option>
-                    <option value="skipped" <?php selected($filterStatus, 'skipped'); ?>><?php esc_html_e('Skipped', 'sync-users-suitecrm'); ?></option>
+                    <option value="all" <?php selected($filterStatus, 'all'); ?>><?php esc_html_e('All Statuses', 'sk-user-sync-suitecrm'); ?></option>
+                    <option value="success" <?php selected($filterStatus, 'success'); ?>><?php esc_html_e('Success', 'sk-user-sync-suitecrm'); ?></option>
+                    <option value="failure" <?php selected($filterStatus, 'failure'); ?>><?php esc_html_e('Failure', 'sk-user-sync-suitecrm'); ?></option>
+                    <option value="skipped" <?php selected($filterStatus, 'skipped'); ?>><?php esc_html_e('Skipped', 'sk-user-sync-suitecrm'); ?></option>
                 </select>
 
                 <!-- Module Filter -->
-                <label for="syus-filter-module" class="screen-reader-text"><?php esc_html_e('Filter by Module', 'sync-users-suitecrm'); ?></label>
+                <label for="syus-filter-module" class="screen-reader-text"><?php esc_html_e('Filter by Module', 'sk-user-sync-suitecrm'); ?></label>
                 <select name="module" id="syus-filter-module" style="vertical-align: middle;">
-                    <option value="all" <?php selected($filterModule, 'all'); ?>><?php esc_html_e('All Modules', 'sync-users-suitecrm'); ?></option>
+                    <option value="all" <?php selected($filterModule, 'all'); ?>><?php esc_html_e('All Modules', 'sk-user-sync-suitecrm'); ?></option>
                     <?php foreach (['Accounts', 'Contacts', 'Leads', 'Users'] as $mod) : ?>
                         <option value="<?php echo esc_attr($mod); ?>" <?php selected($filterModule, $mod); ?>><?php echo esc_html($mod); ?></option>
                     <?php endforeach; ?>
                 </select>
 
-                <input type="submit" class="button" value="<?php esc_attr_e('Filter', 'sync-users-suitecrm'); ?>" style="vertical-align: middle;">
+                <input type="submit" class="button" value="<?php esc_attr_e('Filter', 'sk-user-sync-suitecrm'); ?>" style="vertical-align: middle;">
 
                 <?php if ($filterUsername !== '' || $filterStatus !== 'all' || $filterModule !== 'all') : ?>
                     <a href="<?php echo esc_url(admin_url('admin.php?page=syus-activity-log')); ?>" class="button" style="vertical-align: middle; margin-left: 5px;">
-                        <?php esc_html_e('Reset', 'sync-users-suitecrm'); ?>
+                        <?php esc_html_e('Reset', 'sk-user-sync-suitecrm'); ?>
                     </a>
                 <?php endif; ?>
             </div>
@@ -105,11 +105,11 @@ $pagination = $totalPages > 1 ? paginate_links([
             <!-- ACTION BUTTONS: DELETE SHOWN / CLEAR ALL -->
             <div class="alignright actions">
                 <button type="button" class="button button-secondary" id="syus-delete-shown-logs-btn" data-ids="<?php echo esc_attr(wp_json_encode($renderedIds)); ?>" <?php disabled(empty($renderedIds)); ?>>
-                    <?php esc_html_e('Delete records shown on this page', 'sync-users-suitecrm'); ?>
+                    <?php esc_html_e('Delete records shown on this page', 'sk-user-sync-suitecrm'); ?>
                 </button>
 
                 <button type="button" class="button button-link-delete" id="syus-clear-all-logs-btn" style="margin-left: 8px;" <?php disabled($totalItems === 0); ?>>
-                    <?php esc_html_e('Clear all logs', 'sync-users-suitecrm'); ?>
+                    <?php esc_html_e('Clear all logs', 'sk-user-sync-suitecrm'); ?>
                 </button>
 
                 <span class="spinner" id="syus-log-action-spinner" style="float: none; margin: 0 0 0 6px;"></span>
@@ -124,7 +124,7 @@ $pagination = $totalPages > 1 ? paginate_links([
                 <?php
                 printf(
                     /* translators: %s: total record count */
-                    esc_html(_n('%s log entry', '%s log entries', $totalItems, 'sync-users-suitecrm')),
+                    esc_html(_n('%s log entry', '%s log entries', $totalItems, 'sk-user-sync-suitecrm')),
                     esc_html(number_format_i18n($totalItems))
                 );
                 ?>
@@ -137,19 +137,19 @@ $pagination = $totalPages > 1 ? paginate_links([
     <table class="wp-list-table widefat fixed striped" role="presentation">
         <thead>
             <tr>
-                <th scope="col" style="width: 140px;"><?php esc_html_e('Time', 'sync-users-suitecrm'); ?></th>
-                <th scope="col" style="width: 120px;"><?php esc_html_e('User', 'sync-users-suitecrm'); ?></th>
-                <th scope="col" style="width: 110px;"><?php esc_html_e('Module', 'sync-users-suitecrm'); ?></th>
-                <th scope="col" style="width: 80px;"><?php esc_html_e('Action', 'sync-users-suitecrm'); ?></th>
-                <th scope="col" style="width: 95px;"><?php esc_html_e('Status', 'sync-users-suitecrm'); ?></th>
-                <th scope="col" style="min-width: 120px; width: 100%;"><?php esc_html_e('Details', 'sync-users-suitecrm'); ?></th>
+                <th scope="col" style="width: 140px;"><?php esc_html_e('Time', 'sk-user-sync-suitecrm'); ?></th>
+                <th scope="col" style="width: 120px;"><?php esc_html_e('User', 'sk-user-sync-suitecrm'); ?></th>
+                <th scope="col" style="width: 110px;"><?php esc_html_e('Module', 'sk-user-sync-suitecrm'); ?></th>
+                <th scope="col" style="width: 80px;"><?php esc_html_e('Action', 'sk-user-sync-suitecrm'); ?></th>
+                <th scope="col" style="width: 95px;"><?php esc_html_e('Status', 'sk-user-sync-suitecrm'); ?></th>
+                <th scope="col" style="min-width: 120px; width: 100%;"><?php esc_html_e('Details', 'sk-user-sync-suitecrm'); ?></th>
             </tr>
         </thead>
         <tbody id="syus-activity-log-tbody">
             <?php if (empty($items)) : ?>
                 <tr class="no-items">
                     <td class="colspanchange" colspan="7" style="text-align: center; padding: 25px; color: #646970;">
-                        <?php esc_html_e('No activity log entries found.', 'sync-users-suitecrm'); ?>
+                        <?php esc_html_e('No activity log entries found.', 'sk-user-sync-suitecrm'); ?>
                     </td>
                 </tr>
             <?php else : ?>
@@ -174,7 +174,7 @@ $pagination = $totalPages > 1 ? paginate_links([
                         <td>
                             <?php if ($userId !== null && $userId > 0) : ?>
                                 <?php if (get_userdata($userId)) : ?>
-                                    <a href="<?php echo esc_url(get_edit_user_link($userId)); ?>" title="<?php esc_attr_e('Edit WordPress User', 'sync-users-suitecrm'); ?>">
+                                    <a href="<?php echo esc_url(get_edit_user_link($userId)); ?>" title="<?php esc_attr_e('Edit WordPress User', 'sk-user-sync-suitecrm'); ?>">
                                         #<?php echo esc_html($userId); ?>
                                     </a>
                                 <?php else : ?>
@@ -212,7 +212,7 @@ $pagination = $totalPages > 1 ? paginate_links([
                         <td>
                             <?php if (!empty($crmId)) : ?>
                                 <span style="display: inline-block; margin-right: 8px; font-size: 12px;">
-                                    <strong><?php esc_html_e('CRM ID:', 'sync-users-suitecrm'); ?></strong>
+                                    <strong><?php esc_html_e('CRM ID:', 'sk-user-sync-suitecrm'); ?></strong>
                                     <code><?php echo esc_html($crmId); ?></code>
                                 </span>
                             <?php endif; ?>
@@ -231,12 +231,12 @@ $pagination = $totalPages > 1 ? paginate_links([
         </tbody>
         <tfoot>
             <tr>
-                <th scope="col"><?php esc_html_e('Time', 'sync-users-suitecrm'); ?></th>
-                <th scope="col"><?php esc_html_e('User', 'sync-users-suitecrm'); ?></th>
-                <th scope="col"><?php esc_html_e('Module', 'sync-users-suitecrm'); ?></th>
-                <th scope="col"><?php esc_html_e('Action', 'sync-users-suitecrm'); ?></th>
-                <th scope="col"><?php esc_html_e('Status', 'sync-users-suitecrm'); ?></th>
-                <th scope="col"><?php esc_html_e('Details', 'sync-users-suitecrm'); ?></th>
+                <th scope="col"><?php esc_html_e('Time', 'sk-user-sync-suitecrm'); ?></th>
+                <th scope="col"><?php esc_html_e('User', 'sk-user-sync-suitecrm'); ?></th>
+                <th scope="col"><?php esc_html_e('Module', 'sk-user-sync-suitecrm'); ?></th>
+                <th scope="col"><?php esc_html_e('Action', 'sk-user-sync-suitecrm'); ?></th>
+                <th scope="col"><?php esc_html_e('Status', 'sk-user-sync-suitecrm'); ?></th>
+                <th scope="col"><?php esc_html_e('Details', 'sk-user-sync-suitecrm'); ?></th>
             </tr>
         </tfoot>
     </table>

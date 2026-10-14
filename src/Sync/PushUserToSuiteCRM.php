@@ -110,7 +110,7 @@ class PushUserToSuiteCRM {
                 $username,
                 $module,
                 SyncOutcome::REASON_CONNECTION_CHANGED,
-                __('Connection configuration changed during processing.', 'sync-users-suitecrm')
+                __('Connection configuration changed during processing.', 'sk-user-sync-suitecrm')
             );
         }
 
@@ -122,7 +122,7 @@ class PushUserToSuiteCRM {
                 $username,
                 $module,
                 SyncOutcome::REASON_AUTHENTICATION_UNAVAILABLE,
-                __('SuiteCRM connection is not configured or requires reconnect.', 'sync-users-suitecrm')
+                __('SuiteCRM connection is not configured or requires reconnect.', 'sk-user-sync-suitecrm')
             );
         }
 
@@ -182,7 +182,7 @@ class PushUserToSuiteCRM {
                 $username,
                 $module,
                 SyncOutcome::REASON_EXISTING_RECORD,
-                __('Matching record found in SuiteCRM (Create only mode).', 'sync-users-suitecrm'),
+                __('Matching record found in SuiteCRM (Create only mode).', 'sk-user-sync-suitecrm'),
                 $crmRecordId
             );
         }
@@ -227,7 +227,7 @@ class PushUserToSuiteCRM {
             $crmRecordId,
             SyncOutcome::ACTION_UPDATE,
             SyncOutcome::REASON_UPDATED,
-            __('Record updated in SuiteCRM.', 'sync-users-suitecrm')
+            __('Record updated in SuiteCRM.', 'sk-user-sync-suitecrm')
         );
     }
 
@@ -248,7 +248,7 @@ class PushUserToSuiteCRM {
                 $username,
                 $module,
                 SyncOutcome::REASON_EXISTING_RECORD,
-                __('Multiple matching records found by email in SuiteCRM (Create only mode).', 'sync-users-suitecrm')
+                __('Multiple matching records found by email in SuiteCRM (Create only mode).', 'sk-user-sync-suitecrm')
             );
         }
 
@@ -258,7 +258,7 @@ class PushUserToSuiteCRM {
             $username,
             $module,
             SyncOutcome::REASON_AMBIGUOUS_MATCH,
-            __('Multiple records found in SuiteCRM with matching email address.', 'sync-users-suitecrm'),
+            __('Multiple records found in SuiteCRM with matching email address.', 'sk-user-sync-suitecrm'),
             null,
             SyncOutcome::ACTION_UPDATE
         );
@@ -310,7 +310,7 @@ class PushUserToSuiteCRM {
                 $username,
                 $module,
                 SyncOutcome::REASON_INVALID_RESPONSE,
-                __('SuiteCRM created record response missing record ID.', 'sync-users-suitecrm'),
+                __('SuiteCRM created record response missing record ID.', 'sk-user-sync-suitecrm'),
                 null,
                 SyncOutcome::ACTION_CREATE
             );
@@ -328,7 +328,7 @@ class PushUserToSuiteCRM {
             $newCrmId,
             SyncOutcome::ACTION_CREATE,
             SyncOutcome::REASON_CREATED,
-            __('Record created in SuiteCRM.', 'sync-users-suitecrm')
+            __('Record created in SuiteCRM.', 'sk-user-sync-suitecrm')
         );
     }
 

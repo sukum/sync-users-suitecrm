@@ -1,7 +1,7 @@
 <?php
 /**
- * Plugin Name:       Sync users to SuiteCRM
- * Plugin URI:        https://github.com/sukum/sync-users-suitecrm
+ * Plugin Name:       SK user sync for SuiteCRM
+ * Plugin URI:        https://github.com/sukum/sk-user-sync-suitecrm
  * Description:       Synchronize WordPress users one-way to SuiteCRM as Accounts, Contacts, Leads using the REST V8 API.
  * Version:           1.0.0
  * Requires at least: 5.3
@@ -10,7 +10,7 @@
  * Author URI:        https://github.com/sukum
  * License:           GPL v2 or later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain:       sync-users-suitecrm
+ * Text Domain:       sk-user-sync-suitecrm
  */
 
 defined('ABSPATH') || exit;

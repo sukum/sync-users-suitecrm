@@ -30,7 +30,7 @@ class LockConflictHandler extends AbstractOutcomeHandler implements OutcomeHandl
                 $username,
                 $module,
                 SyncOutcome::REASON_LOCK_CONFLICT,
-                __('Resource locked by another active synchronization process.', 'sync-users-suitecrm')
+                __('Resource locked by another active synchronization process.', 'sk-user-sync-suitecrm')
             );
             $this->logOutcome($outcome);
             $handler->onOutcome($outcome);

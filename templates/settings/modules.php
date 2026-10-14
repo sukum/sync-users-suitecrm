@@ -16,37 +16,37 @@ foreach (\SyncUsersSuitecrm\Settings::SUPPORTED_MODULES as $module) {
 ?>
         <!-- TAB 3: SUITECRM MODULES -->
         <div id="syus-tab-modules" class="syus-tab-content" style="display: none;" data-state="<?php echo esc_attr(wp_json_encode($modulesState)); ?>">
-            <h2><?php esc_html_e('SuiteCRM Modules Synchronization', 'sync-users-suitecrm'); ?></h2>
+            <h2><?php esc_html_e('SuiteCRM Modules Synchronization', 'sk-user-sync-suitecrm'); ?></h2>
             <p class="description">
-                <?php esc_html_e('Choose which SuiteCRM modules are enabled and select whether records should be created only or created and updated.', 'sync-users-suitecrm'); ?>
+                <?php esc_html_e('Choose which SuiteCRM modules are enabled and select whether records should be created only or created and updated.', 'sk-user-sync-suitecrm'); ?>
             </p>
 
             <table class="wp-list-table widefat fixed striped" style="max-width: 860px; margin-top: 15px;">
                 <thead>
                     <tr>
-                        <th style="width: 220px;"><?php esc_html_e('SuiteCRM Module', 'sync-users-suitecrm'); ?></th>
-                        <th style="width: 140px;"><?php esc_html_e('Enable Sync', 'sync-users-suitecrm'); ?></th>
-                        <th><?php esc_html_e('Sync Mode', 'sync-users-suitecrm'); ?></th>
+                        <th style="width: 220px;"><?php esc_html_e('SuiteCRM Module', 'sk-user-sync-suitecrm'); ?></th>
+                        <th style="width: 140px;"><?php esc_html_e('Enable Sync', 'sk-user-sync-suitecrm'); ?></th>
+                        <th><?php esc_html_e('Sync Mode', 'sk-user-sync-suitecrm'); ?></th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
                     $moduleInfo = [
                         'Accounts' => [
-                            'label' => __('Accounts', 'sync-users-suitecrm'),
-                            'desc'  => __('Display Name -> name, Email -> email1', 'sync-users-suitecrm'),
+                            'label' => __('Accounts', 'sk-user-sync-suitecrm'),
+                            'desc'  => __('Display Name -> name, Email -> email1', 'sk-user-sync-suitecrm'),
                         ],
                         'Contacts' => [
-                            'label' => __('Contacts', 'sync-users-suitecrm'),
-                            'desc'  => __('First Name, Last Name -> last_name, Email -> email1', 'sync-users-suitecrm'),
+                            'label' => __('Contacts', 'sk-user-sync-suitecrm'),
+                            'desc'  => __('First Name, Last Name -> last_name, Email -> email1', 'sk-user-sync-suitecrm'),
                         ],
                         'Leads'    => [
-                            'label' => __('Leads', 'sync-users-suitecrm'),
-                            'desc'  => __('First Name, Last Name -> last_name, Email -> email1', 'sync-users-suitecrm'),
+                            'label' => __('Leads', 'sk-user-sync-suitecrm'),
+                            'desc'  => __('First Name, Last Name -> last_name, Email -> email1', 'sk-user-sync-suitecrm'),
                         ],
                         'Users'    => [
-                            'label' => __('Users', 'sync-users-suitecrm'),
-                            'desc'  => __('Username -> user_name, Last Name, Email -> email1. Note: stock SuiteCRM requires api-visible vardef extension.', 'sync-users-suitecrm'),
+                            'label' => __('Users', 'sk-user-sync-suitecrm'),
+                            'desc'  => __('Username -> user_name, Last Name, Email -> email1. Note: stock SuiteCRM requires api-visible vardef extension.', 'sk-user-sync-suitecrm'),
                         ],
                     ];
 
@@ -65,17 +65,17 @@ foreach (\SyncUsersSuitecrm\Settings::SUPPORTED_MODULES as $module) {
                                         name="modules[<?php echo esc_attr($module); ?>][enabled]" value="1" <?php checked($modSettings['enabled']); ?>
                                         <?php echo $module === 'Users' ? 'disabled="disabled"' : ''; ?>
                                     >
-                                    <?php $module !== 'Users' ? esc_html_e('Enabled', 'sync-users-suitecrm') : esc_html_e('Need a change in SuiteCRM to work', 'sync-users-suitecrm'); ?>
+                                    <?php $module !== 'Users' ? esc_html_e('Enabled', 'sk-user-sync-suitecrm') : esc_html_e('Need a change in SuiteCRM to work', 'sk-user-sync-suitecrm'); ?>
                                 </label>
                             </td>
                             <td>
                                 <label style="margin-right: 15px;">
                                     <input type="radio" id="modules_<?php echo esc_attr(strtolower($module)); ?>_mode_create_only" name="modules[<?php echo esc_attr($module); ?>][mode]" value="create_only" <?php checked($modSettings['mode'], 'create_only'); ?>>
-                                    <?php esc_html_e('Create only', 'sync-users-suitecrm'); ?>
+                                    <?php esc_html_e('Create only', 'sk-user-sync-suitecrm'); ?>
                                 </label>
                                 <label>
                                     <input type="radio" id="modules_<?php echo esc_attr(strtolower($module)); ?>_mode_create_update" name="modules[<?php echo esc_attr($module); ?>][mode]" value="create_update" <?php checked($modSettings['mode'], 'create_update'); ?>>
-                                    <?php esc_html_e('Create or update', 'sync-users-suitecrm'); ?>
+                                    <?php esc_html_e('Create or update', 'sk-user-sync-suitecrm'); ?>
                                 </label>
                             </td>
                         </tr>

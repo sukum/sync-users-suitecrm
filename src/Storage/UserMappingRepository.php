@@ -104,7 +104,7 @@ class UserMappingRepository {
         if ($userId <= 0 || empty($module) || empty($crmId)) {
             return new WP_Error(
                 'invalid_mapping_input',
-                __('User ID, module, and CRM ID are required to set mapping.', 'sync-users-suitecrm')
+                __('User ID, module, and CRM ID are required to set mapping.', 'sk-user-sync-suitecrm')
             );
         }
 
@@ -128,7 +128,7 @@ class UserMappingRepository {
                 'mapping_save_failed',
                 sprintf(
                     /* translators: 1: User ID, 2: Module */
-                    __('Failed to save CRM ID mapping for user %1$d and module %2$s.', 'sync-users-suitecrm'),
+                    __('Failed to save CRM ID mapping for user %1$d and module %2$s.', 'sk-user-sync-suitecrm'),
                     $userId,
                     $module
                 )
@@ -164,7 +164,7 @@ class UserMappingRepository {
                 'mapping_delete_failed',
                 sprintf(
                     /* translators: 1: User ID, 2: Module */
-                    __('Failed to delete CRM ID mapping for user %1$d and module %2$s.', 'sync-users-suitecrm'),
+                    __('Failed to delete CRM ID mapping for user %1$d and module %2$s.', 'sk-user-sync-suitecrm'),
                     $userId,
                     $module
                 )
@@ -195,7 +195,7 @@ class UserMappingRepository {
                 'clear_mappings_failed',
                 sprintf(
                     /* translators: %s: Database error */
-                    __('Database error clearing CRM user mappings: %s', 'sync-users-suitecrm'),
+                    __('Database error clearing CRM user mappings: %s', 'sk-user-sync-suitecrm'),
                     $wpdb->last_error
                 )
             );
@@ -231,7 +231,7 @@ class UserMappingRepository {
                 'find_user_by_crm_id_failed',
                 sprintf(
                     /* translators: %s: Database error */
-                    __('Database error looking up user by CRM ID: %s', 'sync-users-suitecrm'),
+                    __('Database error looking up user by CRM ID: %s', 'sk-user-sync-suitecrm'),
                     $wpdb->last_error
                 )
             );

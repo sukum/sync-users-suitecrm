@@ -34,8 +34,8 @@ class QueuePage {
     public function addAdminMenu(): void {
         add_submenu_page(
             'syus-settings',
-            __('Queue', 'sync-users-suitecrm'),
-            __('Queue', 'sync-users-suitecrm'),
+            __('Queue', 'sk-user-sync-suitecrm'),
+            __('Queue', 'sk-user-sync-suitecrm'),
             'manage_options',
             'syus-queue',
             [$this, 'render']
@@ -51,23 +51,23 @@ class QueuePage {
             'ajax_url' => admin_url('admin-ajax.php'),
             'nonce' => wp_create_nonce('syus_queue_nonce'),
             'strings' => [
-                'confirm_delete_queue' => __('Delete these pending queue records?', 'sync-users-suitecrm'),
-                'confirm_clear_queue' => __('Clear all pending queue records, including records on other pages and outside the current filters?', 'sync-users-suitecrm'),
-                'queue_error' => __('Could not update the queue. Please try again.', 'sync-users-suitecrm'),
+                'confirm_delete_queue' => __('Delete these pending queue records?', 'sk-user-sync-suitecrm'),
+                'confirm_clear_queue' => __('Clear all pending queue records, including records on other pages and outside the current filters?', 'sk-user-sync-suitecrm'),
+                'queue_error' => __('Could not update the queue. Please try again.', 'sk-user-sync-suitecrm'),
             ],
         ]);
     }
 
     public function render(): void {
         if (!current_user_can('manage_options')) {
-            wp_die(esc_html__('You do not have sufficient permissions to access this page.', 'sync-users-suitecrm'));
+            wp_die(esc_html__('You do not have sufficient permissions to access this page.', 'sk-user-sync-suitecrm'));
             return;
         }
         if (isset($_GET['username']) || isset($_GET['module']) || isset($_GET['paged'])) {
             $requestNonce = isset($_GET['_syus_queue_nonce']) && is_string($_GET['_syus_queue_nonce'])
                 ? sanitize_text_field(wp_unslash($_GET['_syus_queue_nonce'])) : '';
             if (!wp_verify_nonce($requestNonce, 'syus_queue_filters')) {
-                wp_die(esc_html__('The queue filter link has expired or is invalid. Please reopen the Queue page.', 'sync-users-suitecrm'), '', ['response' => 403]);
+                wp_die(esc_html__('The queue filter link has expired or is invalid. Please reopen the Queue page.', 'sk-user-sync-suitecrm'), '', ['response' => 403]);
                 return;
             }
         }
@@ -112,7 +112,7 @@ class QueuePage {
     public function expectedRun(QueueItem $item, array $settings, int $connectionRev, array $cron): array {
         $result = ['label' => '', 'timestamp' => null, 'fallback' => null];
         if (empty($settings['auto_sync_enabled'])) {
-            $result['label'] = __('Paused — automatic sync disabled', 'sync-users-suitecrm');
+            $result['label'] = __('Paused — automatic sync disabled', 'sk-user-sync-suitecrm');
             return $result;
         }
         $mode = $settings['auto_sync_mode'] ?? 'realtime';
@@ -133,11 +133,11 @@ class QueuePage {
             }
         }
         if ($mode === 'realtime') {
-            $result['label'] = __('As soon as possible', 'sync-users-suitecrm');
+            $result['label'] = __('As soon as possible', 'sk-user-sync-suitecrm');
             $result['fallback'] = $next;
         } else {
             $result['timestamp'] = $next;
-            $result['label'] = $next === null ? __('No batch run scheduled', 'sync-users-suitecrm') : '';
+            $result['label'] = $next === null ? __('No batch run scheduled', 'sk-user-sync-suitecrm') : '';
         }
         return $result;
     }
@@ -150,7 +150,7 @@ class QueuePage {
             return is_scalar($id) && ctype_digit((string) $id) ? (int) $id : 0;
         }, $rawIds), static function (int $id): bool { return $id > 0; })));
         if (empty($ids)) {
-            wp_send_json_error(['message' => __('No valid queue records selected.', 'sync-users-suitecrm')], 400);
+            wp_send_json_error(['message' => __('No valid queue records selected.', 'sk-user-sync-suitecrm')], 400);
             return;
         }
         $this->sendResult($this->queueRepository->deleteByIds($ids));
@@ -164,7 +164,7 @@ class QueuePage {
 
     private function authorizeAction(): void {
         if (!current_user_can('manage_options')) {
-            wp_send_json_error(['message' => __('Unauthorized permission.', 'sync-users-suitecrm')], 403);
+            wp_send_json_error(['message' => __('Unauthorized permission.', 'sk-user-sync-suitecrm')], 403);
         }
     }
 
@@ -176,7 +176,7 @@ class QueuePage {
         wp_send_json_success([
             'deleted_count' => $result,
             /* translators: %d: number of removed queue records. */
-            'message' => sprintf(_n('%d queue record removed.', '%d queue records removed.', $result, 'sync-users-suitecrm'), $result),
+            'message' => sprintf(_n('%d queue record removed.', '%d queue records removed.', $result, 'sk-user-sync-suitecrm'), $result),
         ]);
     }
 }

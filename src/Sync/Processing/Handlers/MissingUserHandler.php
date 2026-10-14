@@ -30,7 +30,7 @@ class MissingUserHandler extends AbstractOutcomeHandler implements OutcomeHandle
                 $username,
                 $module,
                 SyncOutcome::REASON_USER_MISSING,
-                __('WordPress user not found or has been deleted.', 'sync-users-suitecrm')
+                __('WordPress user not found or has been deleted.', 'sk-user-sync-suitecrm')
             );
             $this->logOutcome($outcome);
             $handler->onOutcome($outcome);

@@ -39,7 +39,7 @@ class BulkStoreRecordProgress implements BulkStoreAction {
         if ($current === null || $current->getRunId() !== $this->runId) {
             return new WP_Error(
                 'run_identity_mismatch',
-                __('Bulk progress run identity mismatch or snapshot missing.', 'sync-users-suitecrm'),
+                __('Bulk progress run identity mismatch or snapshot missing.', 'sk-user-sync-suitecrm'),
                 ['http_status' => 409]
             );
         }
@@ -53,7 +53,7 @@ class BulkStoreRecordProgress implements BulkStoreAction {
 
         return BulkStoreActionResult::save(
             $current,
-            __('Failed to persist progress update.', 'sync-users-suitecrm')
+            __('Failed to persist progress update.', 'sk-user-sync-suitecrm')
         );
     }
 }

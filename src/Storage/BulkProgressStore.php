@@ -84,7 +84,7 @@ class BulkProgressStore {
         if (!is_array($data)) {
             return new WP_Error(
                 'invalid_bulk_progress',
-                __('Stored bulk progress snapshot is malformed.', 'sync-users-suitecrm')
+                __('Stored bulk progress snapshot is malformed.', 'sk-user-sync-suitecrm')
             );
         }
 
@@ -92,7 +92,7 @@ class BulkProgressStore {
         if ($progress === null) {
             return new WP_Error(
                 'invalid_bulk_progress',
-                __('Stored bulk progress failed schema validation.', 'sync-users-suitecrm')
+                __('Stored bulk progress failed schema validation.', 'sk-user-sync-suitecrm')
             );
         }
 
@@ -220,7 +220,7 @@ class BulkProgressStore {
         if ($lock === null) {
             return new WP_Error(
                 'progress_busy',
-                __('Bulk progress is currently being updated by another operation.', 'sync-users-suitecrm'),
+                __('Bulk progress is currently being updated by another operation.', 'sk-user-sync-suitecrm'),
                 ['http_status' => 409]
             );
         }

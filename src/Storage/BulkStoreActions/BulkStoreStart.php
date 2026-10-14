@@ -29,7 +29,7 @@ class BulkStoreStart implements BulkStoreAction {
         if ($current !== null && $current->isRunning() && !$isStale) {
             return new WP_Error(
                 'run_active',
-                __('A manual bulk synchronization run is already actively in progress.', 'sync-users-suitecrm'),
+                __('A manual bulk synchronization run is already actively in progress.', 'sk-user-sync-suitecrm'),
                 ['http_status' => 409]
             );
         }
@@ -46,7 +46,7 @@ class BulkStoreStart implements BulkStoreAction {
 
         return BulkStoreActionResult::save(
             $progress,
-            __('Failed to persist bulk progress transient.', 'sync-users-suitecrm')
+            __('Failed to persist bulk progress transient.', 'sk-user-sync-suitecrm')
         );
     }
 }

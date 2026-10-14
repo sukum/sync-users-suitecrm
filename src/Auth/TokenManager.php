@@ -93,7 +93,7 @@ class TokenManager {
             empty($conn['username']) ||
             empty($conn['password'])
         ) {
-            $msg = __('SuiteCRM connection credentials are not configured.', 'sync-users-suitecrm');
+            $msg = __('SuiteCRM connection credentials are not configured.', 'sk-user-sync-suitecrm');
             $this->settings->setConnectionStatus('not_configured', $msg);
             return new WP_Error('authentication_unavailable', $msg, ['http_status' => 401]);
         }
@@ -115,7 +115,7 @@ class TokenManager {
                 'authentication_unavailable',
                 sprintf(
                     /* translators: %s: Error message */
-                    __('Lock acquisition error during token refresh: %s', 'sync-users-suitecrm'),
+                    __('Lock acquisition error during token refresh: %s', 'sk-user-sync-suitecrm'),
                     $lockHandle->get_error_message()
                 ),
                 ['http_status' => 500]
@@ -150,7 +150,7 @@ class TokenManager {
 
             return new WP_Error(
                 'authentication_unavailable',
-                __('SuiteCRM token renewal is in progress by another worker.', 'sync-users-suitecrm'),
+                __('SuiteCRM token renewal is in progress by another worker.', 'sk-user-sync-suitecrm'),
                 ['http_status' => 409]
             );
         }
@@ -195,7 +195,7 @@ class TokenManager {
             empty($conn['client_id']) ||
             empty($conn['client_secret'])
         ) {
-            $msg = __('SuiteCRM connection credentials are incomplete.', 'sync-users-suitecrm');
+            $msg = __('SuiteCRM connection credentials are incomplete.', 'sk-user-sync-suitecrm');
             $this->settings->setConnectionStatus('not_configured', $msg);
             return new WP_Error('authentication_unavailable', $msg, ['http_status' => 401]);
         }
@@ -215,7 +215,7 @@ class TokenManager {
         // 2. Fall back to password grant credentials
         if ($response === null) {
             if (empty($conn['username']) || empty($conn['password'])) {
-                $msg = __('SuiteCRM API username and password are required for renewal.', 'sync-users-suitecrm');
+                $msg = __('SuiteCRM API username and password are required for renewal.', 'sk-user-sync-suitecrm');
                 $this->settings->setConnectionStatus('reconnect_required', $msg);
                 return new WP_Error('authentication_unavailable', $msg, ['http_status' => 401]);
             }
@@ -232,7 +232,7 @@ class TokenManager {
                 'authentication_unavailable',
                 sprintf(
                     /* translators: %s: Error message */
-                    __('SuiteCRM authentication failed: %s', 'sync-users-suitecrm'),
+                    __('SuiteCRM authentication failed: %s', 'sk-user-sync-suitecrm'),
                     $errorMsg
                 ),
                 $response->get_error_data()

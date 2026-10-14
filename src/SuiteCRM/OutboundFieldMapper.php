@@ -47,7 +47,7 @@ class OutboundFieldMapper {
                 'invalid_action',
                 sprintf(
                     /* translators: %s: Action name */
-                    __('Invalid sync action: %s. Must be create or update.', 'sync-users-suitecrm'),
+                    __('Invalid sync action: %s. Must be create or update.', 'sk-user-sync-suitecrm'),
                     $action
                 )
             );
@@ -58,7 +58,7 @@ class OutboundFieldMapper {
                 'invalid_module',
                 sprintf(
                     /* translators: %s: Module name */
-                    __('Unsupported SuiteCRM module: %s.', 'sync-users-suitecrm'),
+                    __('Unsupported SuiteCRM module: %s.', 'sk-user-sync-suitecrm'),
                     $module
                 )
             );
@@ -68,7 +68,7 @@ class OutboundFieldMapper {
         if (!is_email($email)) {
             return new WP_Error(
                 'invalid_user_data',
-                __('WordPress user has no valid email address', 'sync-users-suitecrm'),
+                __('WordPress user has no valid email address', 'sk-user-sync-suitecrm'),
                 ['user_id' => (int) $user->ID]
             );
         }
@@ -114,7 +114,7 @@ class OutboundFieldMapper {
                     'invalid_module',
                     sprintf(
                         /* translators: %s: Module name */
-                        __('Unsupported SuiteCRM module: %s.', 'sync-users-suitecrm'),
+                        __('Unsupported SuiteCRM module: %s.', 'sk-user-sync-suitecrm'),
                         $module
                     )
                 );
