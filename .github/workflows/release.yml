@@ -103,5 +103,6 @@ jobs:
         uses: softprops/action-gh-release@v3
         with:
           files: ${{ env.PLUGIN_SLUG }}.zip
+          draft: true
           generate_release_notes: true
           fail_on_unmatched_files: true
